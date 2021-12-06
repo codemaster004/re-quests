@@ -2,21 +2,36 @@
 	<main>
 		<Header />
 		<section>
-			<ChallengeCard />
+			<QuestCard title="Paper Busket" desc="In this week remeber to use paper bags only." questLength=7 questProgress=3 />
 		</section>
 	</main>
 </template>
 
 <script>
 import Header from './components/Header'
-import ChallengeCard from './components/ChallengeCard'
+import QuestCard from './components/QuestCard'
 
 export default {
   name: 'App',
   components: {
 		Header,
-		ChallengeCard
+		QuestCard
   },
+	data() {
+		return {
+			cards: []
+		}
+	},
+	created() {
+		this.cards = [
+			{
+				title: 'Paper Busket',
+				desc: 'In this week remeber to use paper bags only.',
+				questLength: 7,
+				questProgress: 3
+			}
+		]
+	}
 }
 </script>
 
@@ -25,7 +40,7 @@ export default {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin-top: 45px;
+		margin-top: 10px;
 	}
 </style>
 
@@ -38,9 +53,22 @@ export default {
   box-sizing: border-box;	
 }
 
+body {
+	background-color: #4C866B;
+}
+
 #app {
   font-family: 'Montserrat', sans-serif;
+	background-color: #4C866B;
 	background: linear-gradient(180deg, #4C866B 0%, #337053 100%);
+	min-height: -webkit-fill-available;
+}
+
+.absolute-center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .title {
@@ -71,6 +99,21 @@ export default {
 	font-weight: 600;
 	font-size: 11px;
 	line-height: 13px;
+}
+
+.action-button {
+	height: 40px;
+	
+	font-family: Oswald;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 17px;
+	line-height: 40px;
+	text-align: center;
+	
+	background: #EFDEBC;
+	border-radius: 10px;
+	color: #FFFFFF;
 }
 
 </style>
