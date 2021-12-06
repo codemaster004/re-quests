@@ -1,8 +1,8 @@
 <template>
     <div class="card">
         <div class="feature">
-            <h2 class="header">{{ title }}</h2>
-            <p class="sub-header">{{ desc }}</p>
+            <h2 class="header">{{ quest.title }}</h2>
+            <p class="sub-header">{{ quest.desc }}</p>
             
             <div class="image-box">
                 <img src="../assets/Rectangle.svg" class="absolute-center">
@@ -12,12 +12,12 @@
         </div>
         <div class="progress-group">
             <div class="progress-bar">
-                <span class="progress checked"></span><span class="progress checked"></span><span class="progress checked"></span><span class="progress checked"></span><span class="progress"></span><span class="progress"></span><span class="progress"></span>
+                <span v-for="i in quest.questLength" :key="i" :class="progressClass(i)" :style="progressStyles"></span>
             </div>
             
             <div class="progress-info">
                 <div>
-                    <h2 class="header">{{ questLength - questProgress }} days</h2>
+                    <h2 class="header">{{ quest.questLength - quest.questProgress }} days</h2>
                     <p class="sub-header">to finish</p>
                 </div>
                 
@@ -30,7 +30,24 @@
 <script>
 export default {
     name: 'QuestCard',
-    props: ['title', 'desc', 'questLength', 'questProgress']
+    props: {
+        quest: Object
+    },
+    methods: {
+        progressClass(i) {
+            return {
+                progress: true,
+                checked: this.quest.questProgress >= i
+            }
+        },
+    },
+    computed: {
+        progressStyles() {
+            return {
+                width: `calc(300px / ${this.quest.questLength} - 1px)`
+            }
+        }
+    }
 }
 </script>
 
@@ -38,6 +55,7 @@ export default {
 .card {
     width: 340px;
     height: 510px;
+    margin-bottom: 30px;
     
     background: #FFFFFF;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
@@ -88,7 +106,7 @@ export default {
 }
 .progress {
     display: block;
-    width: calc(300px / 7 - 1px);
+    
     height: 10px;
     float: left;
     

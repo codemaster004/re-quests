@@ -1,48 +1,45 @@
 <template>
 	<main>
+		<div id="bgc"></div>
 		<Header />
-		<section>
-			<QuestCard title="Paper Busket" desc="In this week remeber to use paper bags only." questLength=7 questProgress=3 />
-		</section>
+		<Quests :quests="quests" />
 	</main>
 </template>
 
 <script>
 import Header from './components/Header'
-import QuestCard from './components/QuestCard'
+import Quests from './components/Quests'
 
 export default {
   name: 'App',
   components: {
 		Header,
-		QuestCard
+		Quests
   },
 	data() {
 		return {
-			cards: []
+			quests: []
 		}
 	},
 	created() {
-		this.cards = [
+		this.quests = [
 			{
+				id: 0,
 				title: 'Paper Busket',
 				desc: 'In this week remeber to use paper bags only.',
 				questLength: 7,
 				questProgress: 3
-			}
+			}, {
+				id: 1,
+				title: 'Sometinhg Else',
+				desc: 'Lorem ipsum dolores abridge.',
+				questLength: 4,
+				questProgress: 3
+			},
 		]
 	}
 }
 </script>
-
-<style scoped>
-	section {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin-top: 10px;
-	}
-</style>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@300;400;500;600;700&display=swap');
@@ -59,9 +56,13 @@ body {
 
 #app {
   font-family: 'Montserrat', sans-serif;
+}
+
+#bgc {
 	background-color: #4C866B;
 	background: linear-gradient(180deg, #4C866B 0%, #337053 100%);
 	min-height: -webkit-fill-available;
+	position: fixed;
 }
 
 .absolute-center {
