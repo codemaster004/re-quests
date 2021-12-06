@@ -1,30 +1,76 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+	<main>
+		<Header />
+		<section>
+			<ChallengeCard />
+		</section>
+	</main>
 </template>
 
+<script>
+import Header from './components/Header'
+import ChallengeCard from './components/ChallengeCard'
+
+export default {
+  name: 'App',
+  components: {
+		Header,
+		ChallengeCard
+  },
+}
+</script>
+
+<style scoped>
+	section {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-top: 45px;
+	}
+</style>
+
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;	
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  font-family: 'Montserrat', sans-serif;
+	background: linear-gradient(180deg, #4C866B 0%, #337053 100%);
 }
 
-#nav {
-  padding: 30px;
+.title {
+	font-family: Oswald;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 34px;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.sub-title {
+	font-family: Montserrat;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 13px;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+.header {
+	font-family: Oswald;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 30px;
 }
+
+.sub-header {
+	font-family: Montserrat;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 11px;
+	line-height: 13px;
+}
+
 </style>
