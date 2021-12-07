@@ -12,6 +12,7 @@ public interface IAuthService
 	Task<GetTokenDto> LogInAsync( string username, string password );
 	bool CheckPassword( string password, string hashString );
 	string HashNewPassword( string password );
+	Task<TokenModel?> GetTokenWithDataAsync( string accessToken );
 }
 
 public class AuthService : IAuthService
@@ -86,6 +87,13 @@ public class AuthService : IAuthService
 		return (access, refresh);
 	}
 
+	public async Task<TokenModel?> GetTokenWithDataAsync( string accessToken )
+	{
+		return await _dbContext.Tokens
+			.Include( t => t.User )
+			.Where( t => t.AccessToken == accessToken )
+			.FirstOrDefaultAsync();
+	}
 
 
 	const char hashSplitChar = ':';

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ReQuests.Domain.Dtos.User;
 
 namespace ReQuests.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route( "api/[controller]" )]
 public class UsersController : ExtendedControllerBase
 {
@@ -34,6 +36,7 @@ public class UsersController : ExtendedControllerBase
 	}
 
 	[HttpPost]
+	[AllowAnonymous]
 	public async Task<ActionResult<GetUserDto>> CreateUser( [FromBody] CreateUserDto dto )
 	{
 		GetUserDto user;

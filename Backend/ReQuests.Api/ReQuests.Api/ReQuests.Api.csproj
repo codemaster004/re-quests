@@ -23,4 +23,8 @@
     <ProjectReference Include="..\ReQuests.Migrations.Pg\ReQuests.Migrations.Pg.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Auth\" />
+  </ItemGroup>
+
 </Project>

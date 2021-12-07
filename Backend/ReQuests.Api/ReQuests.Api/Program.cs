@@ -3,6 +3,8 @@ global using ReQuests.Api.Exceptions;
 using ReQuests.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using ReQuests.Api.Auth;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -11,8 +13,39 @@ var builder = WebApplication.CreateBuilder( args );
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen( c =>
+{
+	c.SwaggerDoc( "v1", new OpenApiInfo { Title = "ReQuests.Api", Version = "v1" } );
 
+	var securityScheme = new OpenApiSecurityScheme
+	{
+		Scheme = "Bearer",
+		Name = "Authorization",
+		In = ParameterLocation.Header,
+		Type = SecuritySchemeType.ApiKey,
+		Description = "Authorization header. Example: 'Authorization: Bearer {token}'",
+
+		Reference = new OpenApiReference
+		{
+			Id = "Bearer",
+			Type = ReferenceType.SecurityScheme
+		}
+	};
+
+	c.AddSecurityDefinition( "Bearer", securityScheme );
+	c.AddSecurityRequirement( new OpenApiSecurityRequirement()
+	{
+		{ securityScheme, Array.Empty<string>() }
+	} );
+} );
+
+builder.Services.AddAuthentication( options =>
+	{
+		options.DefaultScheme = "Bearer";
+		options.DefaultAuthenticateScheme = "Bearer";
+		options.DefaultChallengeScheme = "Bearer";
+	} )
+	.AddScheme<TokenOptions, TokenAuthHandler>( "Bearer", options => { } );
 
 builder.Services.AddNpgsql<AppDbContext>(
 	builder.Configuration.GetConnectionString( "postgresConnection" ),
