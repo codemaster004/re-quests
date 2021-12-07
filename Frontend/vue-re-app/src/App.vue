@@ -2,42 +2,27 @@
 	<main>
 		<div id="bgc"></div>
 		<Header />
-		<Quests :quests="quests" />
+		<router-view></router-view>
+		<footer>
+			<router-link to="/">Home</router-link>
+			<router-link to="/about">About</router-link>
+		</footer>
 	</main>
 </template>
 
 <script>
 import Header from './components/Header'
-import Quests from './components/Quests'
 
 export default {
-  name: 'App',
-  components: {
-		Header,
-		Quests
-  },
+	name: 'App',
+	components: {
+		Header
+  	},
 	data() {
 		return {
 			quests: []
 		}
 	},
-	created() {
-		this.quests = [
-			{
-				id: 0,
-				title: 'Paper Busket',
-				desc: 'In this week remeber to use paper bags only.',
-				questLength: 7,
-				questProgress: 3
-			}, {
-				id: 1,
-				title: 'Sometinhg Else',
-				desc: 'Lorem ipsum dolores abridge.',
-				questLength: 4,
-				questProgress: 3
-			},
-		]
-	}
 }
 </script>
 
