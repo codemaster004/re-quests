@@ -59,7 +59,7 @@ public class UsersController : ExtendedControllerBase
 		{
 			await _usersService.DeleteUserAsync( uuid );
 		}
-		catch ( ArgumentException )
+		catch ( NotFoundException )
 		{
 			return NotFound();
 		}

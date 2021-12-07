@@ -76,7 +76,7 @@ public class UsersService : IUsersService
 
 		if ( user is null )
 		{
-			throw new ArgumentException( null, nameof( uuid ) );
+			throw new NotFoundException();
 		}
 
 		_ = _dbContext.Users.Remove( user );
@@ -91,7 +91,8 @@ public class UsersService : IUsersService
 		{
 			var guid = Guid.NewGuid();
 			uuid = Base64UrlTextEncoder.Encode( guid.ToByteArray() );
-		} while ( await _dbContext.Users.Where(u=>u.Uuid == uuid).AnyAsync() );
+
+		} while ( await _dbContext.Users.Where( u => u.Uuid == uuid ).AnyAsync() );
 
 		return uuid;
 	}

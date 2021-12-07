@@ -1,6 +1,8 @@
 global using ReQuests.Api.Services;
 global using ReQuests.Api.Exceptions;
 using ReQuests.Data;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -11,12 +13,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 builder.Services.AddNpgsql<AppDbContext>(
-	builder.Configuration.GetConnectionString( "postgresConnection" ), 
+	builder.Configuration.GetConnectionString( "postgresConnection" ),
 	 pgob => pgob.MigrationsAssembly( "ReQuests.Migrations.Pg" ),
 	 ob => ob.UseLoggerFactory( LoggerFactory.Create( factoryBuilder => factoryBuilder.AddConsole() ) )
 	 );
 
+builder.Services.TryAddSingleton<ISystemClock, SystemClock>();
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
