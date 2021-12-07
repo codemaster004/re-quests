@@ -1,3 +1,5 @@
+global using ReQuests.Api.Services;
+global using ReQuests.Api.Exceptions;
 using ReQuests.Data;
 
 var builder = WebApplication.CreateBuilder( args );
@@ -14,6 +16,9 @@ builder.Services.AddNpgsql<AppDbContext>(
 	 pgob => pgob.MigrationsAssembly( "ReQuests.Migrations.Pg" ),
 	 ob => ob.UseLoggerFactory( LoggerFactory.Create( factoryBuilder => factoryBuilder.AddConsole() ) )
 	 );
+
+builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 

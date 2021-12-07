@@ -1,5 +1,10 @@
-﻿namespace ReQuests.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
 
+namespace ReQuests.Domain.Models;
+
+[Index( nameof( Uuid ), IsUnique = true )]
+[Index( nameof( Username ), IsUnique = true )]
+[Index( nameof( Email ), IsUnique = true )]
 public class UserModel
 {
 	public UserModel( string uuid, string username, string email, string passwordHash )
