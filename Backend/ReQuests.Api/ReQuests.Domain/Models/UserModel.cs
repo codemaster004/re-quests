@@ -25,4 +25,6 @@ public class UserModel
 	public List<TokenModel>? Tokens { get; set; }
 	public List<RoleModel>? Roles{ get; set; }
 	public List<UserRoleRelation>? RolesR{ get; set; }
+	public List<QuestModel>? Quests{ get; set; }
+	public List<UserQuestRelation>? QuestsR { get; set; }
 }
