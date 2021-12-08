@@ -1,6 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore;
 using ReQuests.Data;
 using ReQuests.Domain.Dtos.Quest;
+using ReQuests.Domain.Dtos.UserQuest;
+using ReQuests.Domain.Relations;
 
 namespace ReQuests.Api.Services;
 
@@ -10,15 +13,20 @@ public interface IQuestsService
 	Task<GetQuestDto?> GetQuest( int id );
 	Task<GetQuestDto> CreateQuest( CreateQuestDto dto );
 	Task DeleteQuest( int id );
+
+	Task BeginQuest( int questId, string userUuid );
+	Task<GetUserQuestDto[]> GetBegun( string uuid );
 }
 
 public class QuestsService : IQuestsService
 {
 	private readonly AppDbContext _dbContext;
+	private readonly ISystemClock _clock;
 
-	public QuestsService( AppDbContext dbContext )
+	public QuestsService( AppDbContext dbContext, ISystemClock clock )
 	{
 		_dbContext = dbContext;
+		_clock = clock;
 	}
 
 	public async Task<GetQuestDto[]> GetQuests()
@@ -59,4 +67,37 @@ public class QuestsService : IQuestsService
 		_ = await _dbContext.SaveChangesAsync();
 	}
 
+
+	public async Task BeginQuest( int questId, string userUuid )
+	{
+		var user = from u in _dbContext.Users
+				   where u.Uuid == userUuid
+				   select new { };
+
+		var quest = from q in _dbContext.Quests
+					where q.Id == questId
+					select new { };
+
+		var exist = await user.Union( quest ).CountAsync() == 2;
+		if ( !exist )
+		{
+			throw new NotFoundException();
+		}
+
+		UserQuestRelation userQuest = new( userUuid, _clock.UtcNow )
+		{
+			QuestId = questId
+		};
+
+		_ = _dbContext.UsersQuests.Add( userQuest );
+		_ = await _dbContext.SaveChangesAsync();
+	}
+
+	public async Task<GetUserQuestDto[]> GetBegun( string uuid )
+	{
+		return await _dbContext.UsersQuests
+			.Where( uq => uq.UserUuid == uuid )
+			.Select( GetUserQuestDto.FromUserQuestExp )
+			.ToArrayAsync();
+	}
 }

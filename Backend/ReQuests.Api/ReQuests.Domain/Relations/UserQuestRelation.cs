@@ -4,9 +4,10 @@ namespace ReQuests.Domain.Relations;
 
 public class UserQuestRelation
 {
-	public UserQuestRelation( string userUuid )
+	public UserQuestRelation( string userUuid, DateTimeOffset dateStarted )
 	{
 		UserUuid = userUuid;
+		DateStarted = dateStarted;
 	}
 
 	public int Id { get; set; }
