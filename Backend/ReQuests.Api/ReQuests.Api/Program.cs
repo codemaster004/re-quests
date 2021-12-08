@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using ReQuests.Api.Auth;
 using Microsoft.OpenApi.Models;
 using Microsoft.OpenApi.Any;
+using ReQuests.Api;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -20,7 +21,7 @@ builder.Services.AddSwaggerGen( c =>
 
 	var securityScheme = new OpenApiSecurityScheme
 	{
-		Scheme = "Bearer",
+		Scheme = Constants.Auth.BearerSheme,
 		Name = "Authorization",
 		In = ParameterLocation.Header,
 		Type = SecuritySchemeType.ApiKey,
@@ -28,12 +29,12 @@ builder.Services.AddSwaggerGen( c =>
 
 		Reference = new OpenApiReference
 		{
-			Id = "Bearer",
+			Id = Constants.Auth.BearerSheme,
 			Type = ReferenceType.SecurityScheme
 		}
 	};
 
-	c.AddSecurityDefinition( "Bearer", securityScheme );
+	c.AddSecurityDefinition( Constants.Auth.BearerSheme, securityScheme );
 	c.AddSecurityRequirement( new OpenApiSecurityRequirement()
 	{
 		{ securityScheme, Array.Empty<string>() }
@@ -44,11 +45,11 @@ builder.Services.AddSwaggerGen( c =>
 
 builder.Services.AddAuthentication( options =>
 	{
-		options.DefaultScheme = "Bearer";
-		options.DefaultAuthenticateScheme = "Bearer";
-		options.DefaultChallengeScheme = "Bearer";
+		options.DefaultScheme = Constants.Auth.DefaultSheme;
+		options.DefaultAuthenticateScheme = Constants.Auth.DefaultSheme;
+		options.DefaultChallengeScheme = Constants.Auth.DefaultSheme;
 	} )
-	.AddScheme<TokenOptions, TokenAuthHandler>( "Bearer", options => { } );
+	.AddScheme<TokenOptions, TokenAuthHandler>( Constants.Auth.BearerSheme, options => { } );
 
 builder.Services.AddNpgsql<AppDbContext>(
 	builder.Configuration.GetConnectionString( "postgresConnection" ),

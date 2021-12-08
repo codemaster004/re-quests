@@ -6,7 +6,7 @@ using ReQuests.Domain.Models;
 namespace ReQuests.Api.Controllers;
 
 [ApiController]
-[Authorize( "Admin" )]
+[Authorize( Constants.Auth.SuperAdminRole )]
 [Route( "auth/[controller]" )]
 public class RolesController : ControllerBase
 {

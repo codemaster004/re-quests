@@ -38,7 +38,7 @@ public class QuestsController : ExtendedControllerBase
 	}
 
 	[HttpPost]
-	[Authorize( Roles = "Admin" )]
+	[Authorize( Roles = Constants.Auth.SuperAdminRole )]
 	public async Task<IActionResult> CreateQuest( [FromBody] CreateQuestDto dto )
 	{
 		var quest = await _questsService.CreateQuest( dto );
@@ -47,7 +47,7 @@ public class QuestsController : ExtendedControllerBase
 	}
 
 	[HttpDelete( "{id}" )]
-	[Authorize( Roles = "Admin" )]
+	[Authorize( Roles = Constants.Auth.SuperAdminRole )]
 	public async Task<IActionResult> DeleteQuest( int id )
 	{
 		try

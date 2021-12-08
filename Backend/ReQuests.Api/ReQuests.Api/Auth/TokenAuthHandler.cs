@@ -107,6 +107,7 @@ public class TokenAuthHandler : AuthenticationHandler<TokenOptions>
 	{
 		yield return new( ClaimTypes.Name, user.Uuid );
 		yield return new( ClaimTypes.Email, user.Email );
+		yield return new( ClaimTypes.GivenName, user.Username );
 
 		foreach ( var role in user.Roles! )
 		{
