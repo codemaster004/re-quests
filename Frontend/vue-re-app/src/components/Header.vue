@@ -1,9 +1,5 @@
 <template>
 <header>
-  <div class="burger">
-    <div class="burger-line"></div>
-    <div class="burger-line"></div>
-  </div>
   <div>
     <h1 class="title">Hello, Filip</h1>
     <p class="sub-title">Stay on your Goal</p>
@@ -19,23 +15,11 @@ export default {
 
 <style scoped>
 header {
-  padding: 25px;
-}
-
-.burger .burger-line {
-  width: 26px;
-  height: 2px;
-  
-  background-color: #fff;
-}
-.burger .burger-line:last-child {
-  width: 16px;
-  margin-top: 8px;
+  padding: 0 25px;
 }
 
 .title {
   height: 50px;
-  margin-top: 15px;
   
   color: #ffffff;
   line-height: 50px;
