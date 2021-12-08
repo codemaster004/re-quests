@@ -9,10 +9,10 @@ namespace ReQuests.Api.Services;
 
 public interface IAuthService
 {
-	Task<GetTokenDto> LogInAsync( string username, string password );
-	bool CheckPassword( string password, string hashString );
-	string HashNewPassword( string password );
-	Task<TokenModel?> GetTokenWithDataAsync( string accessToken );
+	Task<GetTokenDto> LogInAsync(string username, string password);
+	bool CheckPassword(string password, string hashString);
+	string HashNewPassword(string password);
+	Task<TokenModel?> GetTokenWithDataAsync(string accessToken);
 }
 
 public class AuthService : IAuthService
@@ -20,14 +20,14 @@ public class AuthService : IAuthService
 	private readonly AppDbContext _dbContext;
 	private readonly ISystemClock _clock;
 
-	public AuthService( AppDbContext dbContext, ISystemClock clock )
+	public AuthService(AppDbContext dbContext, ISystemClock clock)
 	{
 		_dbContext = dbContext;
 		_clock = clock;
 	}
 
 	const int tokenValidityMinutes = 1440;
-	public async Task<GetTokenDto> LogInAsync( string username, string password )
+	public async Task<GetTokenDto> LogInAsync(string username, string password)
 	{
 		UserModel? user;
 		if ( username.Contains( '@' ) )
@@ -87,24 +87,25 @@ public class AuthService : IAuthService
 		return (access, refresh);
 	}
 
-	public async Task<TokenModel?> GetTokenWithDataAsync( string accessToken )
+	public async Task<TokenModel?> GetTokenWithDataAsync(string accessToken)
 	{
 		return await _dbContext.Tokens
-			.Include( t => t.User )
+			.Include( t => t.User! )
+			.ThenInclude( u => u.Roles! )
 			.Where( t => t.AccessToken == accessToken )
 			.FirstOrDefaultAsync();
 	}
 
 
 	const char hashSplitChar = ':';
-	public string HashNewPassword( string password )
+	public string HashNewPassword(string password)
 	{
 		var salt = GenerateSalt();
 		var hash = HashPassword( password, salt );
 		var saltString = Convert.ToBase64String( salt );
 		return $"{hash}{hashSplitChar}{saltString}";
 	}
-	public bool CheckPassword( string password, string hashString )
+	public bool CheckPassword(string password, string hashString)
 	{
 		var values = hashString.Split( hashSplitChar );
 		if ( values.Length != 2 )
@@ -125,7 +126,7 @@ public class AuthService : IAuthService
 		rng.GetBytes( buffer );
 		return buffer;
 	}
-	private static string HashPassword( string password, byte[] salt )
+	private static string HashPassword(string password, byte[] salt)
 	{
 		var bytes = Rfc2898DeriveBytes.Pbkdf2( password, salt, 8192, HashAlgorithmName.SHA512, 512 );
 		return Convert.ToBase64String( bytes );

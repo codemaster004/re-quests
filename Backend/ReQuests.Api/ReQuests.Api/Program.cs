@@ -55,6 +55,7 @@ builder.Services.AddNpgsql<AppDbContext>(
 
 builder.Services.TryAddSingleton<ISystemClock, SystemClock>();
 builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IRolesService, RolesService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
@@ -68,6 +69,7 @@ if ( app.Environment.IsDevelopment() )
 
 _ = app.UseHttpsRedirection();
 
+_ = app.UseAuthentication();
 _ = app.UseAuthorization();
 
 _ = app.MapControllers();
