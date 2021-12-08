@@ -2,6 +2,7 @@
 	<main>
 		<div id="bgc"></div>
 		<Nav />
+		
 		<div class="content">
 			<Header />
 			<router-view></router-view>
