@@ -1,4 +1,5 @@
 ﻿using ReQuests.Domain.Relations;
+using System.ComponentModel.DataAnnotations;
 
 namespace ReQuests.Domain.Models;
 
@@ -11,6 +12,8 @@ public class QuestModel
 	}
 
 	public int Id { get; set; }
+
+	[StringLength( 24 )]
 	public string Name { get; set; }
 	public string Description { get; set; }
 

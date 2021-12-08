@@ -1,7 +1,9 @@
-﻿using ReQuests.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ReQuests.Domain.Models;
 
 namespace ReQuests.Domain.Relations;
 
+[Index( nameof( UserUuid ), nameof( QuestId ), IsUnique = true )]
 public class UserQuestRelation
 {
 	public UserQuestRelation( string userUuid, DateTimeOffset dateStarted )

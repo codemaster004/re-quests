@@ -1,10 +1,12 @@
-﻿using ReQuests.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ReQuests.Domain.Models;
 
 namespace ReQuests.Domain.Relations;
 
+[Index( nameof( UserUuid ), nameof( RoleId ), IsUnique = true )]
 public class UserRoleRelation
 {
-	public UserRoleRelation(string userUuid)
+	public UserRoleRelation( string userUuid )
 	{
 		UserUuid = userUuid;
 	}
