@@ -107,18 +107,23 @@ public class TokenAuthHandler : AuthenticationHandler<TokenOptions>
 	{
 		yield return new( ClaimTypes.Name, user.Uuid );
 		yield return new( ClaimTypes.Email, user.Email );
+
+		foreach ( var role in user.Roles! )
+		{
+			yield return new( ClaimTypes.Role, role.Name );
+		}
 	}
 
 
 	protected override async Task HandleChallengeAsync( AuthenticationProperties properties )
 	{
-		Response.StatusCode = 401;
-
 		AuthenticateResult authResult = await HandleAuthenticateOnceSafeAsync();
 		if ( !authResult.None && authResult.Failure is null )
 		{
 			return;
 		}
+
+		Response.StatusCode = 401;
 
 		// https://datatracker.ietf.org/doc/html/rfc6750#section-3.1
 		StringBuilder wwwauth = new( $"{Scheme.Name} realm=\"ReQuestsDefault\"" );

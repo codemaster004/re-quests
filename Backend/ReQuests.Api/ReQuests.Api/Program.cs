@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using ReQuests.Api.Auth;
 using Microsoft.OpenApi.Models;
+using Microsoft.OpenApi.Any;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -37,6 +38,8 @@ builder.Services.AddSwaggerGen( c =>
 	{
 		{ securityScheme, Array.Empty<string>() }
 	} );
+
+	c.MapType<TimeSpan>( () => new OpenApiSchema() { Title= "ISO_8601_Duration", Type = "string", Example = new OpenApiString( "P3DT12H30M" ) } );
 } );
 
 builder.Services.AddAuthentication( options =>
@@ -55,7 +58,9 @@ builder.Services.AddNpgsql<AppDbContext>(
 
 builder.Services.TryAddSingleton<ISystemClock, SystemClock>();
 builder.Services.AddScoped<IUsersService, UsersService>();
+builder.Services.AddScoped<IRolesService, RolesService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IQuestsService, QuestsService>();
 
 var app = builder.Build();
 
@@ -68,6 +73,7 @@ if ( app.Environment.IsDevelopment() )
 
 _ = app.UseHttpsRedirection();
 
+_ = app.UseAuthentication();
 _ = app.UseAuthorization();
 
 _ = app.MapControllers();

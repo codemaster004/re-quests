@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ReQuests.Data;
@@ -11,9 +12,10 @@ using ReQuests.Data;
 namespace ReQuests.Migrations.Pg.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211208102020_AddedUserRoles")]
+    partial class AddedUserRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,31 +23,6 @@ namespace ReQuests.Migrations.Pg.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("ReQuests.Domain.Models.QuestModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Duration")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Quests");
-                });
 
             modelBuilder.Entity("ReQuests.Domain.Models.RoleModel", b =>
                 {
@@ -132,33 +109,6 @@ namespace ReQuests.Migrations.Pg.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ReQuests.Domain.Relations.UserQuestRelation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTimeOffset>("DateStarted")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("QuestId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("UserUuid")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuestId");
-
-                    b.HasIndex("UserUuid");
-
-                    b.ToTable("UsersQuests");
-                });
-
             modelBuilder.Entity("ReQuests.Domain.Relations.UserRoleRelation", b =>
                 {
                     b.Property<int>("Id")
@@ -195,26 +145,6 @@ namespace ReQuests.Migrations.Pg.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ReQuests.Domain.Relations.UserQuestRelation", b =>
-                {
-                    b.HasOne("ReQuests.Domain.Models.QuestModel", "Quest")
-                        .WithMany("UsersR")
-                        .HasForeignKey("QuestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ReQuests.Domain.Models.UserModel", "User")
-                        .WithMany("QuestsR")
-                        .HasForeignKey("UserUuid")
-                        .HasPrincipalKey("Uuid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Quest");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("ReQuests.Domain.Relations.UserRoleRelation", b =>
                 {
                     b.HasOne("ReQuests.Domain.Models.RoleModel", "Role")
@@ -235,11 +165,6 @@ namespace ReQuests.Migrations.Pg.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ReQuests.Domain.Models.QuestModel", b =>
-                {
-                    b.Navigation("UsersR");
-                });
-
             modelBuilder.Entity("ReQuests.Domain.Models.RoleModel", b =>
                 {
                     b.Navigation("UsersR");
@@ -247,8 +172,6 @@ namespace ReQuests.Migrations.Pg.Migrations
 
             modelBuilder.Entity("ReQuests.Domain.Models.UserModel", b =>
                 {
-                    b.Navigation("QuestsR");
-
                     b.Navigation("RolesR");
 
                     b.Navigation("Tokens");
