@@ -1,8 +1,11 @@
 <template>
 	<main>
 		<div id="bgc"></div>
-		<Header />
-		<router-view></router-view>
+		<Nav />
+		<div class="content">
+			<Header />
+			<router-view></router-view>
+		</div>
 		<footer>
 			<router-link to="/">Home</router-link>
 			<router-link to="/about">About</router-link>
@@ -12,11 +15,13 @@
 
 <script>
 import Header from './components/Header'
+import Nav from './components/Nav'
 
 export default {
 	name: 'App',
 	components: {
-		Header
+		Header,
+		Nav
   	},
 	data() {
 		return {
@@ -25,6 +30,12 @@ export default {
 	},
 }
 </script>
+
+<style scoped>
+.content {
+	padding-top: 50px;
+}
+</style>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@300;400;500;600;700&display=swap');
@@ -41,13 +52,16 @@ body {
 
 #app {
   font-family: 'Montserrat', sans-serif;
+  overflow: hidden;
 }
 
 #bgc {
 	background-color: #4C866B;
-	background: linear-gradient(180deg, #4C866B 0%, #337053 100%);
-	min-height: -webkit-fill-available;
+	background: linear-gradient(180deg, #3C7B5F 0%, #2B684A 100%);
+	height: 100vh;
+	width: 100%;
 	position: fixed;
+	z-index: -1;
 }
 
 .absolute-center {
