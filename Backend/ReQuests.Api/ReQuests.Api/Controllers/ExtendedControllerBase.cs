@@ -13,7 +13,7 @@ public class ExtendedControllerBase : ControllerBase
 	}
 
 	[NonAction]
-	public ObjectResult Unauthorized( string detail )
+	public UnauthorizedObjectResult Unauthorized( string detail )
 	{
 		var problemDetails = ProblemDetailsFactory.CreateProblemDetails( HttpContext, 401, detail: detail );
 		return Unauthorized( problemDetails );
@@ -23,7 +23,10 @@ public class ExtendedControllerBase : ControllerBase
 	public ObjectResult Forbidden( string detail )
 	{
 		var problemDetails = ProblemDetailsFactory.CreateProblemDetails( HttpContext, 403, detail: detail );
-		return Unauthorized( problemDetails );
+		return new ObjectResult( problemDetails )
+		{
+			StatusCode = 403
+		};
 	}
 
 	[NonAction]

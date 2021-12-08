@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ReQuests.Domain.Dtos.Token;
 using ReQuests.Domain.Dtos.User;
 using System.ComponentModel.DataAnnotations;
+using System.Net.Mime;
 
 namespace ReQuests.Api.Controllers;
 
@@ -17,7 +18,13 @@ public class AuthController : ExtendedControllerBase
 		_authService = authService;
 	}
 
+	// POST auth/login
 	[HttpPost( "login" )]
+
+	[Consumes( MediaTypeNames.Application.Json )]
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( typeof( GetTokenDto ), 200 )]
+	[ProducesResponseType( typeof( ProblemDetails ), 401 )]
 	public async Task<ActionResult<GetTokenDto>> LogIn( [FromBody] LoginDto data )
 	{
 		try
@@ -34,5 +41,5 @@ public class AuthController : ExtendedControllerBase
 		}
 	}
 
-	
+
 }

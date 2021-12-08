@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ReQuests.Api.Extensions;
 using ReQuests.Domain.Dtos.User;
+using System.Net.Mime;
 
 namespace ReQuests.Api.Controllers;
 
-[ApiController]
 [Authorize]
+[ApiController]
 [Route( "api/[controller]" )]
 public class UsersController : ExtendedControllerBase
 {
@@ -18,15 +19,26 @@ public class UsersController : ExtendedControllerBase
 		_usersService = usersService;
 	}
 
+	// GET api/users
 	[HttpGet]
 	[Authorize( Roles = Constants.Auth.SuperAdminRole )]
+
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( typeof( GetUserDto[] ), 200 )]
+	[ProducesResponseType( typeof( ProblemDetails ), 403 )]
 	public async Task<ActionResult<GetUserDto[]>> GetUsers()
 	{
 		return await _usersService.GetUsersAsync();
 	}
 
+	// GET api/users/12ab==
 	[HttpGet( "{uuid}" )]
 	[Authorize( Roles = Constants.Auth.SuperAdminRole )]
+
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( typeof( GetUserDto ), 200 )]
+	[ProducesResponseType( typeof( ProblemDetails ), 403 )]
+	[ProducesResponseType( typeof( ProblemDetails ), 404 )]
 	public async Task<ActionResult<GetUserDto>> GetUser( string uuid )
 	{
 		var user = await _usersService.GetUserAsync( uuid );
@@ -38,8 +50,14 @@ public class UsersController : ExtendedControllerBase
 		return user;
 	}
 
+	// POST api/users
 	[HttpPost]
 	[AllowAnonymous]
+
+	[Consumes( MediaTypeNames.Application.Json )]
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( typeof( string ), 201 )]
+	[ProducesResponseType( typeof( ProblemDetails ), 409 )]
 	public async Task<ActionResult<GetUserDto>> CreateUser( [FromBody] CreateUserDto dto )
 	{
 		GetUserDto user;
@@ -58,8 +76,13 @@ public class UsersController : ExtendedControllerBase
 		return CreatedAtAction( nameof( GetUser ), new { user.Uuid }, user );
 	}
 
+	// DELETE api/users/12ab==
 	[HttpDelete( "{uuid}" )]
 	[Authorize( Roles = Constants.Auth.SuperAdminRole )]
+
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( 204 )]
+	[ProducesResponseType( typeof( ProblemDetails ), 403 )]
 	public async Task<IActionResult> DeleteUser( string uuid )
 	{
 		try
@@ -75,7 +98,11 @@ public class UsersController : ExtendedControllerBase
 	}
 
 
+	// GET api/users/me
 	[HttpGet( "me" )]
+
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( typeof( GetUserDto ), 200 )]
 	public async Task<ActionResult<GetUserDto>> GetCurrentUser()
 	{
 		var uuid = User.GetUuid();
@@ -87,13 +114,17 @@ public class UsersController : ExtendedControllerBase
 		var user = await _usersService.GetUserAsync( uuid );
 		if ( user is null )
 		{
-			return NotFound();
+			return InternalServerError( "Error occured" );
 		}
 
 		return user;
 	}
 
+	// DELETE api/users/me
 	[HttpDelete( "me" )]
+
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( 204 )]
 	public async Task<IActionResult> DeleteCurrentUser()
 	{
 		var uuid = User.GetUuid();

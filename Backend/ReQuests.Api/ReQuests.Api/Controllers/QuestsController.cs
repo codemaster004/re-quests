@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ReQuests.Api.Extensions;
 using ReQuests.Domain.Dtos.Quest;
 using ReQuests.Domain.Dtos.UserQuest;
+using System.Net.Mime;
 
 namespace ReQuests.Api.Controllers;
 
@@ -19,13 +20,22 @@ public class QuestsController : ExtendedControllerBase
 		_questsService = questsService;
 	}
 
+	// GET api/quests
 	[HttpGet]
+
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( typeof( GetQuestDto[] ), 200 )]
 	public async Task<ActionResult<GetQuestDto[]>> GetQuests()
 	{
 		return await _questsService.GetQuests();
 	}
 
+	// GET api/quests/1
 	[HttpGet( "{id}" )]
+
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( typeof( GetQuestDto ), 200 )]
+	[ProducesResponseType( typeof( ProblemDetails ), 404 )]
 	public async Task<ActionResult<GetQuestDto>> GetQuest( int id )
 	{
 		var quest = await _questsService.GetQuest( id );
@@ -37,8 +47,14 @@ public class QuestsController : ExtendedControllerBase
 		return quest;
 	}
 
+	// POST api/quests
 	[HttpPost]
 	[Authorize( Roles = Constants.Auth.SuperAdminRole )]
+
+	[Consumes( MediaTypeNames.Application.Json )]
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( typeof( string ), 201 )]
+	[ProducesResponseType( typeof( ProblemDetails ), 403 )]
 	public async Task<IActionResult> CreateQuest( [FromBody] CreateQuestDto dto )
 	{
 		var quest = await _questsService.CreateQuest( dto );
@@ -46,8 +62,14 @@ public class QuestsController : ExtendedControllerBase
 		return CreatedAtAction( nameof( GetQuest ), new { quest.Id }, quest );
 	}
 
+	// DELETE api/quests/1
 	[HttpDelete( "{id}" )]
 	[Authorize( Roles = Constants.Auth.SuperAdminRole )]
+
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( 204 )]
+	[ProducesResponseType( typeof( ProblemDetails ), 403 )]
+	[ProducesResponseType( typeof( ProblemDetails ), 404 )]
 	public async Task<IActionResult> DeleteQuest( int id )
 	{
 		try
@@ -63,7 +85,12 @@ public class QuestsController : ExtendedControllerBase
 	}
 
 
+	// POST api/quests/1
 	[HttpPost( "{id}/begin" )]
+
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( 204 )]
+	[ProducesResponseType( typeof( ProblemDetails ), 404 )]
 	public async Task<IActionResult> BeginQuest( int id )
 	{
 		var uuid = User.GetUuid();
@@ -84,7 +111,11 @@ public class QuestsController : ExtendedControllerBase
 		return NoContent();
 	}
 
+	// GET api/quests/begun
 	[HttpGet( "begun" )]
+
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( typeof( GetQuestDto[] ), 200 )]
 	public async Task<ActionResult<GetUserQuestDto[]>> GetBegun()
 	{
 		var uuid = User.GetUuid();
