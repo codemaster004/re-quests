@@ -25,8 +25,13 @@ public class QuestsController : ExtendedControllerBase
 
 	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
 	[ProducesResponseType( typeof( GetQuestDto[] ), 200 )]
-	public async Task<ActionResult<GetQuestDto[]>> GetQuests()
+	public async Task<ActionResult<GetQuestDto[]>> GetQuests( [FromQuery] int[] ids )
 	{
+		if ( ids.Length > 0 )
+		{
+			return await _questsService.GetQuests( ids );
+		}
+
 		return await _questsService.GetQuests();
 	}
 
@@ -85,7 +90,7 @@ public class QuestsController : ExtendedControllerBase
 	}
 
 
-	// POST api/quests/1
+	// POST api/quests/1/begin
 	[HttpPost( "{id}/begin" )]
 
 	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
@@ -116,7 +121,7 @@ public class QuestsController : ExtendedControllerBase
 
 	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
 	[ProducesResponseType( typeof( GetQuestDto[] ), 200 )]
-	public async Task<ActionResult<GetUserQuestDto[]>> GetBegun()
+	public async Task<ActionResult<GetUserQuestDto[]>> GetBegun( [FromQuery] int[] ids )
 	{
 		var uuid = User.GetUuid();
 		if ( uuid is null )
@@ -124,7 +129,35 @@ public class QuestsController : ExtendedControllerBase
 			return InternalServerError( "Error occured" );
 		}
 
+		if ( ids.Length > 0 )
+		{
+			return await _questsService.GetBegun( uuid, ids );
+		}
+
 		return await _questsService.GetBegun( uuid );
+	}
+
+	// GET api/quests/begun
+	[HttpGet( "begun/{id}" )]
+
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( typeof( GetQuestDto ), 200 )]
+	[ProducesResponseType( typeof( ProblemDetails ), 404 )]
+	public async Task<ActionResult<GetUserQuestDto>> GetBegun( int id )
+	{
+		var uuid = User.GetUuid();
+		if ( uuid is null )
+		{
+			return InternalServerError( "Error occured" );
+		}
+
+		var userQuest = await _questsService.GetBegun( uuid, id );
+		if ( userQuest is null )
+		{
+			return NotFound();
+		}
+
+		return userQuest;
 	}
 
 

@@ -10,12 +10,15 @@ namespace ReQuests.Api.Services;
 public interface IQuestsService
 {
 	Task<GetQuestDto[]> GetQuests();
+	Task<GetQuestDto[]> GetQuests( int[] ids );
 	Task<GetQuestDto?> GetQuest( int id );
 	Task<GetQuestDto> CreateQuest( CreateQuestDto dto );
 	Task DeleteQuest( int id );
 
 	Task BeginQuest( int questId, string userUuid );
 	Task<GetUserQuestDto[]> GetBegun( string uuid );
+	Task<GetUserQuestDto[]> GetBegun( string uuid, int[] ids );
+	Task<GetUserQuestDto?> GetBegun( string uuid, int id );
 }
 
 public class QuestsService : IQuestsService
@@ -31,9 +34,17 @@ public class QuestsService : IQuestsService
 
 	public async Task<GetQuestDto[]> GetQuests()
 	{
-		return await _dbContext.Quests.Select( GetQuestDto.FromQuestExp ).ToArrayAsync();
+		return await _dbContext.Quests
+			.Select( GetQuestDto.FromQuestExp )
+			.ToArrayAsync();
 	}
-
+	public async Task<GetQuestDto[]> GetQuests( int[] ids )
+	{
+		return await _dbContext.Quests
+			.Where( x => ids.Contains( x.Id ) )
+			.Select( GetQuestDto.FromQuestExp )
+			.ToArrayAsync();
+	}
 	public async Task<GetQuestDto?> GetQuest( int id )
 	{
 		return await _dbContext.Quests
@@ -41,7 +52,6 @@ public class QuestsService : IQuestsService
 			.Select( GetQuestDto.FromQuestExp )
 			.FirstOrDefaultAsync();
 	}
-
 	public async Task<GetQuestDto> CreateQuest( CreateQuestDto dto )
 	{
 		var quest = dto.ToQuest();
@@ -51,7 +61,6 @@ public class QuestsService : IQuestsService
 
 		return GetQuestDto.FromQuest( quest );
 	}
-
 	public async Task DeleteQuest( int id )
 	{
 		var quest = await _dbContext.Quests
@@ -92,12 +101,27 @@ public class QuestsService : IQuestsService
 		_ = _dbContext.UsersQuests.Add( userQuest );
 		_ = await _dbContext.SaveChangesAsync();
 	}
-
 	public async Task<GetUserQuestDto[]> GetBegun( string uuid )
 	{
 		return await _dbContext.UsersQuests
 			.Where( uq => uq.UserUuid == uuid )
 			.Select( GetUserQuestDto.FromUserQuestExp )
 			.ToArrayAsync();
+	}
+	public async Task<GetUserQuestDto[]> GetBegun( string uuid, int[] ids )
+	{
+		return await _dbContext.UsersQuests
+			.Where( uq => uq.UserUuid == uuid )
+			.Where( uq => ids.Contains( uq.Id ) )
+			.Select( GetUserQuestDto.FromUserQuestExp )
+			.ToArrayAsync();
+	}
+	public async Task<GetUserQuestDto?> GetBegun( string uuid, int id )
+	{
+		return await _dbContext.UsersQuests
+			.Where( uq => uq.UserUuid == uuid )
+			.Where( uq => uq.Id == id )
+			.Select( GetUserQuestDto.FromUserQuestExp )
+			.FirstOrDefaultAsync();
 	}
 }

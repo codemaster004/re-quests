@@ -26,8 +26,13 @@ public class UsersController : ExtendedControllerBase
 	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
 	[ProducesResponseType( typeof( GetUserDto[] ), 200 )]
 	[ProducesResponseType( typeof( ProblemDetails ), 403 )]
-	public async Task<ActionResult<GetUserDto[]>> GetUsers()
+	public async Task<ActionResult<GetUserDto[]>> GetUsers( [FromQuery] string[] uuids )
 	{
+		if ( uuids.Length > 0 )
+		{
+			return await _usersService.GetUsersAsync( uuids );
+		}
+
 		return await _usersService.GetUsersAsync();
 	}
 
