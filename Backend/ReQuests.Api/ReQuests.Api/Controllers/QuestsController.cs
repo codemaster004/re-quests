@@ -161,4 +161,81 @@ public class QuestsController : ExtendedControllerBase
 	}
 
 
+	// POST api/quests/1/abort
+	[HttpPost( "{id}/abort" )]
+
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( 204 )]
+	[ProducesResponseType( typeof( ProblemDetails ), 404 )]
+	public async Task<IActionResult> AbortQuest( int id )
+	{
+		var uuid = User.GetUuid();
+		if ( uuid is null )
+		{
+			return InternalServerError( "Error occured" );
+		}
+
+		try
+		{
+			await _questsService.AbortQuest( uuid, id );
+		}
+		catch ( NotFoundException )
+		{
+			return NotFound( "quest not started" );
+		}
+
+		return NoContent();
+	}
+
+	// POST api/quests/1/reset
+	[HttpPost( "{id}/reset" )]
+
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( 204 )]
+	[ProducesResponseType( typeof( ProblemDetails ), 404 )]
+	public async Task<IActionResult> ResetQuest( int id )
+	{
+		var uuid = User.GetUuid();
+		if ( uuid is null )
+		{
+			return InternalServerError( "Error occured" );
+		}
+
+		try
+		{
+			await _questsService.ResetQuest( uuid, id );
+		}
+		catch ( NotFoundException )
+		{
+			return NotFound( "quest not started" );
+		}
+
+		return NoContent();
+	}
+
+	// POST api/quests/1/check
+	[HttpPost( "{id}/check" )]
+
+	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[ProducesResponseType( typeof( bool ), 200 )]
+	[ProducesResponseType( typeof( ProblemDetails ), 404 )]
+	public async Task<ActionResult<bool>> CheckQuestCompletion( int id )
+	{
+		var uuid = User.GetUuid();
+		if ( uuid is null )
+		{
+			return InternalServerError( "Error occured" );
+		}
+
+		try
+		{
+			return await _questsService.CheckQuestCompletion( uuid, id );
+		}
+		catch ( NotFoundException )
+		{
+			return NotFound( "quest not started" );
+		}
+
+	}
+
 }
