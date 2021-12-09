@@ -1,16 +1,18 @@
 <template>
-  <div>
+  <div class="auth-view">
     <div class="logo-box">
       <img src="" alt="" />
     </div>
     <h2 class="auth-title">Log In</h2>
-    <div class="input-group">
-      <AuthInput placeholder="Username" inputType="text" />
-      <AuthInput placeholder="Password" inputType="password" />
-      <p>Forgot Password</p>
-    </div>
+    <form @submit="handdleSubmit">
+      <div class="input-group">
+        <AuthInput placeholder="Username" inputType="text" />
+        <AuthInput placeholder="Password" inputType="password" />
+        <p>Forgot Password</p>
+      </div>
 
-    <AuthButton text="Log in" />
+      <AuthButton text="Log in" />
+    </form>
   </div>
 </template>
 
@@ -26,10 +28,23 @@ export default {
     AuthInput,
     AuthButton,
   },
+  methods: {
+    handdleSubmit(e) {
+      e.preventDefault();
+      console.log("submit");
+    },
+  },
 };
 </script>
 
 <style scoped>
+.auth-view {
+  min-height: calc(100vh - 50px);
+  width: 100vw;
+  background-color: #fff;
+  padding-top: 50px;
+}
+
 .logo-box {
   width: 114px;
   height: 114px;

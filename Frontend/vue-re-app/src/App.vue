@@ -11,7 +11,6 @@
         'content-minimize': navState.showing,
       }"
     >
-      <Header />
       <router-view></router-view>
     </div>
     <Nav @burger-clicked="toggleNav()" />
@@ -19,13 +18,11 @@
 </template>
 
 <script>
-import Header from "./components/Header";
 import Nav from "./components/Nav";
 
 export default {
   name: "App",
   components: {
-    Header,
     Nav,
   },
   methods: {
@@ -82,17 +79,14 @@ body {
 #bgc {
   background-color: #4c866b;
   background: linear-gradient(180deg, #3c7b5f 0%, #2b684a 100%);
-  height: 100vh;
+  height: -webkit-fill-available;
   width: 100%;
   position: fixed;
   z-index: -1;
 }
 
-main {
-  padding-bottom: 15px;
-}
-
 .content {
+  min-height: -webkit-fill-available;
   background: linear-gradient(180deg, #4c866b 0%, #337053 100%);
   overflow-y: hidden;
   padding-top: 50px;
@@ -101,10 +95,10 @@ main {
 }
 
 .content-minimize {
-  animation: show-menu 0.3s linear;
+  animation: show-menu 0.3s ease-in;
 }
 .content-maximize {
-  animation: hide-menu 0.3s linear;
+  animation: hide-menu 0.3s ease-out;
 }
 .content-minimal {
   box-shadow: -10px 10px 25px 5px rgba(0, 0, 0, 0.06);
