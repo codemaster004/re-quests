@@ -28,7 +28,7 @@ export default {
     NavLink,
     Header,
   },
-  computed: {
+  methods: {
     burgerClicked() {
       this.$emit("burger-clicked");
     },
@@ -42,8 +42,8 @@ export default {
   created() {
     this.links = [
       { linkTo: "Main", to: "/", active: true, icon: "" },
-      { linkTo: "Notification", to: "/about", active: false, icon: "" },
-      { linkTo: "Auth", to: "/login", active: false, icon: "" },
+      { linkTo: "Log in", to: "/login", active: false, icon: "" },
+      { linkTo: "Sign up", to: "/signup", active: false, icon: "" },
     ];
   },
 };
