@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-link">
+  <div @click="$emit('link-clicked')" class="nav-link">
     <div class="nav-link-box">A</div>
     <p>{{ linkData.linkTo }}</p>
   </div>

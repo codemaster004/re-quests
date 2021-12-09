@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="auth-button">{{ text }}</div>
+    <input type="submit" class="auth-button" :value="text" />
   </div>
 </template>
 
@@ -29,6 +29,8 @@ export default {
   background: #4c866b;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
   border-radius: 50px;
+  -webkit-appearance: none;
+  border: none;
 
   font-family: Montserrat;
   font-style: normal;

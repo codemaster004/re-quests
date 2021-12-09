@@ -1,9 +1,6 @@
 <template>
-  <div v-if="inputType == 'text'">
-    <input type="text" class="input-box" placeholder="Username" />
-  </div>
-  <div v-else-if="inputType == 'password'">
-    <input type="password" class="input-box" placeholder="Password" />
+  <div>
+    <input :type="inputType" class="input-box" :placeholder="placeholder" />
   </div>
 </template>
 
@@ -23,6 +20,7 @@ export default {
   display: block;
   width: 100%;
   height: 49px;
+  margin-bottom: 30px;
 
   background: #f5f5f5;
   border-radius: 50px;

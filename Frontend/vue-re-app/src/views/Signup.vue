@@ -3,15 +3,17 @@
     <div class="logo-box">
       <img src="" alt="" />
     </div>
-    <h2 class="auth-title">Log In</h2>
+    <h2 class="auth-title">Sign Up</h2>
     <form @submit="handdleSubmit">
       <div class="input-group">
         <AuthInput placeholder="Username" inputType="text" />
+        <AuthInput placeholder="Email" inputType="email" />
         <AuthInput placeholder="Password" inputType="password" />
-        <p>Forgot Password?</p>
+        <AuthInput placeholder="Confirm" inputType="password" />
+        <!-- <p>Forgot Password</p> -->
       </div>
 
-      <AuthButton text="Log in" />
+      <AuthButton text="Sign up" />
     </form>
   </div>
 </template>
@@ -22,7 +24,7 @@ import AuthButton from "../components/AuthButton";
 
 export default {
   export: {
-    name: "Login",
+    name: "Signup",
   },
   components: {
     AuthInput,
