@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ReQuests.Api.Auth.Attributes;
+using ReQuests.Api.Controllers.Attributes;
 using ReQuests.Api.Extensions;
 using ReQuests.Domain.Dtos.User;
-using System.Net.Mime;
+
+using MtnA = System.Net.Mime.MediaTypeNames.Application;
 
 namespace ReQuests.Api.Controllers;
 
@@ -21,11 +24,11 @@ public class UsersController : ExtendedControllerBase
 
 	// GET api/users
 	[HttpGet]
-	[Authorize( Roles = Constants.Auth.SuperAdminRole )]
+	[SuperAdminOnly]
 
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
-	[ProducesResponseType( typeof( GetUserDto[] ), 200 )]
-	[ProducesResponseType( typeof( ProblemDetails ), 403 )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces200( typeof( GetUserDto[] ) )]
+	[ProducesProblem( 403 )]
 	public async Task<ActionResult<GetUserDto[]>> GetUsers( [FromQuery] string[] uuids )
 	{
 		if ( uuids.Length > 0 )
@@ -38,12 +41,12 @@ public class UsersController : ExtendedControllerBase
 
 	// GET api/users/12ab==
 	[HttpGet( "{uuid}" )]
-	[Authorize( Roles = Constants.Auth.SuperAdminRole )]
+	[SuperAdminOnly]
 
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
-	[ProducesResponseType( typeof( GetUserDto ), 200 )]
-	[ProducesResponseType( typeof( ProblemDetails ), 403 )]
-	[ProducesResponseType( typeof( ProblemDetails ), 404 )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces200( typeof( GetUserDto ) )]
+	[ProducesProblem( 403 )]
+	[ProducesProblem( 404 )]
 	public async Task<ActionResult<GetUserDto>> GetUser( string uuid )
 	{
 		var user = await _usersService.GetUserAsync( uuid );
@@ -59,10 +62,10 @@ public class UsersController : ExtendedControllerBase
 	[HttpPost]
 	[AllowAnonymous]
 
-	[Consumes( MediaTypeNames.Application.Json )]
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[Consumes( MtnA.Json )]
+	[Produces( MtnA.Json, MtnA.Xml )]
 	[ProducesResponseType( typeof( string ), 201 )]
-	[ProducesResponseType( typeof( ProblemDetails ), 409 )]
+	[ProducesProblem( 409 )]
 	public async Task<ActionResult<GetUserDto>> CreateUser( [FromBody] CreateUserDto dto )
 	{
 		GetUserDto user;
@@ -83,11 +86,11 @@ public class UsersController : ExtendedControllerBase
 
 	// DELETE api/users/12ab==
 	[HttpDelete( "{uuid}" )]
-	[Authorize( Roles = Constants.Auth.SuperAdminRole )]
+	[SuperAdminOnly]
 
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
-	[ProducesResponseType( 204 )]
-	[ProducesResponseType( typeof( ProblemDetails ), 403 )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces204()]
+	[ProducesProblem( 403 )]
 	public async Task<IActionResult> DeleteUser( string uuid )
 	{
 		try
@@ -106,8 +109,8 @@ public class UsersController : ExtendedControllerBase
 	// GET api/users/me
 	[HttpGet( "me" )]
 
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
-	[ProducesResponseType( typeof( GetUserDto ), 200 )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces200( typeof( GetUserDto ) )]
 	public async Task<ActionResult<GetUserDto>> GetCurrentUser()
 	{
 		var uuid = User.GetUuid();
@@ -128,8 +131,8 @@ public class UsersController : ExtendedControllerBase
 	// DELETE api/users/me
 	[HttpDelete( "me" )]
 
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
-	[ProducesResponseType( 204 )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces204()]
 	public async Task<IActionResult> DeleteCurrentUser()
 	{
 		var uuid = User.GetUuid();

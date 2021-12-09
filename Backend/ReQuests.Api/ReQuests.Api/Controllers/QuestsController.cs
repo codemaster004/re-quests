@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ReQuests.Api.Auth.Attributes;
+using ReQuests.Api.Controllers.Attributes;
 using ReQuests.Api.Extensions;
 using ReQuests.Domain.Dtos.Quest;
 using ReQuests.Domain.Dtos.UserQuest;
-using System.Net.Mime;
+
+using MtnA = System.Net.Mime.MediaTypeNames.Application;
 
 namespace ReQuests.Api.Controllers;
 
@@ -23,8 +26,8 @@ public class QuestsController : ExtendedControllerBase
 	// GET api/quests
 	[HttpGet]
 
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
-	[ProducesResponseType( typeof( GetQuestDto[] ), 200 )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces200( typeof( GetQuestDto[] ) )]
 	public async Task<ActionResult<GetQuestDto[]>> GetQuests( [FromQuery] int[] ids )
 	{
 		if ( ids.Length > 0 )
@@ -38,9 +41,9 @@ public class QuestsController : ExtendedControllerBase
 	// GET api/quests/1
 	[HttpGet( "{id}" )]
 
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
-	[ProducesResponseType( typeof( GetQuestDto ), 200 )]
-	[ProducesResponseType( typeof( ProblemDetails ), 404 )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces200( typeof( GetQuestDto ) )]
+	[ProducesProblem( 404 )]
 	public async Task<ActionResult<GetQuestDto>> GetQuest( int id )
 	{
 		var quest = await _questsService.GetQuest( id );
@@ -54,12 +57,12 @@ public class QuestsController : ExtendedControllerBase
 
 	// POST api/quests
 	[HttpPost]
-	[Authorize( Roles = Constants.Auth.SuperAdminRole )]
+	[SuperAdminOnly]
 
-	[Consumes( MediaTypeNames.Application.Json )]
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
+	[Consumes( MtnA.Json )]
+	[Produces( MtnA.Json, MtnA.Xml )]
 	[ProducesResponseType( typeof( string ), 201 )]
-	[ProducesResponseType( typeof( ProblemDetails ), 403 )]
+	[ProducesProblem( 403 )]
 	public async Task<IActionResult> CreateQuest( [FromBody] CreateQuestDto dto )
 	{
 		var quest = await _questsService.CreateQuest( dto );
@@ -69,12 +72,12 @@ public class QuestsController : ExtendedControllerBase
 
 	// DELETE api/quests/1
 	[HttpDelete( "{id}" )]
-	[Authorize( Roles = Constants.Auth.SuperAdminRole )]
+	[SuperAdminOnly]
 
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
-	[ProducesResponseType( 204 )]
-	[ProducesResponseType( typeof( ProblemDetails ), 403 )]
-	[ProducesResponseType( typeof( ProblemDetails ), 404 )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces204()]
+	[ProducesProblem( 403 )]
+	[ProducesProblem( 404 )]
 	public async Task<IActionResult> DeleteQuest( int id )
 	{
 		try
@@ -93,9 +96,9 @@ public class QuestsController : ExtendedControllerBase
 	// POST api/quests/1/begin
 	[HttpPost( "{id}/begin" )]
 
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
-	[ProducesResponseType( 204 )]
-	[ProducesResponseType( typeof( ProblemDetails ), 404 )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces204()]
+	[ProducesProblem( 404 )]
 	public async Task<IActionResult> BeginQuest( int id )
 	{
 		var uuid = User.GetUuid();
@@ -119,8 +122,8 @@ public class QuestsController : ExtendedControllerBase
 	// GET api/quests/begun
 	[HttpGet( "begun" )]
 
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
-	[ProducesResponseType( typeof( GetQuestDto[] ), 200 )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces200( typeof( GetQuestDto[] ) )]
 	public async Task<ActionResult<GetUserQuestDto[]>> GetBegun( [FromQuery] int[] ids )
 	{
 		var uuid = User.GetUuid();
@@ -131,7 +134,7 @@ public class QuestsController : ExtendedControllerBase
 
 		if ( ids.Length > 0 )
 		{
-			return await _questsService.GetBegun( uuid, ids );
+			return await _questsService.GetBegun( ids, uuid );
 		}
 
 		return await _questsService.GetBegun( uuid );
@@ -140,9 +143,9 @@ public class QuestsController : ExtendedControllerBase
 	// GET api/quests/begun
 	[HttpGet( "begun/{id}" )]
 
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
-	[ProducesResponseType( typeof( GetQuestDto ), 200 )]
-	[ProducesResponseType( typeof( ProblemDetails ), 404 )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces200( typeof( GetQuestDto ) )]
+	[ProducesProblem( 404 )]
 	public async Task<ActionResult<GetUserQuestDto>> GetBegun( int id )
 	{
 		var uuid = User.GetUuid();
@@ -151,7 +154,7 @@ public class QuestsController : ExtendedControllerBase
 			return InternalServerError( "Error occured" );
 		}
 
-		var userQuest = await _questsService.GetBegun( uuid, id );
+		var userQuest = await _questsService.GetBegun( id, uuid );
 		if ( userQuest is null )
 		{
 			return NotFound();
@@ -164,9 +167,9 @@ public class QuestsController : ExtendedControllerBase
 	// POST api/quests/1/abort
 	[HttpPost( "{id}/abort" )]
 
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
-	[ProducesResponseType( 204 )]
-	[ProducesResponseType( typeof( ProblemDetails ), 404 )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces204()]
+	[ProducesProblem( 404 )]
 	public async Task<IActionResult> AbortQuest( int id )
 	{
 		var uuid = User.GetUuid();
@@ -177,7 +180,7 @@ public class QuestsController : ExtendedControllerBase
 
 		try
 		{
-			await _questsService.AbortQuest( uuid, id );
+			await _questsService.AbortQuest( id, uuid );
 		}
 		catch ( NotFoundException )
 		{
@@ -190,9 +193,9 @@ public class QuestsController : ExtendedControllerBase
 	// POST api/quests/1/reset
 	[HttpPost( "{id}/reset" )]
 
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
-	[ProducesResponseType( 204 )]
-	[ProducesResponseType( typeof( ProblemDetails ), 404 )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces204()]
+	[ProducesProblem( 404 )]
 	public async Task<IActionResult> ResetQuest( int id )
 	{
 		var uuid = User.GetUuid();
@@ -203,7 +206,7 @@ public class QuestsController : ExtendedControllerBase
 
 		try
 		{
-			await _questsService.ResetQuest( uuid, id );
+			await _questsService.ResetQuest( id, uuid );
 		}
 		catch ( NotFoundException )
 		{
@@ -216,9 +219,9 @@ public class QuestsController : ExtendedControllerBase
 	// POST api/quests/1/check
 	[HttpPost( "{id}/check" )]
 
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
-	[ProducesResponseType( typeof( bool ), 200 )]
-	[ProducesResponseType( typeof( ProblemDetails ), 404 )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces200( typeof( bool ) )]
+	[ProducesProblem( 404 )]
 	public async Task<ActionResult<bool>> CheckQuestCompletion( int id )
 	{
 		var uuid = User.GetUuid();
@@ -229,7 +232,7 @@ public class QuestsController : ExtendedControllerBase
 
 		try
 		{
-			return await _questsService.CheckQuestCompletion( uuid, id );
+			return await _questsService.CheckQuestCompletion( id, uuid );
 		}
 		catch ( NotFoundException )
 		{

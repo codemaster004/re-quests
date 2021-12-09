@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ReQuests.Api.Controllers.Attributes;
 using ReQuests.Domain.Models;
-using System.Net.Mime;
+
+using MtnA = System.Net.Mime.MediaTypeNames.Application;
 
 namespace ReQuests.Api.Controllers;
 
@@ -22,9 +24,9 @@ public class RolesController : ControllerBase
 	// POST auth/roles
 	[HttpPost]
 
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
-	[ProducesResponseType( 204 )]
-	[ProducesResponseType( typeof( ProblemDetails ), 409 )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces204()]
+	[ProducesProblem( 409 )]
 	public async Task<IActionResult> CreateRole( [FromBody] string name )
 	{
 		RoleModel role;

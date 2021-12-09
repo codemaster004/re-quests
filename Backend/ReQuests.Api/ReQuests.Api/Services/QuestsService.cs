@@ -17,12 +17,12 @@ public interface IQuestsService
 
 	Task BeginQuest( int questId, string userUuid );
 	Task<GetUserQuestDto[]> GetBegun( string uuid );
-	Task<GetUserQuestDto[]> GetBegun( string uuid, int[] ids );
-	Task<GetUserQuestDto?> GetBegun( string uuid, int id );
+	Task<GetUserQuestDto[]> GetBegun( int[] questIds, string uuid );
+	Task<GetUserQuestDto?> GetBegun( int questId, string uuid );
 
-	Task AbortQuest( string userUuid, int questId );
-	Task ResetQuest( string userUuid, int questId );
-	Task<bool> CheckQuestCompletion( string userUuid, int questId );
+	Task AbortQuest( int questId, string userUuid );
+	Task ResetQuest( int questId, string userUuid );
+	Task<bool> CheckQuestCompletion( int questId, string userUuid );
 	Task<GetUserQuestDto[]> GetCompleted( string uuid );
 }
 
@@ -114,24 +114,24 @@ public class QuestsService : IQuestsService
 			.Select( GetUserQuestDto.FromUserQuestExp )
 			.ToArrayAsync();
 	}
-	public async Task<GetUserQuestDto[]> GetBegun( string uuid, int[] ids )
+	public async Task<GetUserQuestDto[]> GetBegun( int[] questIds, string uuid )
 	{
 		return await _dbContext.UsersQuests
 			.Where( uq => uq.UserUuid == uuid )
-			.Where( uq => ids.Contains( uq.Id ) )
+			.Where( uq => questIds.Contains( uq.QuestId ) )
 			.Select( GetUserQuestDto.FromUserQuestExp )
 			.ToArrayAsync();
 	}
-	public async Task<GetUserQuestDto?> GetBegun( string uuid, int id )
+	public async Task<GetUserQuestDto?> GetBegun( int questId, string uuid )
 	{
 		return await _dbContext.UsersQuests
 			.Where( uq => uq.UserUuid == uuid )
-			.Where( uq => uq.Id == id )
+			.Where( uq => uq.QuestId == questId )
 			.Select( GetUserQuestDto.FromUserQuestExp )
 			.FirstOrDefaultAsync();
 	}
 
-	public async Task AbortQuest( string userUuid, int questId )
+	public async Task AbortQuest( int questId, string userUuid )
 	{
 		var userQuest = await _dbContext.UsersQuests
 			.Where( uq => uq.UserUuid == userUuid )
@@ -146,7 +146,7 @@ public class QuestsService : IQuestsService
 		_ = _dbContext.UsersQuests.Remove( userQuest );
 		_ = await _dbContext.SaveChangesAsync();
 	}
-	public async Task ResetQuest( string userUuid, int questId )
+	public async Task ResetQuest( int questId, string userUuid )
 	{
 		var userQuest = await _dbContext.UsersQuests
 			.Where( uq => uq.UserUuid == userUuid )
@@ -163,7 +163,7 @@ public class QuestsService : IQuestsService
 
 		_ = await _dbContext.SaveChangesAsync();
 	}
-	public async Task<bool> CheckQuestCompletion( string userUuid, int questId )
+	public async Task<bool> CheckQuestCompletion( int questId, string userUuid )
 	{
 		var userQuest = await _dbContext.UsersQuests
 			.Include( uq => uq.Quest )
