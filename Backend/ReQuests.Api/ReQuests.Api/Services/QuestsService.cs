@@ -17,8 +17,13 @@ public interface IQuestsService
 
 	Task BeginQuest( int questId, string userUuid );
 	Task<GetUserQuestDto[]> GetBegun( string uuid );
-	Task<GetUserQuestDto[]> GetBegun( string uuid, int[] ids );
-	Task<GetUserQuestDto?> GetBegun( string uuid, int id );
+	Task<GetUserQuestDto[]> GetBegun( int[] questIds, string uuid );
+	Task<GetUserQuestDto?> GetBegun( int questId, string uuid );
+
+	Task AbortQuest( int questId, string userUuid );
+	Task ResetQuest( int questId, string userUuid );
+	Task<bool> CheckQuestCompletion( int questId, string userUuid );
+	Task<GetUserQuestDto[]> GetCompleted( string uuid );
 }
 
 public class QuestsService : IQuestsService
@@ -87,7 +92,7 @@ public class QuestsService : IQuestsService
 					where q.Id == questId
 					select new { };
 
-		var exist = await user.Union( quest ).CountAsync() == 2;
+		var exist = await user.Concat( quest ).CountAsync() == 2;
 		if ( !exist )
 		{
 			throw new NotFoundException();
@@ -95,7 +100,8 @@ public class QuestsService : IQuestsService
 
 		UserQuestRelation userQuest = new( userUuid, _clock.UtcNow )
 		{
-			QuestId = questId
+			QuestId = questId,
+			Attempts = 1
 		};
 
 		_ = _dbContext.UsersQuests.Add( userQuest );
@@ -108,20 +114,92 @@ public class QuestsService : IQuestsService
 			.Select( GetUserQuestDto.FromUserQuestExp )
 			.ToArrayAsync();
 	}
-	public async Task<GetUserQuestDto[]> GetBegun( string uuid, int[] ids )
+	public async Task<GetUserQuestDto[]> GetBegun( int[] questIds, string uuid )
 	{
 		return await _dbContext.UsersQuests
 			.Where( uq => uq.UserUuid == uuid )
-			.Where( uq => ids.Contains( uq.Id ) )
+			.Where( uq => questIds.Contains( uq.QuestId ) )
 			.Select( GetUserQuestDto.FromUserQuestExp )
 			.ToArrayAsync();
 	}
-	public async Task<GetUserQuestDto?> GetBegun( string uuid, int id )
+	public async Task<GetUserQuestDto?> GetBegun( int questId, string uuid )
 	{
 		return await _dbContext.UsersQuests
 			.Where( uq => uq.UserUuid == uuid )
-			.Where( uq => uq.Id == id )
+			.Where( uq => uq.QuestId == questId )
 			.Select( GetUserQuestDto.FromUserQuestExp )
 			.FirstOrDefaultAsync();
 	}
+
+	public async Task AbortQuest( int questId, string userUuid )
+	{
+		var userQuest = await _dbContext.UsersQuests
+			.Where( uq => uq.UserUuid == userUuid )
+			.Where( uq => uq.QuestId == questId )
+			.FirstOrDefaultAsync();
+
+		if ( userQuest is null )
+		{
+			throw new NotFoundException();
+		}
+
+		_ = _dbContext.UsersQuests.Remove( userQuest );
+		_ = await _dbContext.SaveChangesAsync();
+	}
+	public async Task ResetQuest( int questId, string userUuid )
+	{
+		var userQuest = await _dbContext.UsersQuests
+			.Where( uq => uq.UserUuid == userUuid )
+			.Where( uq => uq.QuestId == questId )
+			.FirstOrDefaultAsync();
+
+		if ( userQuest is null )
+		{
+			throw new NotFoundException();
+		}
+
+		userQuest.DateStarted = _clock.UtcNow;
+		userQuest.Attempts += 1;
+
+		_ = await _dbContext.SaveChangesAsync();
+	}
+	public async Task<bool> CheckQuestCompletion( int questId, string userUuid )
+	{
+		var userQuest = await _dbContext.UsersQuests
+			.Include( uq => uq.Quest )
+			.Where( uq => uq.UserUuid == userUuid )
+			.Where( uq => uq.QuestId == questId )
+			.FirstOrDefaultAsync();
+
+		if ( userQuest is null )
+		{
+			throw new NotFoundException();
+		}
+
+		if ( userQuest.DateCompleted is not null )
+		{
+			return true;
+		}
+
+		if ( userQuest.DateStarted + userQuest.Quest!.Duration <= _clock.UtcNow )
+		{
+			userQuest.DateCompleted = userQuest.DateStarted + userQuest.Quest!.Duration;
+			_ = await _dbContext.SaveChangesAsync();
+			return true;
+		}
+
+		return false;
+	}
+	public async Task<GetUserQuestDto[]> GetCompleted( string uuid )
+	{
+		return await _dbContext.UsersQuests
+			.Where( uq => uq.UserUuid == uuid )
+			.Where( uq => uq.DateCompleted != null )
+			.Select( GetUserQuestDto.FromUserQuestExp )
+			.ToArrayAsync();
+	}
+
+
+
+
 }

@@ -25,6 +25,9 @@ public class AppDbContext : DbContext
 			.Property( q => q.Duration )
 			.HasConversion( TimeSpanValueConverter.Instance );
 
+		_ = modelBuilder.Entity<UserQuestRelation>()
+			.Property( q => q.Attempts )
+			.HasDefaultValue( 1 );
 
 		// user <= token
 		_ = modelBuilder.Entity<TokenModel>()

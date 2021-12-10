@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ReQuests.Api.Controllers.Attributes;
 using ReQuests.Domain.Dtos.Token;
 using ReQuests.Domain.Dtos.User;
-using System.ComponentModel.DataAnnotations;
-using System.Net.Mime;
+
+using MtnA = System.Net.Mime.MediaTypeNames.Application;
 
 namespace ReQuests.Api.Controllers;
 
@@ -21,10 +22,10 @@ public class AuthController : ExtendedControllerBase
 	// POST auth/login
 	[HttpPost( "login" )]
 
-	[Consumes( MediaTypeNames.Application.Json )]
-	[Produces( MediaTypeNames.Application.Json, MediaTypeNames.Application.Xml )]
-	[ProducesResponseType( typeof( GetTokenDto ), 200 )]
-	[ProducesResponseType( typeof( ProblemDetails ), 401 )]
+	[Consumes( MtnA.Json )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces200( typeof( GetTokenDto ) )]
+	[ProducesProblem( 401 )]
 	public async Task<ActionResult<GetTokenDto>> LogIn( [FromBody] LoginDto data )
 	{
 		try
