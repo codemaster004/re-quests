@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace ReQuests.Domain.Dtos.UserQuest;
 
-public class GetUserQuestDto
+public record GetUserQuestDto
 {
 #nullable disable warnings
 	public int QuestId { get; set; }

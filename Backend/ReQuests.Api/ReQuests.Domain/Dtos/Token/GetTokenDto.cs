@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace ReQuests.Domain.Dtos.Token;
 
-public class GetTokenDto
+public record GetTokenDto
 {
 #nullable disable warnings
 	public string AccessToken { get; set; }

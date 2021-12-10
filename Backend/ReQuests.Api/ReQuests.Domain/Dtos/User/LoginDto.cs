@@ -2,7 +2,7 @@
 
 namespace ReQuests.Domain.Dtos.User;
 
-public class LoginDto
+public record LoginDto
 {
 #nullable disable warnings
 	[Required]
