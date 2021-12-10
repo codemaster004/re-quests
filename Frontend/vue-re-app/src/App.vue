@@ -67,13 +67,26 @@ export default {
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
+  min-height: 100%;
   background-color: #4c866b;
+}
+
+main {
+  height: 100%;
+  min-height: 100%;
 }
 
 #app {
   font-family: "Montserrat", sans-serif;
   overflow: hidden;
+  height: 100%;
+  min-height: 100%;
 }
 
 #bgc {
@@ -86,7 +99,8 @@ body {
 }
 
 .content {
-  min-height: -webkit-fill-available;
+  height: 100%;
+  min-height: 100%;
   background: linear-gradient(180deg, #4c866b 0%, #337053 100%);
   overflow-y: hidden;
   padding-top: 50px;

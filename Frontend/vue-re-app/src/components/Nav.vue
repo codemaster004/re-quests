@@ -10,9 +10,9 @@
     </div>
     <div class="nav-link-box">
       <div v-for="item in links" :key="item.name">
-        <router-link :to="item.to"
-          ><NavLink @link-clicked="burgerClicked()" :linkData="item"
-        /></router-link>
+        <router-link :to="item.to">
+          <NavLink @link-clicked="burgerClicked()" :linkData="item" />
+        </router-link>
       </div>
     </div>
   </nav>
@@ -44,6 +44,8 @@ export default {
       { linkTo: "Main", to: "/", active: true, icon: "" },
       { linkTo: "Log in", to: "/login", active: false, icon: "" },
       { linkTo: "Sign up", to: "/signup", active: false, icon: "" },
+      { linkTo: "Progress", to: "/progress", active: false, icon: "" },
+      { linkTo: "Profile", to: "/user", active: false, icon: "" },
     ];
   },
 };
