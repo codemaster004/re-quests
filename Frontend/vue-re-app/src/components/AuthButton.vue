@@ -1,8 +1,4 @@
-<template>
-  <div>
-    <input type="submit" class="auth-button" :value="text" />
-  </div>
-</template>
+<template></template>
 
 <script>
 export default {

@@ -1,0 +1,24 @@
+<template>
+  <svg
+    width="274"
+    height="120"
+    viewBox="0 0 274 120"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M265.626 8C265.626 8 132.626 8 61.6256 8C-9.37436 8 -10.3744 112 61.6256 112C133.626 112 265.626 112 265.626 112"
+      stroke="#4C866B"
+      stroke-width="15"
+      stroke-linecap="round"
+    />
+  </svg>
+</template>
+
+<script>
+export default {
+  name: "Progress",
+};
+</script>
+
+<style scoped></style>
