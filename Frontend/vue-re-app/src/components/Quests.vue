@@ -29,6 +29,12 @@ section {
   flex-direction: column;
 }
 
+@media screen and (min-width: 1300px) {
+  section {
+    width: 66%;
+  }
+}
+
 @media screen and (min-width: 1000px) {
   section {
     display: flex;

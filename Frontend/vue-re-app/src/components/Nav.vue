@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <div class="nav-bar" v-if="mobileDesign">
+    <div class="nav-bar" v-if="screenSize <= 1000">
       <button @click="burgerClicked()" class="burger">
         <div class="burger-line"></div>
         <div class="burger-line"></div>
@@ -32,12 +32,15 @@ export default {
     burgerClicked() {
       this.$emit("burger-clicked");
     },
+    resizeWindowHandler(e) {
+      this.screenSize = window.innerWidth;
+    },
   },
   data() {
     return {
       links: [],
       headerLarge: false,
-      mobileDesign: window.innerWidth < 1000,
+      screenSize: window.innerWidth,
     };
   },
   created() {
@@ -48,6 +51,10 @@ export default {
       { linkTo: "Progress", to: "/progress", active: false, icon: "" },
       { linkTo: "Profile", to: "/user", active: false, icon: "" },
     ];
+    window.addEventListener("resize", this.resizeWindowHandler);
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.resizeWindowHandler);
   },
 };
 </script>
