@@ -12,7 +12,7 @@ public record GetQuestDto
 	public string Name { get; set; }
 	public string Description { get; set; }
 
-	[JsonConverter( typeof( TimeSpanJsonConverter ) )]
+	[JsonConverter( typeof( TimeSpanDaysCountJsonConverter ) )]
 	public TimeSpan Duration { get; set; }
 	public int Difficulty { get; set; }
 
