@@ -28,14 +28,14 @@ public class QuestsController : ExtendedControllerBase
 
 	[Produces( MtnA.Json, MtnA.Xml )]
 	[Produces200( typeof( GetQuestDto[] ) )]
-	public async Task<ActionResult<GetQuestDto[]>> GetQuests( [FromQuery] int[] ids )
+	public async Task<ActionResult<GetQuestDto[]>> GetQuests( [FromQuery] int[] ids, [FromQuery] QuestsOrderBy order )
 	{
 		if ( ids.Length > 0 )
 		{
-			return await _questsService.GetQuests( ids );
+			return await _questsService.GetQuests( ids, order );
 		}
 
-		return await _questsService.GetQuests();
+		return await _questsService.GetQuests( order );
 	}
 
 	// GET api/quests/1
@@ -90,6 +90,23 @@ public class QuestsController : ExtendedControllerBase
 		}
 
 		return NoContent();
+	}
+
+
+	// GET api/quests/available
+	[HttpGet( "available" )]
+
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces200( typeof( GetQuestDto[] ) )]
+	public async Task<ActionResult<GetQuestDto[]>> GetAvailable( [FromQuery] QuestsOrderBy order )
+	{
+		var uuid = User.GetUuid();
+		if ( uuid is null )
+		{
+			return InternalServerError( "Error occured" );
+		}
+
+		return await _questsService.GetAvailable( uuid, order );
 	}
 
 
@@ -239,6 +256,39 @@ public class QuestsController : ExtendedControllerBase
 			return NotFound( "quest not started" );
 		}
 
+	}
+
+
+	// GET api/quests/completed
+	[HttpGet( "completed" )]
+
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces200( typeof( GetUserQuestDto[] ) )]
+	public async Task<ActionResult<GetUserQuestDto[]>> GetCompleted()
+	{
+		var uuid = User.GetUuid();
+		if ( uuid is null )
+		{
+			return InternalServerError( "Error occured" );
+		}
+
+		return await _questsService.GetCompleted( uuid );
+	}
+
+	// GET api/quests/uncompleted
+	[HttpGet( "uncompleted" )]
+
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces200( typeof( GetUserQuestDto[] ) )]
+	public async Task<ActionResult<GetUserQuestDto[]>> GetUncompleted()
+	{
+		var uuid = User.GetUuid();
+		if ( uuid is null )
+		{
+			return InternalServerError( "Error occured" );
+		}
+
+		return await _questsService.GetUncompleted( uuid );
 	}
 
 }
