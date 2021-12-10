@@ -18,6 +18,7 @@ public class QuestModel
 	public string Description { get; set; }
 
 	public TimeSpan Duration { get; set; }
+	public int Difficulty { get; set; }
 
 	public List<UserModel>? Users { get; set; }
 	public List<UserQuestRelation>? UsersR { get; set; }

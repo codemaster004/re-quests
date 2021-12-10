@@ -14,6 +14,7 @@ public record GetQuestDto
 
 	[JsonConverter( typeof( TimeSpanJsonConverter ) )]
 	public TimeSpan Duration { get; set; }
+	public int Difficulty { get; set; }
 
 #nullable restore
 
@@ -24,6 +25,7 @@ public record GetQuestDto
 		Name = quest.Name,
 		Description = quest.Description,
 		Duration = quest.Duration,
+		Difficulty = quest.Difficulty,
 	};
 
 	private static readonly Func<QuestModel, GetQuestDto> fromQuestFunc = fromQuestExp.Compile();
