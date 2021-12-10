@@ -28,14 +28,14 @@ public class QuestsController : ExtendedControllerBase
 
 	[Produces( MtnA.Json, MtnA.Xml )]
 	[Produces200( typeof( GetQuestDto[] ) )]
-	public async Task<ActionResult<GetQuestDto[]>> GetQuests( [FromQuery] int[] ids )
+	public async Task<ActionResult<GetQuestDto[]>> GetQuests( [FromQuery] int[] ids, [FromQuery] QuestsOrderBy order )
 	{
 		if ( ids.Length > 0 )
 		{
-			return await _questsService.GetQuests( ids );
+			return await _questsService.GetQuests( ids, order );
 		}
 
-		return await _questsService.GetQuests();
+		return await _questsService.GetQuests( order );
 	}
 
 	// GET api/quests/1
@@ -98,7 +98,7 @@ public class QuestsController : ExtendedControllerBase
 
 	[Produces( MtnA.Json, MtnA.Xml )]
 	[Produces200( typeof( GetQuestDto[] ) )]
-	public async Task<ActionResult<GetQuestDto[]>> GetAvailable()
+	public async Task<ActionResult<GetQuestDto[]>> GetAvailable( [FromQuery] QuestsOrderBy order )
 	{
 		var uuid = User.GetUuid();
 		if ( uuid is null )
@@ -106,7 +106,7 @@ public class QuestsController : ExtendedControllerBase
 			return InternalServerError( "Error occured" );
 		}
 
-		return await _questsService.GetAvailable( uuid );
+		return await _questsService.GetAvailable( uuid, order );
 	}
 
 
