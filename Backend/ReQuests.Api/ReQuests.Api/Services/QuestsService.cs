@@ -15,6 +15,8 @@ public interface IQuestsService
 	Task<GetQuestDto> CreateQuest( CreateQuestDto dto );
 	Task DeleteQuest( int id );
 
+	Task<GetQuestDto[]> GetAvailable( string userUuid );
+
 	Task BeginQuest( int questId, string userUuid );
 	Task<GetUserQuestDto[]> GetBegun( string uuid );
 	Task<GetUserQuestDto[]> GetBegun( int[] questIds, string uuid );
@@ -24,6 +26,7 @@ public interface IQuestsService
 	Task ResetQuest( int questId, string userUuid );
 	Task<bool> CheckQuestCompletion( int questId, string userUuid );
 	Task<GetUserQuestDto[]> GetCompleted( string uuid );
+	Task<GetUserQuestDto[]> GetUncompleted( string uuid );
 }
 
 public class QuestsService : IQuestsService
@@ -82,6 +85,14 @@ public class QuestsService : IQuestsService
 	}
 
 
+	public async Task<GetQuestDto[]> GetAvailable( string userUuid )
+	{
+		return await _dbContext.Quests
+			.Where( q => !q.UsersR!.Where( uq => uq.UserUuid == userUuid ).Any() )
+			.Select( GetQuestDto.FromQuestExp )
+			.ToArrayAsync();
+	}
+
 	public async Task BeginQuest( int questId, string userUuid )
 	{
 		var user = from u in _dbContext.Users
@@ -111,6 +122,7 @@ public class QuestsService : IQuestsService
 	{
 		return await _dbContext.UsersQuests
 			.Where( uq => uq.UserUuid == uuid )
+			.OrderBy( uq => uq.DateStarted )
 			.Select( GetUserQuestDto.FromUserQuestExp )
 			.ToArrayAsync();
 	}
@@ -119,6 +131,7 @@ public class QuestsService : IQuestsService
 		return await _dbContext.UsersQuests
 			.Where( uq => uq.UserUuid == uuid )
 			.Where( uq => questIds.Contains( uq.QuestId ) )
+			.OrderBy( uq => uq.DateStarted )
 			.Select( GetUserQuestDto.FromUserQuestExp )
 			.ToArrayAsync();
 	}
@@ -127,6 +140,7 @@ public class QuestsService : IQuestsService
 		return await _dbContext.UsersQuests
 			.Where( uq => uq.UserUuid == uuid )
 			.Where( uq => uq.QuestId == questId )
+			.OrderBy( uq => uq.DateStarted )
 			.Select( GetUserQuestDto.FromUserQuestExp )
 			.FirstOrDefaultAsync();
 	}
@@ -195,6 +209,16 @@ public class QuestsService : IQuestsService
 		return await _dbContext.UsersQuests
 			.Where( uq => uq.UserUuid == uuid )
 			.Where( uq => uq.DateCompleted != null )
+			.OrderBy( uq => uq.DateCompleted )
+			.Select( GetUserQuestDto.FromUserQuestExp )
+			.ToArrayAsync();
+	}
+	public async Task<GetUserQuestDto[]> GetUncompleted( string uuid )
+	{
+		return await _dbContext.UsersQuests
+			.Where( uq => uq.UserUuid == uuid )
+			.Where( uq => uq.DateCompleted == null )
+			.OrderBy( uq => uq.DateStarted )
 			.Select( GetUserQuestDto.FromUserQuestExp )
 			.ToArrayAsync();
 	}

@@ -93,6 +93,23 @@ public class QuestsController : ExtendedControllerBase
 	}
 
 
+	// GET api/quests/available
+	[HttpGet( "available" )]
+
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces200( typeof( GetQuestDto[] ) )]
+	public async Task<ActionResult<GetQuestDto[]>> GetAvailable()
+	{
+		var uuid = User.GetUuid();
+		if ( uuid is null )
+		{
+			return InternalServerError( "Error occured" );
+		}
+
+		return await _questsService.GetAvailable( uuid );
+	}
+
+
 	// POST api/quests/1/begin
 	[HttpPost( "{id}/begin" )]
 
@@ -239,6 +256,39 @@ public class QuestsController : ExtendedControllerBase
 			return NotFound( "quest not started" );
 		}
 
+	}
+
+
+	// GET api/quests/completed
+	[HttpGet( "completed" )]
+
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces200( typeof( GetUserQuestDto[] ) )]
+	public async Task<ActionResult<GetUserQuestDto[]>> GetCompleted()
+	{
+		var uuid = User.GetUuid();
+		if ( uuid is null )
+		{
+			return InternalServerError( "Error occured" );
+		}
+
+		return await _questsService.GetCompleted( uuid );
+	}
+
+	// GET api/quests/uncompleted
+	[HttpGet( "uncompleted" )]
+
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces200( typeof( GetUserQuestDto[] ) )]
+	public async Task<ActionResult<GetUserQuestDto[]>> GetUncompleted()
+	{
+		var uuid = User.GetUuid();
+		if ( uuid is null )
+		{
+			return InternalServerError( "Error occured" );
+		}
+
+		return await _questsService.GetUncompleted( uuid );
 	}
 
 }
