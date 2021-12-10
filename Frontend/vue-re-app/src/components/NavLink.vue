@@ -51,4 +51,20 @@ p {
 
   color: #ffffff;
 }
+
+@media screen and (min-width: 1000px) {
+  .nav-link.active {
+    background-color: #fff;
+    border-radius: 10px 0 0 10px;
+    padding: 5px;
+    box-sizing: content-box;
+    min-width: 210px;
+  }
+  .nav-link.active .nav-icon-box {
+    color: #4c866b;
+  }
+  .nav-link.active p {
+    color: #000000;
+  }
+}
 </style>

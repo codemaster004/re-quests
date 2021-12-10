@@ -28,4 +28,18 @@ section {
   align-items: center;
   flex-direction: column;
 }
+
+@media screen and (min-width: 1000px) {
+  section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0 25px;
+    flex-wrap: wrap;
+  }
+
+  section > div {
+    margin: 10px;
+  }
+}
 </style>
