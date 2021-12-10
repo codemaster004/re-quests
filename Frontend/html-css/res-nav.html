@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        height: 100%;
+      }
+
+      body {
+        height: 100%;
+        min-height: 100%;
+        background-color: #4c866b;
+      }
+
+      main {
+        height: 100%;
+        min-height: 100%;
+      }
+			
+			a {
+				text-decoration: none;
+			}
+
+      .content {
+        height: 100%;
+        min-height: 100%;
+        background: linear-gradient(180deg, #4c866b 0%, #337053 100%);
+        overflow-y: hidden;
+        padding-top: 50px;
+        position: relative;
+        z-index: 50;
+      }
+
+      .content-maximal {
+        box-shadow: -10px 10px 25px 5px rgba(0, 0, 0, 0.06);
+        height: auto;
+        border-radius: 0;
+        transform: scale(1) translateX(0) translateY(0);
+      }
+
+      .absolute-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .title {
+        font-family: Oswald;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 34px;
+      }
+
+      .sub-title {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13px;
+      }
+
+      .header {
+        font-family: Oswald;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 30px;
+      }
+
+      .sub-header {
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 11px;
+        line-height: 13px;
+      }
+
+      .card {
+        width: 340px;
+        height: 510px;
+        margin-bottom: 30px;
+
+        background: #ffffff;
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+        border-radius: 27px;
+      }
+
+      .feature {
+        width: 340px;
+        height: 390px;
+
+        padding: 16px 25px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(242, 234, 205, 0.43) 100%
+        );
+      }
+      .image-box {
+        width: 270.5px;
+        height: 259px;
+        margin: 0 auto;
+        margin-top: 40px;
+
+        position: relative;
+      }
+
+      .header {
+        height: 30px;
+
+        color: #000000;
+      }
+      .sub-header {
+        height: 18px;
+
+        color: #999999;
+      }
+
+      .progress-group {
+        padding: 15px 20px;
+      }
+
+      .progress-bar {
+        height: 10px;
+        margin: auto;
+
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .progress {
+        display: block;
+
+        height: 10px;
+        float: left;
+
+        background-color: #e8e8e8;
+      }
+      .progress.checked {
+        background-color: #efe2c8;
+      }
+      .progress:not(:last-child) {
+        margin-right: 1px;
+      }
+
+      .progress-info {
+        margin-top: 23px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .action-button {
+        width: 40%;
+      }
+
+      section {
+        margin-top: 20px;
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
+
+      .nav-bar {
+        padding: 0 25px;
+        width: 100%;
+
+        display: flex;
+        align-items: flex-start;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .nav-link-box {
+        margin-top: 10vh;
+        padding-left: 25px;
+        position: relative;
+        z-index: 10;
+      }
+
+      .nav-icon {
+        width: 26px;
+      }
+
+      .burger {
+        -webkit-appearance: none;
+        border: none;
+        background-color: transparent;
+        position: relative;
+        z-index: 100;
+        height: auto;
+        margin-top: 20px;
+      }
+
+      .burger .burger-line {
+        width: 26px;
+        height: 2px;
+
+        background-color: #fff;
+      }
+      .burger .burger-line:last-child {
+        width: 16px;
+        margin-top: 8px;
+      }
+
+      header {
+        padding: 0 25px;
+        display: inline-block;
+
+        position: relative;
+        z-index: 100;
+        text-align: center;
+      }
+
+      .header-large {
+        display: block;
+      }
+
+      .title {
+        color: #ffffff;
+        line-height: 45px;
+      }
+
+      .sub-title {
+        height: 16px;
+        margin-top: 3px;
+
+        line-height: 16px;
+        color: #dddddd;
+      }
+
+      .nav-link {
+        min-width: 200px;
+        margin-bottom: 32px;
+      }
+
+      .nav-icon-box {
+        width: 36px;
+        height: 36px;
+        display: inline-block;
+
+        background: rgba(255, 255, 255, 0.4);
+        border-radius: 10px;
+        color: #fff;
+
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 36px;
+        text-align: center;
+      }
+
+      p {
+        width: 130px;
+        height: 23px;
+        display: inline-block;
+        padding: 0 0 0 10px;
+
+        font-family: Montserrat;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 18px;
+
+        color: #ffffff;
+      }
+    </style>
+
+    <style>
+			@media screen and (min-width: 1000px) {
+				body {
+					background: linear-gradient(180deg, #4c866b 0%, #337053 100%);
+				}
+				
+				nav {
+					width: 200px;
+				}
+				.content {
+					width: calc(100% - 200px - 15px);
+					height: calc(100% - 15px * 2);
+					min-height: calc(100% - 15px * 2);
+					background: #fff;
+					margin: 15px;
+					margin-left: 200px;
+					border-radius: 20px;
+					padding-top: 15px;
+				}
+				.nav-link.active {
+					background-color: #fff;
+					border-radius: 10px 0 0 10px;
+					padding: 5px;
+					box-sizing: content-box;
+					min-width: 210px;
+				}
+				.nav-link.active .nav-icon-box {
+					color: #4c866b;
+				}
+				.nav-link.active p {
+					color: #000000;
+				}
+				
+				.content .title {
+					color: #000000;
+				}
+				
+				/* Card - start */
+				.card {
+					width: 250px;
+					height: 410px;
+					border-radius: 15px;
+					box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.10);
+				}
+				.card .feature,
+				.card .progress-group {
+					padding: 10px;
+					width: 100%;
+				}
+				.card .feature {
+					height: auto;
+				}
+				.card p {
+					width: auto;
+				}
+				.card .image-box {
+					width: 100%;
+					height: 230px;
+					margin-top: 0px;
+				}
+				
+				.image-box img {
+					width: 85%;
+				}
+				.image-box img:last-of-type {
+					width: 65%;
+				}
+				/* Card - end */
+				
+				section {
+					display: flex;
+					flex-direction: row;
+					justify-content: space-around;
+					padding: 0 25px;
+					flex-wrap: wrap;
+				}
+				
+				section > div {
+					margin: 10px;
+				}
+			}
+		</style>
+  </head>
+  <body>
+    <main>
+      <div id="bgc"></div>
+      <!-- <div class="content">
+        <section data-v-0f625981="">
+        </section>
+      </div> -->
+      <div class="content">
+				<header class="" data-v-61dd7a3d="" data-v-65af85a3="">
+					<div data-v-61dd7a3d="">
+						<h1 class="title" data-v-61dd7a3d="">Home</h1>
+					</div>
+				</header>
+				<section data-v-0f625981="">
+					<div data-v-0f625981="">
+            <div class="card" data-v-4dd8e612="" data-v-0f625981="">
+              <div class="feature" data-v-4dd8e612="">
+                <h2 class="header" data-v-4dd8e612="">Paper Busket</h2>
+                <p class="sub-header" data-v-4dd8e612="">
+                  In this week remeber to use paper bags only.
+                </p>
+                <div class="image-box" data-v-4dd8e612="">
+                  <img
+                    src="images/Rectangle.svg"
+                    class="absolute-center"
+                    data-v-4dd8e612=""
+                  /><img
+                    src="images/PaperBag.png"
+                    class="absolute-center"
+                    data-v-4dd8e612=""
+                  />
+                </div>
+              </div>
+              <div class="progress-group" data-v-4dd8e612="">
+                <div class="progress-bar" data-v-4dd8e612="">
+                  <span
+                    class="progress checked"
+                    data-v-4dd8e612=""
+                    style="width: calc(41.857142857142854px)"
+                  ></span
+                  ><span
+                    class="progress checked"
+                    data-v-4dd8e612=""
+                    style="width: calc(41.857142857142854px)"
+                  ></span
+                  ><span
+                    class="progress checked"
+                    data-v-4dd8e612=""
+                    style="width: calc(41.857142857142854px)"
+                  ></span
+                  ><span
+                    class="progress"
+                    data-v-4dd8e612=""
+                    style="width: calc(41.857142857142854px)"
+                  ></span
+                  ><span
+                    class="progress"
+                    data-v-4dd8e612=""
+                    style="width: calc(41.857142857142854px)"
+                  ></span
+                  ><span
+                    class="progress"
+                    data-v-4dd8e612=""
+                    style="width: calc(41.857142857142854px)"
+                  ></span
+                  ><span
+                    class="progress"
+                    data-v-4dd8e612=""
+                    style="width: calc(41.857142857142854px)"
+                  ></span>
+                </div>
+                <div class="progress-info" data-v-4dd8e612="">
+                  <div data-v-4dd8e612="">
+                    <h2 class="header" data-v-4dd8e612="">4 days</h2>
+                    <p class="sub-header" data-v-4dd8e612="">to finish</p>
+                  </div>
+                  <div class="action-button" data-v-4dd8e612="">Break</div>
+                </div>
+              </div>
+            </div>
+          </div>
+					
+					<div data-v-0f625981="">
+            <div class="card" data-v-4dd8e612="" data-v-0f625981="">
+              <div class="feature" data-v-4dd8e612="">
+                <h2 class="header" data-v-4dd8e612="">Sometinhg Else</h2>
+                <p class="sub-header" data-v-4dd8e612="">
+                  Lorem ipsum dolores abridge.
+                </p>
+                <div class="image-box" data-v-4dd8e612="">
+                  <img
+                    src="images/Rectangle.svg"
+                    class="absolute-center"
+                    data-v-4dd8e612=""
+                  /><img
+                    src="images/PaperBag.png"
+                    class="absolute-center"
+                    data-v-4dd8e612=""
+                  />
+                </div>
+              </div>
+              <div class="progress-group" data-v-4dd8e612="">
+                <div class="progress-bar" data-v-4dd8e612="">
+                  <span
+                    class="progress checked"
+                    data-v-4dd8e612=""
+                    style="width: calc(74px)"
+                  ></span
+                  ><span
+                    class="progress checked"
+                    data-v-4dd8e612=""
+                    style="width: calc(74px)"
+                  ></span
+                  ><span
+                    class="progress checked"
+                    data-v-4dd8e612=""
+                    style="width: calc(74px)"
+                  ></span
+                  ><span
+                    class="progress"
+                    data-v-4dd8e612=""
+                    style="width: calc(74px)"
+                  ></span>
+                </div>
+                <div class="progress-info" data-v-4dd8e612="">
+                  <div data-v-4dd8e612="">
+                    <h2 class="header" data-v-4dd8e612="">1 days</h2>
+                    <p class="sub-header" data-v-4dd8e612="">to finish</p>
+                  </div>
+                  <div class="action-button" data-v-4dd8e612="">Break</div>
+                </div>
+              </div>
+            </div>
+          </div>
+					
+					<div data-v-0f625981="">
+            <div class="card" data-v-4dd8e612="" data-v-0f625981="">
+              <div class="feature" data-v-4dd8e612="">
+                <h2 class="header" data-v-4dd8e612="">Sometinhg Else</h2>
+                <p class="sub-header" data-v-4dd8e612="">
+                  Lorem ipsum dolores abridge.
+                </p>
+                <div class="image-box" data-v-4dd8e612="">
+                  <img
+                    src="images/Rectangle.svg"
+                    class="absolute-center"
+                    data-v-4dd8e612=""
+                  /><img
+                    src="images/PaperBag.png"
+                    class="absolute-center"
+                    data-v-4dd8e612=""
+                  />
+                </div>
+              </div>
+              <div class="progress-group" data-v-4dd8e612="">
+                <div class="progress-bar" data-v-4dd8e612="">
+                  <span
+                    class="progress checked"
+                    data-v-4dd8e612=""
+                    style="width: calc(74px)"
+                  ></span
+                  ><span
+                    class="progress checked"
+                    data-v-4dd8e612=""
+                    style="width: calc(74px)"
+                  ></span
+                  ><span
+                    class="progress checked"
+                    data-v-4dd8e612=""
+                    style="width: calc(74px)"
+                  ></span
+                  ><span
+                    class="progress"
+                    data-v-4dd8e612=""
+                    style="width: calc(74px)"
+                  ></span>
+                </div>
+                <div class="progress-info" data-v-4dd8e612="">
+                  <div data-v-4dd8e612="">
+                    <h2 class="header" data-v-4dd8e612="">1 days</h2>
+                    <p class="sub-header" data-v-4dd8e612="">to finish</p>
+                  </div>
+                  <div class="action-button" data-v-4dd8e612="">Break</div>
+                </div>
+              </div>
+            </div>
+          </div>
+					
+					
+				</section>
+			</div>
+			<nav data-v-65af85a3="">
+        <!-- <div class="nav-bar" data-v-65af85a3="">
+          <button class="burger" data-v-65af85a3="">
+            <div class="burger-line" data-v-65af85a3=""></div>
+            <div class="burger-line" data-v-65af85a3=""></div>
+          </button>
+          <header class="" data-v-61dd7a3d="" data-v-65af85a3="">
+            <div data-v-61dd7a3d="">
+              <h1 class="title" data-v-61dd7a3d="">Home</h1>
+            </div>
+          </header>
+          <div class="nav-icon" data-v-65af85a3=""></div>
+        </div> -->
+        <div class="nav-link-box" data-v-65af85a3="">
+          <div data-v-65af85a3="" class="">
+            <a
+              href="/"
+              class="router-link-active router-link-exact-active"
+              data-v-65af85a3=""
+              aria-current="page"
+            >
+              <div class="nav-link active" data-v-7aece186="" data-v-65af85a3="">
+                <div class="nav-icon-box" data-v-7aece186="">A</div>
+                <p data-v-7aece186="">Main</p>
+              </div>
+            </a>
+          </div>
+          <div data-v-65af85a3="">
+            <a href="/login" class="" data-v-65af85a3=""></a>
+              <div class="nav-link" data-v-7aece186="" data-v-65af85a3="">
+                <div class="nav-icon-box" data-v-7aece186="">A</div>
+                <p data-v-7aece186="">Log in</p>
+              </div>
+            </a>
+          </div>
+          <div data-v-65af85a3="">
+            <a href="/signup" class="" data-v-65af85a3=""
+              >
+							<div class="nav-link" data-v-7aece186="" data-v-65af85a3="">
+                <div class="nav-icon-box" data-v-7aece186="">A</div>
+                <p data-v-7aece186="">Sign up</p>
+              </div>
+            </a>
+          </div>
+          <div data-v-65af85a3="">
+            <a href="/progress" class="" data-v-65af85a3=""
+              >
+							<div class="nav-link" data-v-7aece186="" data-v-65af85a3="">
+                <div class="nav-icon-box" data-v-7aece186="">A</div>
+                <p data-v-7aece186="">Progress</p>
+              </div>
+            </a>
+          </div>
+          <div data-v-65af85a3="">
+            <a href="/user" class="" data-v-65af85a3=""
+              >
+							<div class="nav-link" data-v-7aece186="" data-v-65af85a3="">
+                <div class="nav-icon-box" data-v-7aece186="">A</div>
+                <p data-v-7aece186="">Profile</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </main>
+  </body>
+</html>

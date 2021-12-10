@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <div class="nav-bar">
+    <div class="nav-bar" v-if="mobileDesign">
       <button @click="burgerClicked()" class="burger">
         <div class="burger-line"></div>
         <div class="burger-line"></div>
@@ -37,6 +37,7 @@ export default {
     return {
       links: [],
       headerLarge: false,
+      mobileDesign: window.innerWidth < 1000,
     };
   },
   created() {

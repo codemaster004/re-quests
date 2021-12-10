@@ -216,4 +216,30 @@ main {
     transform: scale(1) translateX(0) translateY(0);
   }
 }
+
+@media screen and (min-width: 1000px) {
+  body {
+    background: linear-gradient(180deg, #4c866b 0%, #337053 100%);
+  }
+
+  nav {
+    width: 200px;
+  }
+
+  #bgc {
+    background-color: none;
+    background: none;
+  }
+
+  .content {
+    width: calc(100% - 200px - 15px);
+    height: calc(100% - 15px * 2);
+    min-height: calc(100% - 15px * 2);
+    background: #fff;
+    margin: 15px;
+    margin-left: 200px;
+    border-radius: 20px;
+    padding-top: 15px;
+  }
+}
 </style>

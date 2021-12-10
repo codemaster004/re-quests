@@ -55,4 +55,10 @@ header {
   line-height: 16px;
   color: #dddddd;
 }
+
+@media screen and (min-width: 1000px) {
+  .content .title {
+    color: #000000;
+  }
+}
 </style>
