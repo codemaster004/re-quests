@@ -47,12 +47,18 @@ export default {
         password: this.password,
       };
 
-      const response = await axios.post("/auth/login", formData);
+      try {
+        const response = await axios.post(
+          "https://re-quests-api.herokuapp.com/auth/login",
+          formData
+        );
 
-      console.log(response);
+        localStorage.setItem("accessToken", response.data.accessToken);
+        console.log("Success login");
 
-      const router = useRouter();
-      router.push("/");
+        const router = useRouter();
+        // router.push("/")
+      } catch {}
     },
   },
   data() {
