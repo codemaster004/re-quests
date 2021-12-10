@@ -30,12 +30,7 @@ public class QuestsController : ExtendedControllerBase
 	[Produces200( typeof( GetQuestDto[] ) )]
 	public async Task<ActionResult<GetQuestDto[]>> GetQuests( [FromQuery] int[] ids, [FromQuery] QuestsOrderBy order )
 	{
-		if ( ids.Length > 0 )
-		{
-			return await _questsService.GetQuests( ids, order );
-		}
-
-		return await _questsService.GetQuests( order );
+		return await _questsService.GetQuests( ids.Any() ? ids : null, order );
 	}
 
 	// GET api/quests/1
@@ -149,12 +144,7 @@ public class QuestsController : ExtendedControllerBase
 			return InternalServerError( "Error occured" );
 		}
 
-		if ( ids.Length > 0 )
-		{
-			return await _questsService.GetBegun( ids, uuid );
-		}
-
-		return await _questsService.GetBegun( uuid );
+		return await _questsService.GetBegun( ids.Any() ? ids : null, uuid );
 	}
 
 	// GET api/quests/begun

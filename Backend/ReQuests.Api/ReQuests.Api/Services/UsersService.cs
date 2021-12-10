@@ -9,8 +9,7 @@ namespace ReQuests.Api.Services;
 
 public interface IUsersService
 {
-	Task<GetUserDto[]> GetUsersAsync();
-	Task<GetUserDto[]> GetUsersAsync( string[] uuids );
+	Task<GetUserDto[]> GetUsersAsync( string[]? uuids );
 	Task<GetUserDto?> GetUserAsync( string uuid );
 	Task<GetUserDto> CreateUserAsync( CreateUserDto dto );
 	Task DeleteUserAsync( string uuid );
@@ -27,16 +26,13 @@ public class UsersService : IUsersService
 		_authService = authService;
 	}
 
-	public async Task<GetUserDto[]> GetUsersAsync()
+	public async Task<GetUserDto[]> GetUsersAsync( string[]? uuids )
 	{
-		return await _dbContext.Users
-			.Select( GetUserDto.FromUserExp )
-			.ToArrayAsync();
-	}
-	public async Task<GetUserDto[]> GetUsersAsync( string[] uuids )
-	{
-		return await _dbContext.Users
-			.Where( u => uuids.Contains( u.Uuid ) )
+		return await ( uuids is null ?
+			_dbContext.Users :
+			_dbContext.Users
+				.Where( u => uuids.Contains( u.Uuid ) )
+			)
 			.Select( GetUserDto.FromUserExp )
 			.ToArrayAsync();
 	}

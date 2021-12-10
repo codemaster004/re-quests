@@ -31,12 +31,7 @@ public class UsersController : ExtendedControllerBase
 	[ProducesProblem( 403 )]
 	public async Task<ActionResult<GetUserDto[]>> GetUsers( [FromQuery] string[] uuids )
 	{
-		if ( uuids.Length > 0 )
-		{
-			return await _usersService.GetUsersAsync( uuids );
-		}
-
-		return await _usersService.GetUsersAsync();
+		return await _usersService.GetUsersAsync( uuids.Any() ? uuids : null );
 	}
 
 	// GET api/users/12ab==

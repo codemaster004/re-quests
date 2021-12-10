@@ -11,17 +11,15 @@ namespace ReQuests.Api.Services;
 
 public interface IQuestsService
 {
-	Task<GetQuestDto[]> GetQuests( QuestsOrderBy orderBy = QuestsOrderBy.None );
-	Task<GetQuestDto[]> GetQuests( int[] ids, QuestsOrderBy orderBy = QuestsOrderBy.None );
+	Task<GetQuestDto[]> GetQuests( int[]? ids, QuestsOrderBy orderBy = default );
 	Task<GetQuestDto?> GetQuest( int id );
 	Task<GetQuestDto> CreateQuest( CreateQuestDto dto );
 	Task DeleteQuest( int id );
 
-	Task<GetQuestDto[]> GetAvailable( string userUuid, QuestsOrderBy orderBy = QuestsOrderBy.None );
+	Task<GetQuestDto[]> GetAvailable( string userUuid, QuestsOrderBy orderBy = default );
 
 	Task BeginQuest( int questId, string userUuid );
-	Task<GetUserQuestDto[]> GetBegun( string uuid );
-	Task<GetUserQuestDto[]> GetBegun( int[] questIds, string uuid );
+	Task<GetUserQuestDto[]> GetBegun( int[]? questIds, string uuid );
 	Task<GetUserQuestDto?> GetBegun( int questId, string uuid );
 
 	Task AbortQuest( int questId, string userUuid );
@@ -49,17 +47,13 @@ public class QuestsService : IQuestsService
 		_clock = clock;
 	}
 
-	public async Task<GetQuestDto[]> GetQuests( QuestsOrderBy orderBy )
+	public async Task<GetQuestDto[]> GetQuests( int[]? ids, QuestsOrderBy orderBy = default )
 	{
-		return await _dbContext.Quests
-			.OrderBy( OrderExps[orderBy] )
-			.Select( GetQuestDto.FromQuestExp )
-			.ToArrayAsync();
-	}
-	public async Task<GetQuestDto[]> GetQuests( int[] ids, QuestsOrderBy orderBy = QuestsOrderBy.None )
-	{
-		return await _dbContext.Quests
-			.Where( x => ids.Contains( x.Id ) )
+		return await ( ids is null ?
+			_dbContext.Quests :
+			_dbContext.Quests
+				.Where( x => ids.Contains( x.Id ) )
+			)
 			.OrderBy( OrderExps[orderBy] )
 			.Select( GetQuestDto.FromQuestExp )
 			.ToArrayAsync();
@@ -96,7 +90,7 @@ public class QuestsService : IQuestsService
 	}
 
 
-	public async Task<GetQuestDto[]> GetAvailable( string userUuid, QuestsOrderBy orderBy = QuestsOrderBy.None )
+	public async Task<GetQuestDto[]> GetAvailable( string userUuid, QuestsOrderBy orderBy = default )
 	{
 		return await _dbContext.Quests
 			.Where( q => !q.UsersR!.Where( uq => uq.UserUuid == userUuid ).Any() )
@@ -130,19 +124,14 @@ public class QuestsService : IQuestsService
 		_ = _dbContext.UsersQuests.Add( userQuest );
 		_ = await _dbContext.SaveChangesAsync();
 	}
-	public async Task<GetUserQuestDto[]> GetBegun( string uuid )
+	public async Task<GetUserQuestDto[]> GetBegun( int[]? questIds, string uuid )
 	{
-		return await _dbContext.UsersQuests
+		return await ( questIds is null ?
+			_dbContext.UsersQuests :
+			_dbContext.UsersQuests
+			 .Where( uq => questIds.Contains( uq.QuestId ) )
+			)
 			.Where( uq => uq.UserUuid == uuid )
-			.OrderBy( uq => uq.DateStarted )
-			.Select( GetUserQuestDto.FromUserQuestExp )
-			.ToArrayAsync();
-	}
-	public async Task<GetUserQuestDto[]> GetBegun( int[] questIds, string uuid )
-	{
-		return await _dbContext.UsersQuests
-			.Where( uq => uq.UserUuid == uuid )
-			.Where( uq => questIds.Contains( uq.QuestId ) )
 			.OrderBy( uq => uq.DateStarted )
 			.Select( GetUserQuestDto.FromUserQuestExp )
 			.ToArrayAsync();
@@ -240,7 +229,7 @@ public class QuestsService : IQuestsService
 
 public enum QuestsOrderBy
 {
-	None,
+	None = default,
 	Name,
 	Difficulty,
 }
