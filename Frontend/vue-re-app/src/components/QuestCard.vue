@@ -27,7 +27,7 @@
           <p class="sub-header">to finish</p>
         </div>
 
-        <div class="action-button">Break</div>
+        <div class="action-button">Add work</div>
       </div>
     </div>
   </div>

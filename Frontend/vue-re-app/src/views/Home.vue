@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="overflow: scroll; height: 100%">
     <Header v-if="screenSize > 1000" title="Login" :large="false" />
     <Quests :quests="quests" />
   </div>

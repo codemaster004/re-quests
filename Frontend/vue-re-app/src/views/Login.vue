@@ -34,7 +34,7 @@
 
 <script>
 import axios from "axios";
-import { useRouter, useRoute } from "vue-router";
+import "vue-router";
 
 export default {
   export: {
@@ -53,8 +53,7 @@ export default {
         localStorage.setItem("accessToken", response.data.accessToken);
         console.log("Success login");
 
-        const router = useRouter();
-        // router.push("/")
+        this.$router.push("/");
       } catch {}
     },
   },
@@ -65,8 +64,6 @@ export default {
     };
   },
 };
-
-// https://6e6742f9-7f62-44d8-94da-2b62ae215a49.mock.pstmn.io/
 </script>
 
 <style>

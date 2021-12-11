@@ -84,7 +84,7 @@ main {
 
 #app {
   font-family: "Montserrat", sans-serif;
-  overflow: hidden;
+  overflow-x: hidden;
   height: 100%;
   min-height: 100%;
 }
@@ -102,7 +102,6 @@ main {
   height: 100%;
   min-height: 100%;
   background: linear-gradient(180deg, #4c866b 0%, #337053 100%);
-  overflow-y: hidden;
   padding-top: 50px;
   position: relative;
   z-index: 50;
