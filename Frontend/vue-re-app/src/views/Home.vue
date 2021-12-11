@@ -45,10 +45,11 @@ export default {
       for (let quest of response.data) {
         this.quests.push({
           id: quest.questId,
-          title: quest?.name ?? "",
-          desc: quest?.description ?? "",
+          title: quest?.questName ?? "",
+          desc: quest?.questDescription ?? "",
           questLength: quest?.duration ?? 1,
-          questProgress: quest?.attempts ?? 0,
+          questProgress: quest?.sinceStart ?? 0,
+          daysLeft: quest?.duration - quest?.sinceStart,
         });
       }
     } catch (e) {

@@ -20,14 +20,15 @@
       </div>
 
       <div class="progress-info">
-        <div>
-          <h2 class="header">
-            {{ quest.questLength - quest.questProgress }} days
-          </h2>
+        <div v-if="quest.daysLeft > 0">
+          <h2 class="header">{{ quest.daysLeft }} days</h2>
           <p class="sub-header">to finish</p>
         </div>
+        <div v-else>
+          <h2 class="header">Finished!</h2>
+        </div>
 
-        <div class="action-button">Add work</div>
+        <div class="action-button" v-if="quest.daysLeft > 0">Add work</div>
       </div>
     </div>
   </div>
