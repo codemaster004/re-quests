@@ -49,7 +49,7 @@ export default {
         },
         async fetchRewards() {
             try {
-                const { data } = await axios.get("/api/Users/me", {
+                const { data } = await axios.get("/api/Quests/completed", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 console.log(data);
@@ -80,23 +80,7 @@ export default {
     },
     data() {
         return {
-            rewards: [
-                {
-                    id: 0,
-                    img: "",
-                    color: "red",
-                },
-                {
-                    id: 1,
-                    img: "",
-                    color: "blue",
-                },
-                {
-                    id: 2,
-                    img: "",
-                    color: "violet",
-                },
-            ],
+            rewards: [],
             quests: [],
             selected: "quests",
             username: "Maja Kowalaska",
