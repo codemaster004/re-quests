@@ -1,5 +1,6 @@
 ﻿using ReQuests.Domain.Converters;
 using ReQuests.Domain.Relations;
+using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Text.Json.Serialization;
 
@@ -19,6 +20,11 @@ public record GetUserQuestDto
 	[JsonConverter( typeof( TimeSpanDaysCountJsonConverter ) )]
 	public TimeSpan SinceStart => DateTimeOffset.UtcNow - DateStarted;
 
+	[StringLength( 24 )]
+	public string QuestName { get; set; }
+	public string QuestDescription { get; set; }
+	public int Difficulty { get; set; }
+
 #nullable restore
 
 	public static Expression<Func<UserQuestRelation, GetUserQuestDto>> FromUserQuestExp => fromUserQuestExp;
@@ -28,8 +34,12 @@ public record GetUserQuestDto
 		DateStarted = userQuest.DateStarted,
 		DateCompleted = userQuest.DateCompleted,
 		Attempts = userQuest.Attempts,
-		Duration = userQuest.Quest!.Duration,
 		WasWinReceived = userQuest.WasWinReceived,
+
+		Duration = userQuest.Quest!.Duration,
+		QuestName = userQuest.Quest.Name,
+		QuestDescription = userQuest.Quest.Description,
+		Difficulty = userQuest.Quest.Difficulty
 	};
 
 	private static readonly Func<UserQuestRelation, GetUserQuestDto> fromUserQuestFunc = fromUserQuestExp.Compile();
