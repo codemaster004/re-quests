@@ -54,7 +54,7 @@ public class CleanupWorker : BackgroundService
 				.Where( t => t.ValidUntil <= removeBelow )
 				.DeleteAsync();
 
-			_logger.LogInformation( "Removed {count} outdated tokens", _clock.UtcNow );
+			_logger.LogInformation( "Removed {count} outdated tokens", count );
 		}
 		catch ( Exception )
 		{
@@ -72,7 +72,7 @@ public class CleanupWorker : BackgroundService
 				.Where( uq => uq.DateCompleted == null && uq.DateStarted + uq.Quest!.Duration <= now )
 				.UpdateAsync( uq => new( uq.UserUuid, uq.DateStarted ) { DateCompleted = now } );
 
-			_logger.LogInformation( "Updated {count} completed quests", _clock.UtcNow );
+			_logger.LogInformation( "Updated {count} completed quests", count );
 		}
 		catch ( Exception )
 		{

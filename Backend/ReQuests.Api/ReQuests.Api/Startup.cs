@@ -13,6 +13,9 @@ public static class Startup
 	// Add services to the container.
 	public static void ConfigureServices( WebApplicationBuilder builder )
 	{
+		//_ = builder.Logging.ClearProviders();
+		_ = builder.Logging.AddSimpleConsole();
+
 		_ = builder.Services.AddControllers()
 			.AddXmlSerializerFormatters()
 			.AddJsonOptions( options =>
