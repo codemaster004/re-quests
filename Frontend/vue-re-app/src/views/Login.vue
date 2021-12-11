@@ -48,10 +48,7 @@ export default {
       };
 
       try {
-        const response = await axios.post(
-          "https://re-quests-api.herokuapp.com/auth/login",
-          formData
-        );
+        const response = await axios.post("auth/login", formData);
 
         localStorage.setItem("accessToken", response.data.accessToken);
         console.log("Success login");
