@@ -282,7 +282,7 @@ public class QuestsController : ExtendedControllerBase
 	}
 
 	// POST api/quests/1/receive
-	[HttpPost( "{id}/reset" )]
+	[HttpPost( "{id}/receive" )]
 
 	[Produces( MtnA.Json, MtnA.Xml )]
 	[Produces204()]
