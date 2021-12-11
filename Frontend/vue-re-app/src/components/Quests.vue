@@ -1,5 +1,6 @@
 <template>
   <section>
+    <div v-if="!quests.length">You haven't started any quests yet</div>
     <div v-for="quest in quests" :key="quest.id">
       <QuestCard :quest="quest" />
     </div>

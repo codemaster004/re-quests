@@ -8,6 +8,7 @@
 <script>
 import Quests from "../components/Quests";
 import Header from "../components/Header";
+import axios from "axios";
 
 export default {
   name: "Home",
@@ -29,23 +30,31 @@ export default {
       screenSize: window.innerWidth,
     };
   },
-  created() {
-    this.quests = [
-      {
-        id: 0,
-        title: "Paper Busket",
-        desc: "In this week remeber to use paper bags only.",
-        questLength: 7,
-        questProgress: 3,
-      },
-      {
-        id: 1,
-        title: "Sometinhg Else",
-        desc: "Lorem ipsum dolores abridge.",
-        questLength: 4,
-        questProgress: 3,
-      },
-    ];
+  async created() {
+    try {
+      let token = localStorage.getItem("accessToken");
+      // console.log(token);
+
+      const response = await axios.get("/api/Quests/begun", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      console.log("Success");
+      console.log(response);
+
+      for (let quest of response.data) {
+        this.quests.push({
+          id: quest.questId,
+          title: quest?.name ?? "",
+          desc: quest?.description ?? "",
+          questLength: quest?.duration ?? 1,
+          questProgress: quest?.attempts ?? 0,
+        });
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
     window.addEventListener("resize", this.resizeWindowHandler);
   },
   destroyed() {
