@@ -12,6 +12,7 @@ public record GetUserQuestDto
 	public DateTimeOffset DateStarted { get; set; }
 	public DateTimeOffset? DateCompleted { get; set; }
 	public int Attempts { get; set; }
+	public bool WasWinReceived { get; set; }
 
 	[JsonConverter( typeof( TimeSpanDaysCountJsonConverter ) )]
 	public TimeSpan Duration { get; set; }
@@ -27,7 +28,8 @@ public record GetUserQuestDto
 		DateStarted = userQuest.DateStarted,
 		DateCompleted = userQuest.DateCompleted,
 		Attempts = userQuest.Attempts,
-		Duration = userQuest.Quest!.Duration
+		Duration = userQuest.Quest!.Duration,
+		WasWinReceived = userQuest.WasWinReceived,
 	};
 
 	private static readonly Func<UserQuestRelation, GetUserQuestDto> fromUserQuestFunc = fromUserQuestExp.Compile();

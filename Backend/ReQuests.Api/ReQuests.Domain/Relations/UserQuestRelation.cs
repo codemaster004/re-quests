@@ -18,6 +18,7 @@ public class UserQuestRelation
 	public DateTimeOffset DateStarted { get; set; }
 	public DateTimeOffset? DateCompleted { get; set; }
 	public int Attempts { get; set; }
+	public bool WasWinReceived { get; set; }
 
 	public UserModel? User { get; set; }
 	public QuestModel? Quest { get; set; }

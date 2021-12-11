@@ -27,6 +27,7 @@ public interface IQuestsService
 	Task<bool> CheckQuestCompletion( int questId, string userUuid );
 	Task<GetUserQuestDto[]> GetCompleted( string uuid );
 	Task<GetUserQuestDto[]> GetUncompleted( string uuid );
+	Task MarkAsReceived( int questId, string userUuid );
 }
 
 public class QuestsService : IQuestsService
@@ -222,6 +223,23 @@ public class QuestsService : IQuestsService
 			.OrderBy( uq => uq.DateStarted )
 			.Select( GetUserQuestDto.FromUserQuestExp )
 			.ToArrayAsync();
+	}
+
+	public async Task MarkAsReceived( int questId, string userUuid )
+	{
+		var userQuest = await _dbContext.UsersQuests
+			.Where( uq => uq.UserUuid == userUuid )
+			.Where( uq => uq.QuestId == questId )
+			.FirstOrDefaultAsync();
+
+		if ( userQuest is null )
+		{
+			throw new NotFoundException();
+		}
+
+		userQuest.WasWinReceived = true;
+
+		_ = await _dbContext.SaveChangesAsync();
 	}
 
 

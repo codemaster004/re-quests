@@ -281,4 +281,30 @@ public class QuestsController : ExtendedControllerBase
 		return await _questsService.GetUncompleted( uuid );
 	}
 
+	// POST api/quests/1/receive
+	[HttpPost( "{id}/reset" )]
+
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces204()]
+	[ProducesProblem( 404 )]
+	public async Task<IActionResult> MarkAsReceived( int id )
+	{
+		var uuid = User.GetUuid();
+		if ( uuid is null )
+		{
+			return InternalServerError( "Error occured" );
+		}
+
+		try
+		{
+			await _questsService.MarkAsReceived( id, uuid );
+		}
+		catch ( NotFoundException )
+		{
+			return NotFound( "quest not started" );
+		}
+
+		return NoContent();
+	}
+
 }
