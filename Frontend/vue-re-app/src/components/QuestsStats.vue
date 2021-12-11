@@ -27,6 +27,10 @@ export default {
 </script>
 
 <style scoped>
+.quest-stat-info {
+    margin-bottom: 20px;
+}
+
 .user-data {
     max-height: 60vh;
     overflow: scroll;

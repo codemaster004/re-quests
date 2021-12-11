@@ -36,6 +36,47 @@ export default {
         changeUserTab(toTab) {
             this.selected = toTab;
         },
+        async fetchUserData() {
+            try {
+                const { data } = await axios.get("/api/Users/me", {
+                    headers: { Authorization: `Bearer ${this.token}` },
+                });
+                console.log(data);
+                this.username = data.username;
+            } catch (e) {
+                console.log(e);
+            }
+        },
+        async fetchRewards() {
+            try {
+                const { data } = await axios.get("/api/Users/me", {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                console.log(data);
+                this.username = data.username;
+            } catch (e) {
+                console.log(e);
+            }
+        },
+        async fetchQuests() {
+            try {
+                const { data } = await axios.get("/api/Quests/begun", {
+                    headers: { Authorization: `Bearer ${this.token}` },
+                });
+                console.log(data);
+                for (let quest of data) {
+                    this.quests.push({
+                        title: quest.questName,
+                        img: "",
+                        completed: quest?.sinceStart < quest?.duration ? quest?.sinceStart / quest?.duration : 100,
+                    });
+                    console.log(quest?.sinceStart, quest?.duration);
+                    console.log(quest?.sinceStart / quest?.duration);
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        },
     },
     data() {
         return {
@@ -56,39 +97,15 @@ export default {
                     color: "violet",
                 },
             ],
-            quests: [
-                {
-                    img: "",
-                    title: "Paper bag",
-                    completed: 33,
-                },
-                {
-                    img: "",
-                    title: "Golder plastick",
-                    completed: 75,
-                },
-                {
-                    img: "",
-                    title: "glossy",
-                    completed: 100,
-                },
-            ],
-            selected: "rewads",
+            quests: [],
+            selected: "quests",
             username: "Maja Kowalaska",
         };
     },
-    async created() {
-        let token = localStorage.getItem("accessToken");
-        console.log(token);
-        try {
-            const { data } = await axios.get("/api/Users/me", {
-                headers: { Authorization: `Bearer ${token}` },
-            });
-            console.log(data);
-            this.username = data.username;
-        } catch (e) {
-            console.log(e);
-        }
+    created() {
+        this.token = localStorage.getItem("accessToken");
+        this.fetchUserData();
+        this.fetchQuests();
     },
 };
 </script>
