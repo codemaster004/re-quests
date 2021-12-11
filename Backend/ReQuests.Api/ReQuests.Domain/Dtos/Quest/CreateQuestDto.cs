@@ -17,12 +17,20 @@ public record CreateQuestDto
 	[Required]
 	[JsonConverter( typeof( TimeSpanRfc8601JsonConverter ) )]
 	public TimeSpan Duration { get; set; }
+
+	[Required]
 	public int Difficulty { get; set; }
+
+	[Required]
+	public string Explanation { get; set; }
+
+	[Required]
+	public string ImageUrl { get; set; }
 
 #nullable restore
 
 	public QuestModel ToQuest()
 	{
-		return new( Name, Description ) { Duration = Duration, Difficulty = Difficulty };
+		return new( Name, Description, Explanation, ImageUrl ) { Duration = Duration, Difficulty = Difficulty };
 	}
 }
