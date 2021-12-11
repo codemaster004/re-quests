@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace ReQuests.Domain.Converters;
 
-internal class TimeSpanJsonConverter : JsonConverter<TimeSpan>
+internal class TimeSpanDaysCountJsonConverter : JsonConverter<TimeSpan>
 {
 	public override TimeSpan Read( ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options )
 	{
@@ -12,13 +12,13 @@ internal class TimeSpanJsonConverter : JsonConverter<TimeSpan>
 			throw new ArgumentException( "can only parse System.TimeSpan", nameof( typeToConvert ) );
 		}
 
-		var value = reader.GetString() ?? throw new NullReferenceException();
-		return System.Xml.XmlConvert.ToTimeSpan( value );
+		var value = reader.GetInt32();
+		return TimeSpan.FromDays( value );
 	}
 
 	public override void Write( Utf8JsonWriter writer, TimeSpan value, JsonSerializerOptions options )
 	{
-		var encoded = System.Xml.XmlConvert.ToString( value );
-		writer.WriteStringValue( encoded );
+		var encoded = value.Days;
+		writer.WriteNumberValue( encoded );
 	}
 }

@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace ReQuests.Domain.Dtos.User;
 
-public class GetUserDto
+public record GetUserDto
 {
 #nullable disable warnings
 	public string Uuid { get; set; }

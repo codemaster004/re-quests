@@ -20,11 +20,6 @@ public class AppDbContext : DbContext
 
 	protected override void OnModelCreating( ModelBuilder modelBuilder )
 	{
-		// quest.duration -> time as ticks
-		_ = modelBuilder.Entity<QuestModel>()
-			.Property( q => q.Duration )
-			.HasConversion( TimeSpanValueConverter.Instance );
-
 		_ = modelBuilder.Entity<UserQuestRelation>()
 			.Property( q => q.Attempts )
 			.HasDefaultValue( 1 );

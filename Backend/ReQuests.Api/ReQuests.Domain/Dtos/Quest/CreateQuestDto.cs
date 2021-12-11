@@ -14,7 +14,7 @@ public record CreateQuestDto
 	public string Description { get; set; }
 
 	[Required]
-	[JsonConverter( typeof( TimeSpanJsonConverter ) )]
+	[JsonConverter( typeof( TimeSpanRfc8601JsonConverter ) )]
 	public TimeSpan Duration { get; set; }
 	public int Difficulty { get; set; }
 
