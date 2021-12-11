@@ -9,10 +9,12 @@ public record CreateUserDto
 	[Required]
 	[MinLength( 4 )]
 	[RegularExpression( @"^[^@]*$", ErrorMessage = "Username cannot contain @" )]
+	[StringLength( 50 )]
 	public string Username { get; set; }
 
 	[Required]
 	[EmailAddress]
+	[StringLength( 50 )]
 	public string Email { get; set; }
 
 	[Required]

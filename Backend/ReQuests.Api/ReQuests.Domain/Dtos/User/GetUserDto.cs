@@ -1,4 +1,5 @@
 ﻿using ReQuests.Domain.Models;
+using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 
 namespace ReQuests.Domain.Dtos.User;
@@ -6,8 +7,13 @@ namespace ReQuests.Domain.Dtos.User;
 public record GetUserDto
 {
 #nullable disable warnings
+	[StringLength( 24 )]
 	public string Uuid { get; set; }
+
+	[StringLength( 50 )]
 	public string Username { get; set; }
+
+	[StringLength( 50 )]
 	public string Email { get; set; }
 #nullable restore
 

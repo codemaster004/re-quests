@@ -1,5 +1,6 @@
 ﻿using ReQuests.Domain.Converters;
 using ReQuests.Domain.Models;
+using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using System.Text.Json.Serialization;
 
@@ -9,6 +10,7 @@ public record GetQuestDto
 {
 #nullable disable warnings
 	public int Id { get; set; }
+	[StringLength( 24 )]
 	public string Name { get; set; }
 	public string Description { get; set; }
 

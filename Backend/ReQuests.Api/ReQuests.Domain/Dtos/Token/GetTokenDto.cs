@@ -1,4 +1,5 @@
 ﻿using ReQuests.Domain.Models;
+using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 
 namespace ReQuests.Domain.Dtos.Token;
@@ -6,7 +7,9 @@ namespace ReQuests.Domain.Dtos.Token;
 public record GetTokenDto
 {
 #nullable disable warnings
+	[StringLength( 24 )]
 	public string AccessToken { get; set; }
+	[StringLength( 24 )]
 	public string RefreshToken { get; set; }
 	public DateTimeOffset ValidUntil { get; set; }
 #nullable restore
