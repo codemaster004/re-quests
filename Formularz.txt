@@ -1,0 +1,38 @@
+1.
+Re-Quests
+
+2.
+Bez snu tydzień two electric boogaloo
+
+3.
+Filip Dąbkowski - Project menager, Front-end developer
+Przemysław Urbanek - Back-end developer
+Franciszek Łuczkiewicz - UI Designer, Graphic
+Katarzyna Straszkiewicz - Coach, Mentor
+
+4.
+https://github.com/codemaster004/re-quests
+
+5.
+-
+
+6.
+Aplikacja została stworzona z myślą o recyklingu, dokładniej o ludziach, którzy niekoniecznie mają świadomość ile rzeczy mogą zrobić, aby nie tylko segregować śmieci, ale także działać w taki sposób aby śmieci były wykorzystywane ponownie, a nie tylko przetważane (Na przykład "W tym tygodniu używaj tylko papierowych toreb.")
+
+7.
+C#, HTML, CSS, JSON, Vue, Figma, Postgre, git, JS, ES6, 3D,
+
+8.
+Nasz projekt ma według nas bardzo duży potencjał ponieważ jest to aplikacja, do której używania użytkownik nie potrzebuje dużo czasu. Każdy, kto chociaż trochę będzie chciał dbać o naszą planetę - na początku nieświadomie nie produkując śmieci poprzez wykonywanie questów z aplikacji, poznając wiele metod recyclingu/upcyclingu, będzie z chęcią używał naszej aplikacji.
+
+9.
+
+
+10.
+Franciszek Łuczkiewicz
+
+11.
+franek.luczkiewicz@gmail.com
+
+12.
+733575787
