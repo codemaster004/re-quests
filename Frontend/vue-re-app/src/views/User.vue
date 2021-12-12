@@ -38,9 +38,17 @@ export default {
         },
         async fetchUserData() {
             try {
-                const { data } = await axios.get("/api/Users/me", {
-                    headers: { Authorization: `Bearer ${this.token}` },
-                });
+                const { data } = await axios
+                    .get("/api/Users/me", {
+                        headers: { Authorization: `Bearer ${this.token}` },
+                    })
+                    .catch((error) => {
+                        console.log(error.response);
+                        console.log(error.response.statusText);
+                        if (error.response.statusText == "Unauthorized") {
+                            this.$router.push("/login");
+                        }
+                    });
                 console.log(data);
                 this.username = data.username;
             } catch (e) {

@@ -16,7 +16,7 @@
         >
             <div class="medal-box">
                 <div>
-                    <img src="images/MedalTransparent.gif" alt="" srcset="" />
+                    <img src="/MedalAnimation.gif" alt="" srcset="" />
                     <h2>Congrats!</h2>
                     <p>You completed the quest</p>
                     <p>
@@ -113,9 +113,17 @@ export default {
         try {
             let token = localStorage.getItem("accessToken");
 
-            const response = await axios.get("/api/Quests/uncompleted", {
-                headers: { Authorization: `Bearer ${token}` },
-            });
+            const response = await axios
+                .get("/api/Quests/uncompleted", {
+                    headers: { Authorization: `Bearer ${token}` },
+                })
+                .catch((error) => {
+                    console.log(error.response);
+                    console.log(error.response.statusText);
+                    if (error.response.statusText == "Unauthorized") {
+                        this.$router.push("/login");
+                    }
+                });
 
             for (let quest of response.data) {
                 this.quests.push({
@@ -284,5 +292,25 @@ export default {
     opacity: 0;
     transform: translateY(50%);
     display: none;
+}
+
+@media screen and (min-width: 1000px) {
+    .medal-container {
+        padding: 100px 0;
+    }
+
+    .medal-box {
+        width: 60%;
+        height: 90%;
+        margin: auto;
+        position: relative;
+        border-radius: 30px;
+        border: 3px solid #e0e0e0;
+    }
+
+    .auth-button {
+        width: calc(60% - 30px * 2);
+        position: absolute;
+    }
 }
 </style>
