@@ -36,4 +36,16 @@ public record CreateQuestDto
 	{
 		return new( Name, Description, Explanation, ImageUrl, AwardUrl, Color ) { Duration = Duration, Difficulty = Difficulty };
 	}
+
+	public void UpdateQuest( QuestModel quest )
+	{
+		quest.Name = Name;
+		quest.Description = Description;
+		quest.Duration = Duration;
+		quest.Difficulty = Difficulty;
+		quest.Explanation = Explanation;
+		quest.ImageUrl = ImageUrl;
+		quest.AwardUrl = AwardUrl;
+		quest.Color = Color;
+	}
 }

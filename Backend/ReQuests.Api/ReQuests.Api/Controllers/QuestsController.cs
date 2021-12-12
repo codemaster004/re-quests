@@ -65,6 +65,29 @@ public class QuestsController : ExtendedControllerBase
 		return CreatedAtAction( nameof( GetQuest ), new { quest.Id }, quest );
 	}
 
+	// PUT api/quests/1
+	[HttpPut( "{id}" )]
+	[SuperAdminOnly]
+
+	[Consumes( MtnA.Json )]
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces204]
+	[ProducesProblem( 403 )]
+	[ProducesProblem( 404 )]
+	public async Task<IActionResult> UpdateQuest( int id, [FromBody] CreateQuestDto dto )
+	{
+		try
+		{
+			await _questsService.UpdateQuest( id, dto );
+		}
+		catch ( NotFoundException )
+		{
+			return NotFound();
+		}
+
+		return NoContent();
+	}
+
 	// DELETE api/quests/1
 	[HttpDelete( "{id}" )]
 	[SuperAdminOnly]
