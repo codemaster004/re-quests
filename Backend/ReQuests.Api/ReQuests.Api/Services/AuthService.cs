@@ -10,6 +10,7 @@ namespace ReQuests.Api.Services;
 public interface IAuthService
 {
 	Task<GetTokenDto> LogInAsync( string username, string password );
+	Task LogOutAsync( string accessToken );
 	bool CheckPassword( string password, string hashString );
 	string HashNewPassword( string password );
 	Task<TokenModel?> GetTokenWithDataAsync( string accessToken );
@@ -66,6 +67,25 @@ public class AuthService : IAuthService
 		return GetTokenDto.FromToken( token );
 
 	}
+
+	public async Task LogOutAsync( string accessToken )
+	{
+		var token = await _dbContext.Tokens
+			.Where( u => u.AccessToken == accessToken )
+			.FirstOrDefaultAsync();
+
+		if ( token is null )
+		{
+			throw new NotFoundException();
+		}
+
+		token.Revoked = true;
+
+		_ = _dbContext.Update( token );
+		_ = await _dbContext.SaveChangesAsync();
+	}
+
+
 	private async Task<(string access, string refresh)> GenerateTokensAsync()
 	{
 		string access;

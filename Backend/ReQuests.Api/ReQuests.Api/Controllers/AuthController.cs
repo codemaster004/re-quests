@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ReQuests.Api.Controllers.Attributes;
 using ReQuests.Domain.Dtos.Token;
@@ -40,6 +42,32 @@ public class AuthController : ExtendedControllerBase
 		{
 			return Unauthorized( "Invalid password" );
 		}
+	}
+
+	[Authorize]
+	[HttpPost("logout")]
+
+	[Produces( MtnA.Json, MtnA.Xml )]
+	[Produces204]
+	[ProducesProblem( 401 )]
+	public async Task<IActionResult> LogOut()
+	{
+		var token = await HttpContext.GetTokenAsync( Constants.Auth.AccessTokenName );
+		if ( token is null )
+		{
+			return InternalServerError( "Error occured" );
+		}
+
+		try
+		{
+			await _authService.LogOutAsync( token );
+		}
+		catch ( NotFoundException )
+		{
+			return Unauthorized();
+		}
+
+		return NoContent();
 	}
 
 
