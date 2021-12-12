@@ -225,6 +225,8 @@ public class QuestsController : ExtendedControllerBase
 
 	// POST api/quests/1/check
 	[HttpPost( "{id}/check" )]
+	[NonAction]
+	[Obsolete( "check is done automatically by CleanupWorker" )]
 
 	[Produces( MtnA.Json, MtnA.Xml )]
 	[Produces200( typeof( bool ) )]
@@ -287,6 +289,7 @@ public class QuestsController : ExtendedControllerBase
 	[Produces( MtnA.Json, MtnA.Xml )]
 	[Produces204()]
 	[ProducesProblem( 404 )]
+	[ProducesProblem( 409 )]
 	public async Task<IActionResult> MarkAsReceived( int id )
 	{
 		var uuid = User.GetUuid();
@@ -303,7 +306,10 @@ public class QuestsController : ExtendedControllerBase
 		{
 			return NotFound( "quest not started" );
 		}
-
+		catch ( ConflictException )
+		{
+			return Conflict( "quest not conpleted" );
+		}
 		return NoContent();
 	}
 

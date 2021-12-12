@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using ReQuests.Data;
+using System.Diagnostics;
 using Z.EntityFramework.Plus;
 
 namespace ReQuests.Api.Services;
 
-public class CleanupWorker : BackgroundService
+public class CleanupWorker : BackgroundService, IDisposable
 {
 	private readonly ILogger<CleanupWorker> _logger;
 	private readonly IServiceProvider _serviceProvider;
@@ -18,6 +19,7 @@ public class CleanupWorker : BackgroundService
 	}
 
 	const int milisecondsInterval = 60 * 1000;
+	static readonly Process curr = Process.GetCurrentProcess();
 	protected override async Task ExecuteAsync( CancellationToken stoppingToken )
 	{
 		while ( !stoppingToken.IsCancellationRequested )
@@ -31,6 +33,7 @@ public class CleanupWorker : BackgroundService
 					using var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
 					await RemoveOldTokens( dbContext );
+
 					await UpdateQuestsCompletion( dbContext );
 				}
 
@@ -39,6 +42,9 @@ public class CleanupWorker : BackgroundService
 			{
 				_logger.LogError( "Error occured in cleanup worker" );
 			}
+			GC.Collect( 3, GCCollectionMode.Forced, true );
+			Console.WriteLine( "before delay memory used {0}", curr.WorkingSet64 );
+
 			await Task.Delay( milisecondsInterval, stoppingToken );
 		}
 	}
@@ -83,6 +89,13 @@ public class CleanupWorker : BackgroundService
 	class DateCompletedUpdater
 	{
 		public DateTimeOffset DateCompleted { get; set; }
+	}
+
+	public override void Dispose()
+	{
+		( curr as IDisposable ).Dispose();
+		base.Dispose();
+		GC.SuppressFinalize( this );
 	}
 
 }

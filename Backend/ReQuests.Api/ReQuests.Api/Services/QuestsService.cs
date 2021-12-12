@@ -237,6 +237,11 @@ public class QuestsService : IQuestsService
 			throw new NotFoundException();
 		}
 
+		if ( userQuest.DateCompleted is null )
+		{
+			throw new ConflictException();
+		}
+
 		userQuest.WasWinReceived = true;
 
 		_ = await _dbContext.SaveChangesAsync();
