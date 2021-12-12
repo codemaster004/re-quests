@@ -7,5 +7,6 @@ public static class Constants
 		public const string BearerSheme = "Bearer";
 		public const string DefaultSheme = BearerSheme;
 		public const string SuperAdminRole = "Admin";
+		public const string AccessTokenName = "access_token";
 	}
 }

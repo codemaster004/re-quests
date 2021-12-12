@@ -61,6 +61,11 @@ public class TokenAuthHandler : AuthenticationHandler<TokenOptions>
 			return AuthenticateResult.Fail( new TokenExpiredException() );
 		}
 
+		if ( foundToken.Revoked )
+		{
+			return AuthenticateResult.Fail( new TokenRevokedException() );
+		}
+
 		Claim[] claims = GetClaims( foundToken.User ).ToArray();
 		ClaimsIdentity identity = new( claims, Scheme.Name );
 		ClaimsPrincipal principal = new( identity );
@@ -72,7 +77,7 @@ public class TokenAuthHandler : AuthenticationHandler<TokenOptions>
 
 		tokenValidatedContext.Properties.StoreTokens( new[]
 		{
-			new AuthenticationToken { Name = "access_token", Value = sentTokenValue }
+			new AuthenticationToken { Name = Constants.Auth.AccessTokenName, Value = sentTokenValue }
 		} );
 
 		tokenValidatedContext.Success();
@@ -179,6 +184,8 @@ public class TokenAuthHandler : AuthenticationHandler<TokenOptions>
 				"The token is invalid",
 			TokenExpiredException =>
 				"The token is expired",
+			TokenRevokedException =>
+				"The token is revoked",
 			_ => null
 		};
 	}

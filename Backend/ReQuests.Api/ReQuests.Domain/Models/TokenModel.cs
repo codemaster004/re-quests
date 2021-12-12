@@ -23,4 +23,5 @@ public class TokenModel
 	[StringLength( 24 )]
 	public string RefreshToken { get; set; }
 	public DateTimeOffset ValidUntil { get; set; }
+	public bool Revoked { get; set; }
 }
