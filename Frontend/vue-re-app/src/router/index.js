@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory, createWebHashHistory } from "vue-router";
 import Home from "../views/Home";
 import Login from "../views/Login";
 import Signup from "../views/Signup";
@@ -34,7 +34,7 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createWebHistory("re-quests.herokuapp.com"),
+    history: createWebHashHistory(),
     routes,
 });
 
