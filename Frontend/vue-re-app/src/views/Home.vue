@@ -116,7 +116,7 @@ export default {
         try {
             let token = localStorage.getItem("accessToken");
 
-            const response = await axios.get("/api/Quests/begun", {
+            const response = await axios.get("/api/Quests/uncompleted", {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
