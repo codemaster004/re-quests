@@ -74,13 +74,10 @@ export default {
             };
 
             try {
-                console.log("hi");
-                console.log(this.medalId);
                 let token = localStorage.getItem("accessToken");
                 const receiveResponse = await axios.post(`/api/Quests/${this.medalId}/receive`, "", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                console.log(receiveResponse);
             } catch (e) {
                 console.log(e);
             }

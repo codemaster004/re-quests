@@ -30,7 +30,9 @@ export default {
     },
     methods: {
         burgerClicked() {
-            this.$emit("burger-clicked");
+            if (this.screenSize < 1000) {
+                this.$emit("burger-clicked");
+            }
         },
         resizeWindowHandler(e) {
             this.screenSize = window.innerWidth;
