@@ -1,584 +1,612 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
 
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
 
-      html {
-        height: 100%;
-      }
+            html {
+                height: 100%;
+            }
 
-      body {
-        height: 100%;
-        min-height: 100%;
-        background-color: #4c866b;
-      }
+            body {
+                height: 100%;
+                min-height: 100%;
+                background-color: #4c866b;
+            }
 
-      main {
-        height: 100%;
-        min-height: 100%;
-      }
-			
-			a {
-				text-decoration: none;
-			}
+            main {
+                height: 100%;
+                min-height: 100%;
+            }
 
-      .content {
-        height: 100%;
-        min-height: 100%;
-        background: linear-gradient(180deg, #4c866b 0%, #337053 100%);
-        overflow-y: hidden;
-        padding-top: 50px;
-        position: relative;
-        z-index: 50;
-      }
+            a {
+                text-decoration: none;
+            }
 
-      .content-maximal {
-        box-shadow: -10px 10px 25px 5px rgba(0, 0, 0, 0.06);
-        height: auto;
-        border-radius: 0;
-        transform: scale(1) translateX(0) translateY(0);
-      }
+            .content {
+                height: 100%;
+                min-height: 100%;
+                background: linear-gradient(180deg, #4c866b 0%, #337053 100%);
+                overflow-y: hidden;
+                padding-top: 50px;
+                position: relative;
+                z-index: 50;
+            }
 
-      .absolute-center {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
+            .content-maximal {
+                box-shadow: -10px 10px 25px 5px rgba(0, 0, 0, 0.06);
+                height: auto;
+                border-radius: 0;
+                transform: scale(1) translateX(0) translateY(0);
+            }
 
-      .title {
-        font-family: Oswald;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 34px;
-      }
+            .absolute-center {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
 
-      .sub-title {
-        font-family: Montserrat;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 13px;
-      }
+            .title {
+                font-family: Oswald;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 34px;
+            }
 
-      .header {
-        font-family: Oswald;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 30px;
-      }
+            .sub-title {
+                font-family: Montserrat;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 13px;
+            }
 
-      .sub-header {
-        font-family: Montserrat;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 11px;
-        line-height: 13px;
-      }
+            .header {
+                font-family: Oswald;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 20px;
+                line-height: 30px;
+            }
 
-      .card {
-        width: 340px;
-        height: 510px;
-        margin-bottom: 30px;
+            .sub-header {
+                font-family: Montserrat;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 11px;
+                line-height: 13px;
+            }
 
-        background: #ffffff;
-        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
-        border-radius: 27px;
-      }
+            .card {
+                width: 340px;
+                height: 510px;
+                margin-bottom: 30px;
 
-      .feature {
-        width: 340px;
-        height: 390px;
+                background: #ffffff;
+                box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+                border-radius: 27px;
+            }
 
-        padding: 16px 25px;
-        background: linear-gradient(
-          180deg,
-          rgba(255, 255, 255, 0) 0%,
-          rgba(242, 234, 205, 0.43) 100%
-        );
-      }
-      .image-box {
-        width: 270.5px;
-        height: 259px;
-        margin: 0 auto;
-        margin-top: 40px;
+            .feature {
+                width: 340px;
+                height: 390px;
 
-        position: relative;
-      }
+                padding: 16px 25px;
+                background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(242, 234, 205, 0.43) 100%);
+            }
+            .image-box {
+                width: 270.5px;
+                height: 259px;
+                margin: 0 auto;
+                margin-top: 40px;
 
-      .header {
-        height: 30px;
+                position: relative;
+            }
 
-        color: #000000;
-      }
-      .sub-header {
-        height: 18px;
+            .header {
+                height: 30px;
 
-        color: #999999;
-      }
+                color: #000000;
+            }
+            .sub-header {
+                height: 18px;
 
-      .progress-group {
-        padding: 15px 20px;
-      }
+                color: #999999;
+            }
 
-      .progress-bar {
-        height: 10px;
-        margin: auto;
+            .progress-group {
+                padding: 15px 20px;
+            }
 
-        border-radius: 5px;
-        overflow: hidden;
-      }
-      .progress {
-        display: block;
+            .progress-bar {
+                height: 10px;
+                margin: auto;
 
-        height: 10px;
-        float: left;
+                border-radius: 5px;
+                overflow: hidden;
+            }
+            .progress {
+                display: block;
 
-        background-color: #e8e8e8;
-      }
-      .progress.checked {
-        background-color: #efe2c8;
-      }
-      .progress:not(:last-child) {
-        margin-right: 1px;
-      }
+                height: 10px;
+                float: left;
 
-      .progress-info {
-        margin-top: 23px;
-        display: flex;
-        justify-content: space-between;
-      }
+                background-color: #e8e8e8;
+            }
+            .progress.checked {
+                background-color: #efe2c8;
+            }
+            .progress:not(:last-child) {
+                margin-right: 1px;
+            }
 
-      .action-button {
-        width: 40%;
-      }
+            .progress-info {
+                margin-top: 23px;
+                display: flex;
+                justify-content: space-between;
+            }
 
-      section {
-        margin-top: 20px;
+            .action-button {
+                width: 40%;
+            }
 
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-      }
+            section {
+                margin-top: 20px;
 
-      nav {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-      }
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+            }
 
-      .nav-bar {
-        padding: 0 25px;
-        width: 100%;
+            nav {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
 
-        display: flex;
-        align-items: flex-start;
-        flex-direction: row;
-        justify-content: space-between;
-      }
+            .nav-bar {
+                padding: 0 25px;
+                width: 100%;
 
-      .nav-link-box {
-        margin-top: 10vh;
-        padding-left: 25px;
-        position: relative;
-        z-index: 10;
-      }
+                display: flex;
+                align-items: flex-start;
+                flex-direction: row;
+                justify-content: space-between;
+            }
 
-      .nav-icon {
-        width: 26px;
-      }
+            .nav-link-box {
+                margin-top: 10vh;
+                padding-left: 25px;
+                position: relative;
+                z-index: 10;
+            }
 
-      .burger {
-        -webkit-appearance: none;
-        border: none;
-        background-color: transparent;
-        position: relative;
-        z-index: 100;
-        height: auto;
-        margin-top: 20px;
-      }
+            .nav-icon {
+                width: 26px;
+            }
 
-      .burger .burger-line {
-        width: 26px;
-        height: 2px;
+            .burger {
+                -webkit-appearance: none;
+                border: none;
+                background-color: transparent;
+                position: relative;
+                z-index: 100;
+                height: auto;
+                margin-top: 20px;
+            }
 
-        background-color: #fff;
-      }
-      .burger .burger-line:last-child {
-        width: 16px;
-        margin-top: 8px;
-      }
+            .burger .burger-line {
+                width: 26px;
+                height: 2px;
 
-      header {
-        padding: 0 25px;
-        display: inline-block;
+                background-color: #fff;
+            }
+            .burger .burger-line:last-child {
+                width: 16px;
+                margin-top: 8px;
+            }
 
-        position: relative;
-        z-index: 100;
-        text-align: center;
-      }
+            header {
+                padding: 0 25px;
+                display: inline-block;
 
-      .header-large {
-        display: block;
-      }
+                position: relative;
+                z-index: 100;
+                text-align: center;
+            }
 
-      .title {
-        color: #ffffff;
-        line-height: 45px;
-      }
+            .header-large {
+                display: block;
+            }
 
-      .sub-title {
-        height: 16px;
-        margin-top: 3px;
+            .title {
+                color: #ffffff;
+                line-height: 45px;
+            }
 
-        line-height: 16px;
-        color: #dddddd;
-      }
+            .sub-title {
+                height: 16px;
+                margin-top: 3px;
 
-      .nav-link {
-        min-width: 200px;
-        margin-bottom: 32px;
-      }
+                line-height: 16px;
+                color: #dddddd;
+            }
 
-      .nav-icon-box {
-        width: 36px;
-        height: 36px;
-        display: inline-block;
+            .nav-link {
+                min-width: 200px;
+                margin-bottom: 32px;
+            }
 
-        background: rgba(255, 255, 255, 0.4);
-        border-radius: 10px;
-        color: #fff;
+            .nav-icon-box {
+                width: 36px;
+                height: 36px;
+                display: inline-block;
 
-        font-family: Montserrat;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 18px;
-        line-height: 36px;
-        text-align: center;
-      }
+                background: rgba(255, 255, 255, 0.4);
+                border-radius: 10px;
+                color: #fff;
 
-      p {
-        width: 130px;
-        height: 23px;
-        display: inline-block;
-        padding: 0 0 0 10px;
+                font-family: Montserrat;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 36px;
+                text-align: center;
+            }
 
-        font-family: Montserrat;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 15px;
-        line-height: 18px;
+            p {
+                width: 130px;
+                height: 23px;
+                display: inline-block;
+                padding: 0 0 0 10px;
 
-        color: #ffffff;
-      }
-    </style>
+                font-family: Montserrat;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 15px;
+                line-height: 18px;
 
-    <style>
-			@media screen and (min-width: 1000px) {
-				body {
-					background: linear-gradient(180deg, #4c866b 0%, #337053 100%);
-				}
-				
-				nav {
-					width: 200px;
-				}
-				.content {
-					width: calc(100% - 200px - 15px);
-					height: calc(100% - 15px * 2);
-					min-height: calc(100% - 15px * 2);
-					background: #fff;
-					margin: 15px;
-					margin-left: 200px;
-					border-radius: 20px;
-					padding-top: 15px;
-				}
-				.nav-link.active {
-					background-color: #fff;
-					border-radius: 10px 0 0 10px;
-					padding: 5px;
-					box-sizing: content-box;
-					min-width: 210px;
-				}
-				.nav-link.active .nav-icon-box {
-					color: #4c866b;
-				}
-				.nav-link.active p {
-					color: #000000;
-				}
-				
-				.content .title {
-					color: #000000;
-				}
-				
-				/* Card - start */
-				.card {
-					width: 250px;
-					height: 410px;
-					border-radius: 15px;
-					box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.10);
-				}
-				.card .feature,
-				.card .progress-group {
-					padding: 10px;
-					width: 100%;
-				}
-				.card .feature {
-					height: auto;
-				}
-				.card p {
-					width: auto;
-				}
-				.card .image-box {
-					width: 100%;
-					height: 230px;
-					margin-top: 0px;
-				}
-				
-				.image-box img {
-					width: 85%;
-				}
-				.image-box img:last-of-type {
-					width: 65%;
-				}
-				/* Card - end */
-				
-				section {
-					display: flex;
-					flex-direction: row;
-					justify-content: space-around;
-					padding: 0 25px;
-					flex-wrap: wrap;
-				}
-				
-				section > div {
-					margin: 10px;
-				}
-			}
-		</style>
-  </head>
-  <body>
-    <main>
-      <div id="bgc"></div>
-      <!-- <div class="content">
-        <section data-v-0f625981="">
-        </section>
-      </div> -->
-      <div class="content">
-				<header class="" data-v-61dd7a3d="" data-v-65af85a3="">
-					<div data-v-61dd7a3d="">
-						<h1 class="title" data-v-61dd7a3d="">Home</h1>
-					</div>
-				</header>
-				<section data-v-0f625981="">
-					<div data-v-0f625981="">
-            <div class="card" data-v-4dd8e612="" data-v-0f625981="">
-              <div class="feature" data-v-4dd8e612="">
-                <h2 class="header" data-v-4dd8e612="">Paper Busket</h2>
-                <p class="sub-header" data-v-4dd8e612="">
-                  In this week remeber to use paper bags only.
-                </p>
-                <div class="image-box" data-v-4dd8e612="">
-                  <img
-                    src="images/Rectangle.svg"
-                    class="absolute-center"
-                    data-v-4dd8e612=""
-                  /><img
-                    src="images/PaperBag.png"
-                    class="absolute-center"
-                    data-v-4dd8e612=""
-                  />
+                color: #ffffff;
+            }
+        </style>
+
+        <style>
+            @media screen and (min-width: 1000px) {
+                body {
+                    background: linear-gradient(180deg, #4c866b 0%, #337053 100%);
+                }
+
+                nav {
+                    width: 200px;
+                }
+                .content {
+                    width: calc(100% - 200px - 15px);
+                    height: calc(100% - 15px * 2);
+                    min-height: calc(100% - 15px * 2);
+                    background: #fff;
+                    margin: 15px;
+                    margin-left: 200px;
+                    border-radius: 20px;
+                    padding-top: 15px;
+                }
+                .nav-link.active {
+                    background-color: #fff;
+                    border-radius: 10px 0 0 10px;
+                    padding: 5px;
+                    box-sizing: content-box;
+                    min-width: 210px;
+                }
+                .nav-link.active .nav-icon-box {
+                    color: #4c866b;
+                }
+                .nav-link.active p {
+                    color: #000000;
+                }
+
+                .content .title {
+                    color: #000000;
+                }
+
+                /* Card - start */
+                .card {
+                    width: 250px;
+                    height: 410px;
+                    border-radius: 15px;
+                    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+                }
+                .card .feature,
+                .card .progress-group {
+                    padding: 10px;
+                    width: 100%;
+                }
+                .card .feature {
+                    height: auto;
+                }
+                .card p {
+                    width: auto;
+                }
+                .card .image-box {
+                    width: 100%;
+                    height: 230px;
+                    margin-top: 0px;
+                }
+
+                .image-box img {
+                    width: 85%;
+                }
+                .image-box img:last-of-type {
+                    width: 65%;
+                }
+                /* Card - end */
+
+                section {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-around;
+                    padding: 0 25px;
+                    flex-wrap: wrap;
+                }
+
+                section > div {
+                    margin: 10px;
+                }
+            }
+        </style>
+
+        <style>
+            .blur-content section,
+            .blur-content header {
+                filter: blur(10px);
+            }
+
+            .medal-container {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 300;
+                padding-top: 200px;
+            }
+
+            .medal-box {
+                height: 120%;
+                padding: 30px;
+
+                background-color: #fff;
+                border-radius: 30px 30px 0 0;
+                display: flex;
+                text-align: center;
+                justify-content: space-between;
+                flex-direction: column;
+            }
+
+            .medal-box img {
+                height: 300px;
+            }
+
+            .medal-box h2 {
+                font-family: Oswald;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 39px;
+                line-height: 58px;
+                text-align: center;
+
+                color: #000000;
+            }
+
+            .medal-box p {
+                min-width: 100%;
+
+                font-family: Montserrat;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 15px;
+                line-height: 16px;
+                text-align: center;
+
+                color: #999999;
+            }
+
+            .auth-button {
+                width: calc(100% - 30px * 2);
+                height: 55px;
+                margin: 0 auto;
+                margin-bottom: 20px;
+                position: fixed;
+                bottom: 0;
+                left: 50%;
+
+                transform: translateX(-50%);
+                transition: 0.3s;
+
+                background: #4c866b;
+                box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
+                border-radius: 50px;
+                -webkit-appearance: none;
+                border: none;
+
+                font-family: Montserrat;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 19px;
+                line-height: 55px;
+                text-align: center;
+
+                color: #ffffff;
+            }
+
+            @keyframes show-popup {
+                0% {
+                    opacity: 0;
+                    transform: translateY(50%);
+                }
+                50% {
+                    opacity: 1;
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            .showing-popup {
+                animation: show-popup 1s 0.5s;
+                animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+            .showed-popup {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            .hiding-popup {
+                animation: show-popup 1s reverse;
+                animation-timing-function: cubic-bezier(0.3, -0.55, 0.265, 2);
+            }
+            .hiden-popup {
+                opacity: 0;
+                transform: translateY(50%);
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <div id="bgc"></div>
+
+            <div class="content">
+                <header class="" data-v-61dd7a3d="" data-v-65af85a3="">
+                    <div data-v-61dd7a3d="">
+                        <h1 class="title" data-v-61dd7a3d="">Home</h1>
+                    </div>
+                </header>
+
+                <section data-v-0f625981="">
+                    <div data-v-0f625981="">
+                        <div class="card" data-v-4dd8e612="" data-v-0f625981="">
+                            <div class="feature" data-v-4dd8e612="">
+                                <h2 class="header" data-v-4dd8e612="">Paper Busket</h2>
+                                <p class="sub-header" data-v-4dd8e612="">In this week remeber to use paper bags only.</p>
+                                <div class="image-box" data-v-4dd8e612="">
+                                    <img src="images/Rectangle.svg" class="absolute-center" data-v-4dd8e612="" /><img
+                                        src="images/PaperBag.png"
+                                        class="absolute-center"
+                                        data-v-4dd8e612=""
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="progress-group" data-v-4dd8e612="">
+                                <div class="progress-bar" data-v-4dd8e612="">
+                                    <span class="progress checked" data-v-4dd8e612="" style="width: calc(41.857142857142854px)"></span
+                                    ><span class="progress checked" data-v-4dd8e612="" style="width: calc(41.857142857142854px)"></span
+                                    ><span class="progress checked" data-v-4dd8e612="" style="width: calc(41.857142857142854px)"></span
+                                    ><span class="progress" data-v-4dd8e612="" style="width: calc(41.857142857142854px)"></span
+                                    ><span class="progress" data-v-4dd8e612="" style="width: calc(41.857142857142854px)"></span
+                                    ><span class="progress" data-v-4dd8e612="" style="width: calc(41.857142857142854px)"></span
+                                    ><span class="progress" data-v-4dd8e612="" style="width: calc(41.857142857142854px)"></span>
+                                </div>
+                                <div class="progress-info" data-v-4dd8e612="">
+                                    <div data-v-4dd8e612="">
+                                        <h2 class="header" data-v-4dd8e612="">4 days</h2>
+                                        <p class="sub-header" data-v-4dd8e612="">to finish</p>
+                                    </div>
+                                    <div class="action-button" data-v-4dd8e612="">Break</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-v-0f625981="">
+                        <div class="card" data-v-4dd8e612="" data-v-0f625981="">
+                            <div class="feature" data-v-4dd8e612="">
+                                <h2 class="header" data-v-4dd8e612="">Sometinhg Else</h2>
+                                <p class="sub-header" data-v-4dd8e612="">Lorem ipsum dolores abridge.</p>
+                                <div class="image-box" data-v-4dd8e612="">
+                                    <img src="images/Rectangle.svg" class="absolute-center" data-v-4dd8e612="" /><img
+                                        src="images/PaperBag.png"
+                                        class="absolute-center"
+                                        data-v-4dd8e612=""
+                                    />
+                                </div>
+                            </div>
+                            <div class="progress-group" data-v-4dd8e612="">
+                                <div class="progress-bar" data-v-4dd8e612="">
+                                    <span class="progress checked" data-v-4dd8e612="" style="width: calc(74px)"></span
+                                    ><span class="progress checked" data-v-4dd8e612="" style="width: calc(74px)"></span
+                                    ><span class="progress checked" data-v-4dd8e612="" style="width: calc(74px)"></span
+                                    ><span class="progress" data-v-4dd8e612="" style="width: calc(74px)"></span>
+                                </div>
+                                <div class="progress-info" data-v-4dd8e612="">
+                                    <div data-v-4dd8e612="">
+                                        <h2 class="header" data-v-4dd8e612="">1 days</h2>
+                                        <p class="sub-header" data-v-4dd8e612="">to finish</p>
+                                    </div>
+                                    <div class="action-button" data-v-4dd8e612="">Break</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-v-0f625981="">
+                        <div class="card" data-v-4dd8e612="" data-v-0f625981="">
+                            <div class="feature" data-v-4dd8e612="">
+                                <h2 class="header" data-v-4dd8e612="">Sometinhg Else</h2>
+                                <p class="sub-header" data-v-4dd8e612="">Lorem ipsum dolores abridge.</p>
+                                <div class="image-box" data-v-4dd8e612="">
+                                    <img src="images/Rectangle.svg" class="absolute-center" data-v-4dd8e612="" /><img
+                                        src="images/PaperBag.png"
+                                        class="absolute-center"
+                                        data-v-4dd8e612=""
+                                    />
+                                </div>
+                            </div>
+                            <div class="progress-group" data-v-4dd8e612="">
+                                <div class="progress-bar" data-v-4dd8e612="">
+                                    <span class="progress checked" data-v-4dd8e612="" style="width: calc(74px)"></span
+                                    ><span class="progress checked" data-v-4dd8e612="" style="width: calc(74px)"></span
+                                    ><span class="progress checked" data-v-4dd8e612="" style="width: calc(74px)"></span
+                                    ><span class="progress" data-v-4dd8e612="" style="width: calc(74px)"></span>
+                                </div>
+                                <div class="progress-info" data-v-4dd8e612="">
+                                    <div data-v-4dd8e612="">
+                                        <h2 class="header" data-v-4dd8e612="">1 days</h2>
+                                        <p class="sub-header" data-v-4dd8e612="">to finish</p>
+                                    </div>
+                                    <div class="action-button" data-v-4dd8e612="">Break</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="medal-container hiding-popup">
+                    <div class="medal-box">
+                        <div>
+                            <img src="images/MedalTransparent.gif" alt="" srcset="" />
+                            <h2>Congrats!</h2>
+                            <p>You completed the quest</p>
+                        </div>
+
+                        <input type="submit" class="auth-button" value="Collect reward" />
+                    </div>
                 </div>
-              </div>
-              <div class="progress-group" data-v-4dd8e612="">
-                <div class="progress-bar" data-v-4dd8e612="">
-                  <span
-                    class="progress checked"
-                    data-v-4dd8e612=""
-                    style="width: calc(41.857142857142854px)"
-                  ></span
-                  ><span
-                    class="progress checked"
-                    data-v-4dd8e612=""
-                    style="width: calc(41.857142857142854px)"
-                  ></span
-                  ><span
-                    class="progress checked"
-                    data-v-4dd8e612=""
-                    style="width: calc(41.857142857142854px)"
-                  ></span
-                  ><span
-                    class="progress"
-                    data-v-4dd8e612=""
-                    style="width: calc(41.857142857142854px)"
-                  ></span
-                  ><span
-                    class="progress"
-                    data-v-4dd8e612=""
-                    style="width: calc(41.857142857142854px)"
-                  ></span
-                  ><span
-                    class="progress"
-                    data-v-4dd8e612=""
-                    style="width: calc(41.857142857142854px)"
-                  ></span
-                  ><span
-                    class="progress"
-                    data-v-4dd8e612=""
-                    style="width: calc(41.857142857142854px)"
-                  ></span>
-                </div>
-                <div class="progress-info" data-v-4dd8e612="">
-                  <div data-v-4dd8e612="">
-                    <h2 class="header" data-v-4dd8e612="">4 days</h2>
-                    <p class="sub-header" data-v-4dd8e612="">to finish</p>
-                  </div>
-                  <div class="action-button" data-v-4dd8e612="">Break</div>
-                </div>
-              </div>
             </div>
-          </div>
-					
-					<div data-v-0f625981="">
-            <div class="card" data-v-4dd8e612="" data-v-0f625981="">
-              <div class="feature" data-v-4dd8e612="">
-                <h2 class="header" data-v-4dd8e612="">Sometinhg Else</h2>
-                <p class="sub-header" data-v-4dd8e612="">
-                  Lorem ipsum dolores abridge.
-                </p>
-                <div class="image-box" data-v-4dd8e612="">
-                  <img
-                    src="images/Rectangle.svg"
-                    class="absolute-center"
-                    data-v-4dd8e612=""
-                  /><img
-                    src="images/PaperBag.png"
-                    class="absolute-center"
-                    data-v-4dd8e612=""
-                  />
-                </div>
-              </div>
-              <div class="progress-group" data-v-4dd8e612="">
-                <div class="progress-bar" data-v-4dd8e612="">
-                  <span
-                    class="progress checked"
-                    data-v-4dd8e612=""
-                    style="width: calc(74px)"
-                  ></span
-                  ><span
-                    class="progress checked"
-                    data-v-4dd8e612=""
-                    style="width: calc(74px)"
-                  ></span
-                  ><span
-                    class="progress checked"
-                    data-v-4dd8e612=""
-                    style="width: calc(74px)"
-                  ></span
-                  ><span
-                    class="progress"
-                    data-v-4dd8e612=""
-                    style="width: calc(74px)"
-                  ></span>
-                </div>
-                <div class="progress-info" data-v-4dd8e612="">
-                  <div data-v-4dd8e612="">
-                    <h2 class="header" data-v-4dd8e612="">1 days</h2>
-                    <p class="sub-header" data-v-4dd8e612="">to finish</p>
-                  </div>
-                  <div class="action-button" data-v-4dd8e612="">Break</div>
-                </div>
-              </div>
-            </div>
-          </div>
-					
-					<div data-v-0f625981="">
-            <div class="card" data-v-4dd8e612="" data-v-0f625981="">
-              <div class="feature" data-v-4dd8e612="">
-                <h2 class="header" data-v-4dd8e612="">Sometinhg Else</h2>
-                <p class="sub-header" data-v-4dd8e612="">
-                  Lorem ipsum dolores abridge.
-                </p>
-                <div class="image-box" data-v-4dd8e612="">
-                  <img
-                    src="images/Rectangle.svg"
-                    class="absolute-center"
-                    data-v-4dd8e612=""
-                  /><img
-                    src="images/PaperBag.png"
-                    class="absolute-center"
-                    data-v-4dd8e612=""
-                  />
-                </div>
-              </div>
-              <div class="progress-group" data-v-4dd8e612="">
-                <div class="progress-bar" data-v-4dd8e612="">
-                  <span
-                    class="progress checked"
-                    data-v-4dd8e612=""
-                    style="width: calc(74px)"
-                  ></span
-                  ><span
-                    class="progress checked"
-                    data-v-4dd8e612=""
-                    style="width: calc(74px)"
-                  ></span
-                  ><span
-                    class="progress checked"
-                    data-v-4dd8e612=""
-                    style="width: calc(74px)"
-                  ></span
-                  ><span
-                    class="progress"
-                    data-v-4dd8e612=""
-                    style="width: calc(74px)"
-                  ></span>
-                </div>
-                <div class="progress-info" data-v-4dd8e612="">
-                  <div data-v-4dd8e612="">
-                    <h2 class="header" data-v-4dd8e612="">1 days</h2>
-                    <p class="sub-header" data-v-4dd8e612="">to finish</p>
-                  </div>
-                  <div class="action-button" data-v-4dd8e612="">Break</div>
-                </div>
-              </div>
-            </div>
-          </div>
-					
-					
-				</section>
-			</div>
-			<nav data-v-65af85a3="">
-        <!-- <div class="nav-bar" data-v-65af85a3="">
-          <button class="burger" data-v-65af85a3="">
-            <div class="burger-line" data-v-65af85a3=""></div>
-            <div class="burger-line" data-v-65af85a3=""></div>
-          </button>
-          <header class="" data-v-61dd7a3d="" data-v-65af85a3="">
-            <div data-v-61dd7a3d="">
-              <h1 class="title" data-v-61dd7a3d="">Home</h1>
-            </div>
-          </header>
-          <div class="nav-icon" data-v-65af85a3=""></div>
-        </div> -->
+
+            <!-- <nav data-v-65af85a3="">
         <div class="nav-link-box" data-v-65af85a3="">
           <div data-v-65af85a3="" class="">
-            <a
-              href="/"
-              class="router-link-active router-link-exact-active"
-              data-v-65af85a3=""
-              aria-current="page"
-            >
+            <a href="/" class="router-link-active router-link-exact-active">
               <div class="nav-link active" data-v-7aece186="" data-v-65af85a3="">
                 <div class="nav-icon-box" data-v-7aece186="">A</div>
                 <p data-v-7aece186="">Main</p>
@@ -594,8 +622,7 @@
             </a>
           </div>
           <div data-v-65af85a3="">
-            <a href="/signup" class="" data-v-65af85a3=""
-              >
+            <a href="/signup" class="" data-v-65af85a3="">
 							<div class="nav-link" data-v-7aece186="" data-v-65af85a3="">
                 <div class="nav-icon-box" data-v-7aece186="">A</div>
                 <p data-v-7aece186="">Sign up</p>
@@ -603,8 +630,7 @@
             </a>
           </div>
           <div data-v-65af85a3="">
-            <a href="/progress" class="" data-v-65af85a3=""
-              >
+            <a href="/progress" class="" data-v-65af85a3="">
 							<div class="nav-link" data-v-7aece186="" data-v-65af85a3="">
                 <div class="nav-icon-box" data-v-7aece186="">A</div>
                 <p data-v-7aece186="">Progress</p>
@@ -612,8 +638,7 @@
             </a>
           </div>
           <div data-v-65af85a3="">
-            <a href="/user" class="" data-v-65af85a3=""
-              >
+            <a href="/user" class="" data-v-65af85a3="">
 							<div class="nav-link" data-v-7aece186="" data-v-65af85a3="">
                 <div class="nav-icon-box" data-v-7aece186="">A</div>
                 <p data-v-7aece186="">Profile</p>
@@ -621,7 +646,7 @@
             </a>
           </div>
         </div>
-      </nav>
-    </main>
-  </body>
+      </nav> -->
+        </main>
+    </body>
 </html>
