@@ -1,0 +1,39 @@
+*
+{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: consolas;
+}
+body
+{
+	background-color: white;
+}
+section
+{
+	width: 100%;
+	min-height:100vh;
+	padding:100px;
+}
+section h2
+{
+	font-color: #666;
+	font-size: 5em;
+	margin-bottom: 20px;
+}
+section p
+{
+	color: #666;
+	font-size: 1.2em;
+	margin-bottom:20px;
+}
+::-webkit-Scrollbar
+{
+	width:12px;
+	margin:10px;
+}
+::-webkit-Scrollbar-thumb
+{
+	background: linear-gradient(to top,#62E3A7,#29AE70);
+	border-radius:6px;
+}
