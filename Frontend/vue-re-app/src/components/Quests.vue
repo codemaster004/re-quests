@@ -100,6 +100,30 @@ section > .header {
     display: none;
 }
 
+@media screen and (min-width: 1000px) {
+    .quest-info {
+        display: none;
+    }
+
+    .section-content > div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 0 25px;
+        flex-wrap: wrap;
+    }
+
+    section p.header {
+        color: #000;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    section > div {
+        margin: 10px;
+    }
+}
+
 @media screen and (min-width: 1300px) {
     .section-content {
         width: 66%;
@@ -164,30 +188,6 @@ section > .header {
         text-align: justify;
 
         color: #cfcfcf;
-    }
-}
-
-@media screen and (min-width: 1000px) {
-    .quest-info {
-        display: none;
-    }
-
-    .section-content > div {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 0 25px;
-        flex-wrap: wrap;
-    }
-
-    section p.header {
-        color: #000;
-        margin-bottom: 15px;
-        text-align: center;
-    }
-
-    section > div {
-        margin: 10px;
     }
 }
 </style>

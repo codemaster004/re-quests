@@ -23,7 +23,7 @@
                     <h2 class="header">Finished!</h2>
                 </div>
 
-                <div class="action-button" v-if="quest.daysLeft > 0">Add work</div>
+                <div class="action-button" v-if="quest.daysLeft > 0">Fail</div>
             </div>
         </div>
     </div>
@@ -57,6 +57,7 @@ export default {
 .card {
     width: 340px;
     height: 510px;
+    margin: 10px;
     margin-bottom: 30px;
 
     background: #ffffff;
