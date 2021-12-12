@@ -145,10 +145,6 @@ export default {
             console.log(e);
         }
 
-        this.medalId = 0;
-        this.blurBackground = true;
-        setTimeout(this.showMedal, 100);
-
         window.addEventListener("resize", this.resizeWindowHandler);
     },
     destroyed() {
