@@ -113,9 +113,17 @@ export default {
         try {
             let token = localStorage.getItem("accessToken");
 
-            const response = await axios.get("/api/Quests/uncompleted", {
-                headers: { Authorization: `Bearer ${token}` },
-            });
+            const response = await axios
+                .get("/api/Quests/uncompleted", {
+                    headers: { Authorization: `Bearer ${token}` },
+                })
+                .catch((error) => {
+                    console.log(error.response);
+                    console.log(error.response.statusText);
+                    if (error.response.statusText == "Unauthorized") {
+                        this.$router.push("/login");
+                    }
+                });
 
             for (let quest of response.data) {
                 this.quests.push({
