@@ -14,6 +14,7 @@ public interface IQuestsService
 	Task<GetQuestDto[]> GetQuests( int[]? ids, QuestsOrderBy orderBy = default );
 	Task<GetQuestDto?> GetQuest( int id );
 	Task<GetQuestDto> CreateQuest( CreateQuestDto dto );
+	Task UpdateQuest( int id, CreateQuestDto dto );
 	Task DeleteQuest( int id );
 
 	Task<GetQuestDto[]> GetAvailable( string userUuid, QuestsOrderBy orderBy = default );
@@ -74,6 +75,22 @@ public class QuestsService : IQuestsService
 		_ = await _dbContext.SaveChangesAsync();
 
 		return GetQuestDto.FromQuest( quest );
+	}
+	public async Task UpdateQuest( int id, CreateQuestDto dto )
+	{
+		var quest = await _dbContext.Quests
+			.Where( q => q.Id == id )
+			.FirstOrDefaultAsync();
+
+		if ( quest is null )
+		{
+			throw new NotFoundException();
+		}
+
+		dto.UpdateQuest( quest );
+
+		_ = _dbContext.Quests.Update( quest );
+		_ = await _dbContext.SaveChangesAsync();
 	}
 	public async Task DeleteQuest( int id )
 	{
@@ -235,6 +252,11 @@ public class QuestsService : IQuestsService
 		if ( userQuest is null )
 		{
 			throw new NotFoundException();
+		}
+
+		if ( userQuest.DateCompleted is null )
+		{
+			throw new ConflictException();
 		}
 
 		userQuest.WasWinReceived = true;
