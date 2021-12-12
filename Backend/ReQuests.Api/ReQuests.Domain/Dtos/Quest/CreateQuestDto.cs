@@ -26,11 +26,14 @@ public record CreateQuestDto
 
 	[Required]
 	public string ImageUrl { get; set; }
+	public string AwardUrl { get; set; }
+	[StringLength( 20 )]
+	public string Color { get; set; }
 
 #nullable restore
 
 	public QuestModel ToQuest()
 	{
-		return new( Name, Description, Explanation, ImageUrl ) { Duration = Duration, Difficulty = Difficulty };
+		return new( Name, Description, Explanation, ImageUrl, AwardUrl, Color ) { Duration = Duration, Difficulty = Difficulty };
 	}
 }

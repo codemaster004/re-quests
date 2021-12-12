@@ -26,6 +26,9 @@ public record GetUserQuestDto
 	public int QuestDifficulty { get; set; }
 	public string QuestExplanation { get; set; }
 	public string QuestImageUrl { get; set; }
+	public string QuestAwardUrl { get; set; }
+	[StringLength( 20 )]
+	public string QuestColor { get; set; }
 
 #nullable restore
 
@@ -44,6 +47,8 @@ public record GetUserQuestDto
 		QuestDifficulty = userQuest.Quest.Difficulty,
 		QuestExplanation = userQuest.Quest.Explanation,
 		QuestImageUrl = userQuest.Quest.ImageUrl,
+		QuestAwardUrl = userQuest.Quest.AwardUrl,
+		QuestColor = userQuest.Quest.Color,
 	};
 
 	private static readonly Func<UserQuestRelation, GetUserQuestDto> fromUserQuestFunc = fromUserQuestExp.Compile();
