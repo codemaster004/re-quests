@@ -58,7 +58,8 @@ export default {
 <style>
 .auth-view {
     min-height: calc(100vh - 50px);
-    width: 100vw;
+    /* width: 100vw; */
+    width: 100%;
     background-color: #fff;
     padding-top: 50px;
 }
