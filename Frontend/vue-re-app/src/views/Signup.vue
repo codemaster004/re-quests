@@ -121,4 +121,15 @@ h2.auth-title {
 
     color: #000000;
 }
+
+@media screen and (min-width: 1000px) {
+    .auth-view {
+        width: 50%;
+        margin: 0 auto;
+        max-width: 800px;
+    }
+    .auth-view .auth-button {
+        position: relative;
+    }
+}
 </style>

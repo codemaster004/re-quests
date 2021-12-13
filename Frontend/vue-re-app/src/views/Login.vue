@@ -12,7 +12,6 @@
                 <div>
                     <input class="input-box" type="password" placeholder="Password" v-model="password" />
                 </div>
-                <p>Forgot Password?</p>
             </div>
 
             <div>
@@ -166,5 +165,15 @@ export default {
     text-align: center;
 
     color: #ffffff;
+}
+
+@media screen and (min-width: 1000px) {
+    .auth-view {
+        width: 50%;
+        margin: 0 auto;
+    }
+    .auth-view .auth-button {
+        position: relative;
+    }
 }
 </style>
