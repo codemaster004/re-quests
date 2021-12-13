@@ -48,7 +48,7 @@
 }
 
 .hero-container {
-    padding: 50px 90px;
+    padding: 30px 90px;
 }
 nav {
     display: flex;
@@ -83,6 +83,12 @@ header {
     color: #fff;
     align-items: center;
     justify-content: flex-start;
+}
+
+header .right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 header .header-box h1 {
@@ -130,4 +136,25 @@ header .header-box p {
     line-height: 50px;
 
     color: #000000;
+}
+
+.mockup-box {
+    width: 700px;
+    height: 800px;
+    position: relative;
+}
+
+.mockup-box img {
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.mockup-box img:last-of-type {
+    transform: translate(-40%, 0%);
+}
+.mockup-box img:first-of-type {
+    transform: translate(0, 10%);
 }
