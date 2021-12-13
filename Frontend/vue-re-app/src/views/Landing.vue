@@ -201,7 +201,7 @@ export default {
     display: flex;
     color: #9e9e9e;
     position: relative;
-    z-index: 20;
+    z-index: 100;
 }
 .hero-container nav a {
     text-decoration: none;
