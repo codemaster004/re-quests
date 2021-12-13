@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <div class="right">
-                    <router-link to="/login">Loing</router-link>
+                    <router-link to="/login">Login</router-link>
                     <router-link to="/signup">Signup</router-link>
                 </div>
             </nav>
@@ -59,6 +59,22 @@
                 </div>
             </header>
         </div>
+        <section class="purpose-section">
+            <header class="section-header">
+                <p>The application was created to help <span>You</span> recycle the rubbish</p>
+            </header>
+            <div class="purpose">
+                <img src="../assets/Landingsrodek-1.png" />
+                <img src="../assets/Landingsrodek-2.png" />
+                <img src="../assets/Landingsrodek-3.png" />
+                <p class="heading">Have you ever asked yourself</p>
+                <blockquote><span>"Do I care for the Earth the way that i should?"</span></blockquote>
+                <p>
+                    If You still do not know answer to this question, download this application. Every day You will receive a task that will help you
+                    sort your garbage and more
+                </p>
+            </div>
+        </section>
         <section class="tech-section">
             <header class="section-header"><span>Technologies</span> we used</header>
             <div class="cards-box">
@@ -299,9 +315,198 @@ section {
     position: relative;
     z-index: 300;
 }
+.purpose-section {
+    margin: 0 !important;
+    padding-top: 30px;
+    background-color: #ffffff;
+}
+.purpose-section > header {
+    line-height: initial;
+    font-weight: 500;
+}
+.purpose {
+    margin: auto;
+    width: 100%;
+    display: grid;
+    padding: 2em;
+    align-items: flex-end;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-style: normal;
+    --img-col-width: calc(var(--img-width) - var(--image-translate));
+    grid-template:
+        ".    img2 title title" 1fr
+        "img1 img2 quote  quote" auto
+        "img1 img2 img3  expl " auto
+        "img1 img2 img3  .    " auto;
+    grid-template-columns: var(--img-col-width) var(--img-width) var(--img-col-width) 1fr;
+    padding-bottom: 0;
+}
+blockquote {
+    font-family: monospace;
+    font-style: italic;
+    padding-bottom: 0.5em;
+}
+.purpose .heading {
+    font-size: var(--heading-size);
+    grid-area: title;
+    text-align: end;
+    padding: 0.5em;
+}
+.purpose blockquote {
+    font-size: var(--quote-size);
+    grid-area: quote;
+    text-align: end;
+}
+.purpose p:last-of-type {
+    font-size: var(--text-size);
+    letter-spacing: 1px;
+    text-align: justify;
+    grid-area: expl;
+    padding: 1em;
+}
+.purpose img {
+    width: var(--img-width);
+    height: auto;
+}
+.purpose img:first-of-type {
+    grid-area: img1;
+    transform: translateX(0);
+}
+.purpose img:nth-of-type(2) {
+    grid-area: img2;
+}
+.purpose img:last-of-type {
+    grid-area: img3;
+    transform: translateX(var(--neg-image-translate));
+}
+@media (max-width: 599.99px) {
+    .purpose {
+        width: 100%;
+        --image-translate: 20%;
+        --neg-image-translate: -20%;
+        --img-width: 200px;
+        --heading-size: 20px;
+        --quote-size: 16px;
+        --text-size: 16px;
+        grid-template:
+            "title title title title title" auto
+            ". quote quote quote ." auto
+            ". expl  expl  expl  ." auto
+            ". .     img2  .     ." 1fr
+            ". img1  img2  img3  ." auto
+            ". img1  img2  img3  ." auto
+            ". img1  img2  img3  ." auto;
+        grid-template-columns: 1fr auto auto auto 1fr;
+    }
+
+    .purpose img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .purpose img:first-of-type {
+        transform: translateX(var(--image-translate));
+    }
+
+    .purpose .heading,
+    .purpose blockquote {
+        text-align: center;
+    }
+
+    .purpose-section > header {
+        font-size: 26px;
+    }
+}
+@media (min-width: 600px) and (max-width: 799.99px) {
+    .purpose {
+        width: 100%;
+        --image-translate: 40px;
+        --neg-image-translate: -40px;
+        --img-width: 200px;
+        --heading-size: 32px;
+        --quote-size: 16px;
+        --text-size: 16px;
+        grid-template:
+            "title title title title title" auto
+            ". quote quote quote ." auto
+            ". expl  expl  expl  ." auto
+            ". .     img2  .     ." 1fr
+            ". img1  img2  img3  ." auto
+            ". img1  img2  img3  ." auto
+            ". img1  img2  img3  ." auto;
+        grid-template-columns: 1fr var(--img-col-width) var(--img-width) var(--img-col-width) 1fr;
+    }
+
+    .purpose .heading,
+    .purpose blockquote {
+        text-align: center;
+    }
+
+    .purpose-section > header {
+        font-size: 26px;
+    }
+}
+@media (min-width: 800px) {
+    .purpose {
+        width: 800px;
+        --image-translate: 70px;
+        --neg-image-translate: -70px;
+        --img-width: 200px;
+        --heading-size: 25px;
+        --quote-size: 16px;
+        --text-size: 16px;
+    }
+
+    .purpose-section > header {
+        font-size: 32px;
+    }
+}
+@media (min-width: 900px) {
+    .purpose {
+        width: 900px;
+        --image-translate: 75px;
+        --neg-image-translate: -75px;
+        --img-width: 220px;
+        --heading-size: 28px;
+        --quote-size: 16px;
+        --text-size: 18px;
+    }
+
+    .purpose-section > header {
+        font-size: 36px;
+    }
+}
+@media (min-width: 1200px) {
+    .purpose {
+        width: 1200px;
+        --image-translate: 100px;
+        --neg-image-translate: -100px;
+        --img-width: 250px;
+        --heading-size: 45px;
+        --quote-size: 24px;
+        --text-size: 24px;
+    }
+
+    .purpose-section > header {
+        font-size: 42px;
+    }
+}
+@media (min-width: 1600px) {
+    .purpose {
+        width: 1600px;
+        --image-translate: 110px;
+        --neg-image-translate: -110px;
+        --img-width: 320px;
+        --heading-size: 56px;
+        --quote-size: 32px;
+        --text-size: 28px;
+    }
+}
 
 .tech-section {
-    margin-top: 50px;
+    /* margin-top: 50px; */
+    padding-top: 30px;
     min-height: 700px;
     width: 100%;
     padding-bottom: 120px;

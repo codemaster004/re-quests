@@ -173,17 +173,16 @@ span {
     transform: translate(0, 10%);
 }
 
-
 /*about*/
 .purpose-section {
     margin-top: 100px;
-    background-color: #fff3f3
+    background-color: #fff3f3;
 }
 
-    .purpose-section > header {
-        line-height: initial;
-        font-weight: 500
-    }
+.purpose-section > header {
+    line-height: initial;
+    font-weight: 500;
+}
 
 .purpose {
     margin: auto;
@@ -207,20 +206,20 @@ span {
 blockquote {
     font-family: monospace;
     font-style: italic;
-    padding-bottom: .5em
+    padding-bottom: 0.5em;
 }
 
 .purpose .heading {
     font-size: var(--heading-size);
     grid-area: title;
     text-align: end;
-    padding: .5em;
+    padding: 0.5em;
 }
 
 .purpose blockquote {
     font-size: var(--quote-size);
     grid-area: quote;
-    text-align: end
+    text-align: end;
 }
 
 .purpose p:last-of-type {
@@ -231,27 +230,26 @@ blockquote {
     padding: 1em;
 }
 
-
 .purpose img {
     width: var(--img-width);
     height: auto;
 }
 
-    .purpose img:first-of-type {
-        grid-area: img1;
-        transform: translateX(0);
-    }
+.purpose img:first-of-type {
+    grid-area: img1;
+    transform: translateX(0);
+}
 
-    .purpose img:nth-of-type(2) {
-        grid-area: img2;
-    }
+.purpose img:nth-of-type(2) {
+    grid-area: img2;
+}
 
-    .purpose img:last-of-type {
-        grid-area: img3;
-        transform: translateX(var(--neg-image-translate));
-    }
+.purpose img:last-of-type {
+    grid-area: img3;
+    transform: translateX(var(--neg-image-translate));
+}
 
-@media(max-width:599.99px) {
+@media (max-width: 599.99px) {
     .purpose {
         width: 100%;
         --image-translate: 20%;
@@ -271,25 +269,26 @@ blockquote {
         grid-template-columns: 1fr auto auto auto 1fr;
     }
 
-        .purpose img {
-            max-width: 100%;
-            height: auto;
-        }
+    .purpose img {
+        max-width: 100%;
+        height: auto;
+    }
 
-            .purpose img:first-of-type {
-                transform: translateX(var(--image-translate));
-            }
+    .purpose img:first-of-type {
+        transform: translateX(var(--image-translate));
+    }
 
-        .purpose .heading, .purpose blockquote {
-            text-align: center
-        }
+    .purpose .heading,
+    .purpose blockquote {
+        text-align: center;
+    }
 
     .purpose-section > header {
-        font-size: 26px
+        font-size: 26px;
     }
 }
 
-@media(min-width: 600px) and (max-width:799.99px) {
+@media (min-width: 600px) and (max-width: 799.99px) {
     .purpose {
         width: 100%;
         --image-translate: 40px;
@@ -309,16 +308,17 @@ blockquote {
         grid-template-columns: 1fr var(--img-col-width) var(--img-width) var(--img-col-width) 1fr;
     }
 
-        .purpose .heading, .purpose blockquote {
-            text-align: center
-        }
+    .purpose .heading,
+    .purpose blockquote {
+        text-align: center;
+    }
 
     .purpose-section > header {
-        font-size: 26px
+        font-size: 26px;
     }
 }
 
-@media(min-width:800px) {
+@media (min-width: 800px) {
     .purpose {
         width: 800px;
         --image-translate: 70px;
@@ -330,11 +330,11 @@ blockquote {
     }
 
     .purpose-section > header {
-        font-size: 32px
+        font-size: 32px;
     }
 }
 
-@media(min-width:900px) {
+@media (min-width: 900px) {
     .purpose {
         width: 900px;
         --image-translate: 75px;
@@ -346,11 +346,11 @@ blockquote {
     }
 
     .purpose-section > header {
-        font-size: 36px
+        font-size: 36px;
     }
 }
 
-@media(min-width:1200px) {
+@media (min-width: 1200px) {
     .purpose {
         width: 1200px;
         --image-translate: 100px;
@@ -362,11 +362,11 @@ blockquote {
     }
 
     .purpose-section > header {
-        font-size: 42px
+        font-size: 42px;
     }
 }
 
-@media(min-width:1600px) {
+@media (min-width: 1600px) {
     .purpose {
         width: 1600px;
         --image-translate: 110px;
