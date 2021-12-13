@@ -29,8 +29,8 @@
                     </div>
                 </div>
                 <div class="right">
-                    <a href="#">Loing</a>
-                    <a href="#">Signup</a>
+                    <router-link to="/login">Loing</router-link>
+                    <router-link to="/signup">Signup</router-link>
                 </div>
             </nav>
             <header>
@@ -44,8 +44,10 @@
                             If you are ready to take up the challenge, try out your willpower and endurance, you must take part in our Re-Quests app!
                         </p>
                         <div class="button-box">
-                            <div class="btn btn-main"><span>Create account</span></div>
-                            <div class="btn btn-hide">Read more</div>
+                            <div class="btn btn-main">
+                                <router-link to="/signup" style="text-decoration: none"><span>Create account</span></router-link>
+                            </div>
+                            <div class="btn btn-hide"><a href="#" style="color: white; text-decoration: none">Read more</a></div>
                         </div>
                     </div>
                 </div>
