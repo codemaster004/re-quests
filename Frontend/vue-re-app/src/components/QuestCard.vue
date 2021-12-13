@@ -6,7 +6,7 @@
 
             <div class="image-box">
                 <img src="../assets/Rectangle.svg" class="absolute-center" />
-                <img src="../assets/PaperBag.png" class="absolute-center" />
+                <img :src="require(`../assets/${quest.imgUrl}`)" class="absolute-center quest-img" />
             </div>
         </div>
         <div class="progress-group">
@@ -49,6 +49,9 @@ export default {
                 width: `calc(100% / ${this.quest.questLength} - 1px)`,
             };
         },
+    },
+    created() {
+        console.log(this.quest);
     },
 };
 </script>
@@ -126,6 +129,10 @@ export default {
 
 .action-button {
     width: 40%;
+}
+
+.quest-img {
+    width: 80%;
 }
 
 @media screen and (min-width: 1000px) {

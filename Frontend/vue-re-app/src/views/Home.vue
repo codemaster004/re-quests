@@ -124,6 +124,7 @@ export default {
                         this.$router.push("/login");
                     }
                 });
+            console.log(response);
 
             for (let quest of response.data) {
                 this.quests.push({
@@ -134,6 +135,7 @@ export default {
                     questProgress: quest?.sinceStart ?? 0,
                     daysLeft: quest?.duration - quest?.sinceStart,
                     wasWinReceived: quest.wasWinReceived,
+                    imgUrl: quest?.questImageUrl,
                 });
             }
 

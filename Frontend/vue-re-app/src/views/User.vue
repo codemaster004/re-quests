@@ -49,7 +49,6 @@ export default {
                             this.$router.push("/login");
                         }
                     });
-                console.log(data);
                 this.username = data.username;
             } catch (e) {
                 console.log(e);
@@ -61,7 +60,6 @@ export default {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 console.log(data);
-                this.username = data.username;
             } catch (e) {
                 console.log(e);
             }
@@ -71,15 +69,13 @@ export default {
                 const { data } = await axios.get("/api/Quests/begun", {
                     headers: { Authorization: `Bearer ${this.token}` },
                 });
-                console.log(data);
                 for (let quest of data) {
                     this.quests.push({
+                        id: quest.questId,
                         title: quest.questName,
-                        img: "",
+                        imgUrl: quest.questImageUrl,
                         completed: quest?.sinceStart < quest?.duration ? quest?.sinceStart / quest?.duration : 100,
                     });
-                    console.log(quest?.sinceStart, quest?.duration);
-                    console.log(quest?.sinceStart / quest?.duration);
                 }
             } catch (e) {
                 console.log(e);

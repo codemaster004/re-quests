@@ -3,7 +3,7 @@
         <div class="quest-stat-info" v-for="quest in quests" :key="quest.id">
             <div class="quest-circle" :style="{ background: createRing(quest.completed) }">
                 <div class="quest-bgc absolute-center">
-                    <img src="" alt="" class="reward-medal" />
+                    <img :src="require(`../assets/${quest.imgUrl}`)" alt="" class="reward-medal" />
                 </div>
             </div>
             <h4>{{ quest.title }}</h4>
@@ -61,6 +61,13 @@ export default {
 
     background-color: #4c866b;
     border-radius: 50%;
+}
+
+img {
+    width: 100px;
+    margin: auto;
+    margin-top: 7px;
+    display: block;
 }
 
 h4 {
