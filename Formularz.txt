@@ -1,48 +1,46 @@
-1.
+1. nazwa projektu: 
 Re-Quests
 
-2.
-Bez snu tydzień two electric boogaloo
+2. nazwa drużyny:
+Bez snu week two electric boogaloo
 
-3.
-Filip Dąbkowski - Project menager, Front-end developer
+3. skład drużyny:
+Filip Dąbkowski - Front-end developer, UI Design consultant
 Przemysław Urbanek - Back-end developer
 Franciszek Łuczkiewicz - UI Designer, Graphics designer
 Katarzyna Straszkiewicz - Coach, Mentor
 
-4.
+4. link do pracy:
+https://re-quests.herokuapp.com/
+
+5. link do kodu:
 https://github.com/codemaster004/re-quests
 
-5.
--
+6. na jakie potrzeby/problemy odpowiada:
+Wielu ludzi ma bardzo niską świadomość w temacie recyklingu i sposobów pomagania środowisku, niekoniecznie wiedzą, jak wiele rzeczy można robić by w prosty i przyjemny sposób przyczyniać się do polepszenia świata - nie tylko poprzez segregowanie śmieci, ale również np poprzez znajdowanie dla nich alternatywnych przeznaczeń, a dla bardziej wtajemniczonych - przetwarzanie samemu w celu stworzenia innych bardziej atrakcyjnych produktów.
 
-6.
-Aplikacja została stworzona z myślą o recyklingu. Ludzie, którzy niekoniecznie mają świadomość ile rzeczy mogą zrobić, w prosty i atrakcyjny sposób mogą przekonać się, że segregowanie śmieci ma sens - cel segregacji śmieci to nie tylko mniej odpadów na wysypiskach, ale ponowne przetwarzanie czasem cennych surowców lub wykorzystanie "śmieci" do stworzenia innych bardziej atrakcyjnych produktów.
+7. w jakich językach/technologiach:
+Vue.js, HTML, CSS, C#, REST, Figma, PostgreSQL, git, ECMAScript 6, 3D
 
-7.
-C#, HTML, CSS, JSON, Vue, Figma, Postgre, git, JS, ES6, 3D,
+8.opis działania:
+Użytkownik dostaje możliwość realizowania 'questów' - wybranych przez twórców ciekawych/nietypowych zadań służących nauce recyklingu. W miarę realizowania zadań wzrasta świadomość użytkownika, ćwiczona jest też regularność w 'byciu eko'. Dzięki temu że aplikacja nie zajmuje użytkownikom wiele czasu, każdy, kto chociaż trochę będzie chciał dbać o naszą planetę - na początku nieświadomie nie produkując śmieci poprzez wykonywanie questów z aplikacji, poznając wiele metod recyklingu/upcyclingu - będzie z chęcią używał naszej aplikacji.
 
-8.
-Nasz projekt ma według nas bardzo duży potencjał ponieważ jest to aplikacja, do której używania użytkownik nie potrzebuje dużo czasu. Każdy, kto chociaż trochę będzie chciał dbać o naszą planetę - na początku nieświadomie nie produkując śmieci poprzez wykonywanie questów z aplikacji, poznając wiele metod recyclingu/upcyclingu, będzie z chęcią używał naszej aplikacji.
+9. dalszy rozwój:
+Działanie aplikacji można poszerzyć do większego zakresu dziedzin życia, np działalność związana z wolontariatem, platforma dla harcerzy. Możliwe byłoby dodanie czatu aby umożliwić użytkownikom dyskutowanie na temat zadań udzielanie wskazówek itp. Ciekawa byłaby również opcja tworzenia questów przez użytkowników do realizacji dla innych.
+Partnerami mogłyby być kuratoria, domy kultury, szkoły, urzędy miast, przedsiębiorstwa przetwarzające odpady (aplikacja może stanowić ciekawą rozrywkę dla osób odwiedzających strony internetowe).
 
-9.
+10. zagrożenia:
+
+11. dlaczego my:
 
 
-10.
+12. 
 Franciszek Łuczkiewicz
 
-11.
+13. 
 franek.luczkiewicz@gmail.com
 
-12.
+14. 
 733575787
 
-Opisz działanie waszej aplikacji/narzędzia:
 
-
-Jak widzicie dalszy rozwój Waszego rozwiązania:
-Dalszy rozwój aplikcji można zaadoptować do wielu innych dziedzin życia i zagadnień np. działalność związana z wolontariatem, platforma, którą mogą wykożystywać w swojej formacji harcerze lub inne środowiska wychowujące młodzierz. Partnerami mogą być kuratoria, domy kultury, szkoły, urzędy miast, przedsiębiorstwa przetwarzające odpady (aplikacja może być ciekawą rozrywką dla osób odwiedzających strony internetowe).
-
-Zagrożenia:
-
-Dlaczego:
