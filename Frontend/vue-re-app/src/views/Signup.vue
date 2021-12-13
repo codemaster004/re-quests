@@ -6,35 +6,61 @@
         <h2 class="auth-title">Sign Up</h2>
         <form @submit="handdleSubmit">
             <div class="input-group">
-                <AuthInput placeholder="Username" inputType="text" />
-                <AuthInput placeholder="Email" inputType="email" />
-                <AuthInput placeholder="Password" inputType="password" />
-                <AuthInput placeholder="Confirm" inputType="password" />
-                <!-- <p>Forgot Password</p> -->
+                <div>
+                    <input class="input-box" type="text" placeholder="Username" v-model="username" />
+                </div>
+                <div>
+                    <input class="input-box" type="email" placeholder="email" v-model="email" />
+                </div>
+                <div>
+                    <input class="input-box" type="password" placeholder="Password" v-model="password" />
+                </div>
             </div>
 
-            <AuthButton text="Sign up" />
+            <div>
+                <input type="submit" class="auth-button" />
+            </div>
         </form>
     </div>
 </template>
 
 <script>
-import AuthInput from "../components/AuthInput";
-import AuthButton from "../components/AuthButton";
+import axios from "axios";
+import "vue-router";
 
 export default {
     export: {
         name: "Signup",
     },
-    components: {
-        AuthInput,
-        AuthButton,
-    },
+    components: {},
     methods: {
-        handdleSubmit(e) {
+        async handdleSubmit(e) {
+            const formData = {
+                username: this.username,
+                password: this.password,
+                email: this.email,
+            };
             e.preventDefault();
             console.log("submit");
+
+            try {
+                const response = await axios.post("api/Users", formData);
+
+                console.log("Success signup");
+
+                this.$router.push("/login");
+            } catch (error) {
+                console.log(error);
+            }
         },
+    },
+    data() {
+        return {
+            username: "",
+            password: "",
+            email: "",
+            confirm: "",
+        };
     },
 };
 </script>

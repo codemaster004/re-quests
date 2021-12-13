@@ -42,7 +42,6 @@ export default {
     methods: {
         cardHovered(e, id) {
             let quest = this.quests.filter((quest) => quest.id == id);
-            console.log(quest);
             if (quest[0]) {
                 this.questInfo.title = quest[0].title;
                 this.questInfo.desc = quest[0].desc;
