@@ -68,5 +68,6 @@
 | <img src="https://avatars.githubusercontent.com/u/91752927?size=50" style="border-radius: 50%" height="50px"> | UI Designer, Graphics designer |
 | <img src="https://avatars.githubusercontent.com/u/73723125?size=50" style="border-radius: 50%" height="50px"> | Back-End Dev |
 | <img src="https://avatars.githubusercontent.com/u/50377268?size=50" style="border-radius: 50%"  height="50px"> | Front-End Dev, Part UI Designer |
+| <img src="https://katolik.info.pl/wp-content/uploads/2021/03/2019_2020_straszkiewicz_katarzyna.jpg" style="border-radius: 50%"  height="50px"> | Coach |
 
   
