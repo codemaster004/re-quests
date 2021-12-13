@@ -10,10 +10,10 @@
             }"
         >
             <img
-                :src="require(`../assets/${reward.imgUrl}`)"
+                :src="require(`../assets/${reward.imgUrl}.png`)"
                 alt=""
                 class="reward-medal"
-                v-if="['Bottle.png', 'Can.png', 'PaperBag.png'].includes(reward.imgUrl)"
+                v-if="['Bottle', 'Can', 'Bag'].includes(reward.imgUrl)"
             />
             <img src="../assets/MedalTransparent.gif" alt="" class="reward-medal" v-else />
         </div>

@@ -94,7 +94,7 @@ export default {
             rewards: [],
             quests: [],
             selected: "quests",
-            username: "Maja Kowalaska",
+            username: "Anonymous",
         };
     },
     created() {
