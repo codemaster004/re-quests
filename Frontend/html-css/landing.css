@@ -175,9 +175,9 @@ span {
 
 .tech-section {
     margin-top: 50px;
-    height: 80vh;
     min-height: 700px;
     width: 100%;
+    padding-bottom: 120px;
     background: linear-gradient(to bottom, #fff, #eeeeee);
 }
 section > header {
@@ -263,10 +263,11 @@ section > header {
 .people-box {
     display: flex;
     justify-content: space-around;
-    padding: 100px 0;
+    padding: 50px 0;
+    height: auto;
 }
 .person-box {
-    height: 550px;
+    /* height: 550px; */
     width: 320px;
     display: flex;
     flex-direction: column;
@@ -343,6 +344,31 @@ section > header {
     .btn-main {
         line-height: 45px;
     }
+
+    .team-section {
+        padding: 0 20px;
+    }
+    .people-box {
+        padding-bottom: 0;
+    }
+    .person-box {
+        width: 275px;
+        /* height: 400px; */
+    }
+    .person-box .person-text-box {
+        padding: 20px;
+        height: 120px;
+    }
+    .person-box img {
+        width: 200px;
+        height: 200px;
+    }
+    .person-box .person-text-box h4 {
+        font-size: 20px;
+    }
+    .person-box .person-text-box p {
+        font-size: 16px;
+    }
 }
 
 @media screen and (max-width: 1200px) {
@@ -381,6 +407,17 @@ section > header {
     .card {
         width: 250px;
         height: 350px;
+    }
+
+    .team-section {
+        height: auto;
+    }
+    .people-box {
+        height: auto;
+        flex-wrap: wrap;
+    }
+    .person-box {
+        margin: 10px;
     }
 }
 
@@ -563,6 +600,16 @@ section > header {
     }
     .btn-main {
         line-height: 40px;
+    }
+
+    .team-section {
+        padding-bottom: 30px;
+    }
+    .people-box {
+        padding-top: 0px;
+    }
+    .person-box {
+        margin-top: 20px;
     }
 }
 
