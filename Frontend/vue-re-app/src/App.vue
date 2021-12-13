@@ -241,4 +241,13 @@ main {
         padding-top: 15px;
     }
 }
+
+/* ::-webkit-scrollbar {
+    width: 12px;
+    margin: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to top, #62e3a7, #29ae70);
+    border-radius: 6px;
+} */
 </style>
