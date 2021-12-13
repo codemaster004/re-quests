@@ -357,6 +357,7 @@ blockquote {
     font-size: var(--quote-size);
     grid-area: quote;
     text-align: end;
+    color: #4c866b;
 }
 .purpose p:last-of-type {
     font-size: var(--text-size);
