@@ -4,10 +4,11 @@ import Login from "../views/Login";
 import Signup from "../views/Signup";
 import Progress from "../views/Progress";
 import Profile from "../views/User";
+import Landing from "../views/Landing";
 
 const routes = [
     {
-        path: "/",
+        path: "/home",
         name: "Home",
         component: Home,
     },
@@ -30,6 +31,11 @@ const routes = [
         path: "/user",
         name: "Profile",
         component: Profile,
+    },
+    {
+        path: "/",
+        name: "Landing",
+        component: Landing,
     },
 ];
 

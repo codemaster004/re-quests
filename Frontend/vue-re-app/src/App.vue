@@ -1,10 +1,10 @@
 <template>
     <main>
-        <div id="bgc"></div>
+        <div id="bgc" v-if="currentRouteName != 'Landing'"></div>
 
         <div
-            class="content"
             :class="{
+                content: currentRouteName != 'Landing',
                 'content-minimal': navState.hided,
                 'content-maximal': navState.showed,
                 'content-maximize': navState.hidding,
@@ -13,7 +13,7 @@
         >
             <router-view></router-view>
         </div>
-        <Nav @burger-clicked="toggleNav()" />
+        <Nav @burger-clicked="toggleNav()" v-if="currentRouteName != 'Landing'" />
     </main>
 </template>
 
@@ -24,6 +24,11 @@ export default {
     name: "App",
     components: {
         Nav,
+    },
+    computed: {
+        currentRouteName() {
+            return this.$route.name;
+        },
     },
     methods: {
         toggleNav() {
@@ -221,7 +226,7 @@ main {
         background: linear-gradient(180deg, #4c866b 0%, #337053 100%);
     }
 
-    nav {
+    main > nav {
         width: 200px;
     }
 

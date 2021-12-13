@@ -43,7 +43,7 @@ export default {
                 localStorage.setItem("accessToken", response.data.accessToken);
                 console.log("Success login");
 
-                this.$router.push("/");
+                this.$router.push("/home");
             } catch {}
         },
     },

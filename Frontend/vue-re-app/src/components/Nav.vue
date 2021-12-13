@@ -48,9 +48,9 @@ export default {
     created() {
         this.links = [
             { linkTo: "Main", to: "/", active: true, icon: "" },
-            { linkTo: "Log in", to: "/login", active: false, icon: "" },
-            { linkTo: "Sign up", to: "/signup", active: false, icon: "" },
-            { linkTo: "Progress", to: "/progress", active: false, icon: "" },
+            // { linkTo: "Log in", to: "/login", active: false, icon: "" },
+            // { linkTo: "Sign up", to: "/signup", active: false, icon: "" },
+            // { linkTo: "Progress", to: "/progress", active: false, icon: "" },
             { linkTo: "Profile", to: "/user", active: false, icon: "" },
         ];
         window.addEventListener("resize", this.resizeWindowHandler);
