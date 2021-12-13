@@ -7,7 +7,7 @@ Bez snu tydzień two electric boogaloo
 3.
 Filip Dąbkowski - Project menager, Front-end developer
 Przemysław Urbanek - Back-end developer
-Franciszek Łuczkiewicz - UI Designer, Graphic
+Franciszek Łuczkiewicz - UI Designer, Graphics designer
 Katarzyna Straszkiewicz - Coach, Mentor
 
 4.
@@ -17,7 +17,7 @@ https://github.com/codemaster004/re-quests
 -
 
 6.
-Aplikacja została stworzona z myślą o recyklingu, dokładniej o ludziach, którzy niekoniecznie mają świadomość ile rzeczy mogą zrobić, aby nie tylko segregować śmieci, ale także działać w taki sposób aby śmieci były wykorzystywane ponownie, a nie tylko przetważane (Na przykład "W tym tygodniu używaj tylko papierowych toreb.")
+Aplikacja została stworzona z myślą o recyklingu. Ludzie, którzy niekoniecznie mają świadomość ile rzeczy mogą zrobić, w prosty i atrakcyjny sposób mogą przekonać się, że segregowanie śmieci ma sens - cel segregacji śmieci to nie tylko mniej odpadów na wysypiskach, ale ponowne przetwarzanie czasem cennych surowców lub wykorzystanie "śmieci" do stworzenia innych bardziej atrakcyjnych produktów.
 
 7.
 C#, HTML, CSS, JSON, Vue, Figma, Postgre, git, JS, ES6, 3D,
@@ -36,3 +36,13 @@ franek.luczkiewicz@gmail.com
 
 12.
 733575787
+
+Opisz działanie waszej aplikacji/narzędzia:
+
+
+Jak widzicie dalszy rozwój Waszego rozwiązania:
+Dalszy rozwój aplikcji można zaadoptować do wielu innych dziedzin życia i zagadnień np. działalność związana z wolontariatem, platforma, którą mogą wykożystywać w swojej formacji harcerze lub inne środowiska wychowujące młodzierz. Partnerami mogą być kuratoria, domy kultury, szkoły, urzędy miast, przedsiębiorstwa przetwarzające odpady (aplikacja może być ciekawą rozrywką dla osób odwiedzających strony internetowe).
+
+Zagrożenia:
+
+Dlaczego:
