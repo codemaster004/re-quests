@@ -1,5 +1,5 @@
 <template>
-    <div class="card" @mouseover="$emit('card-hover', $event, quest.id)">
+    <div class="card" :style="{ display: displayCard }" @mouseover="$emit('card-hover', $event, quest.id)">
         <div class="feature">
             <h2 class="header">{{ quest.title }}</h2>
             <p class="sub-header">{{ quest.desc }}</p>
@@ -23,13 +23,15 @@
                     <h2 class="header">Finished!</h2>
                 </div>
 
-                <div class="action-button" v-if="quest.daysLeft > 0">Fail</div>
+                <div @click="failQuest(quest.id)" class="action-button" v-if="quest.daysLeft > 0">Fail</div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     name: "QuestCard",
     props: {
@@ -42,6 +44,21 @@ export default {
                 checked: this.quest.questProgress >= i,
             };
         },
+        async failQuest(id) {
+            let token = localStorage.getItem("accessToken");
+
+            console.log(id);
+            const response = await axios
+                .post(`/api/Quests/${id}/abort`, "", {
+                    headers: { Authorization: `Bearer ${token}` },
+                })
+                .catch((error) => {
+                    console.log(error.response);
+                });
+            console.log(response);
+
+            this.displayCard = "none";
+        },
     },
     computed: {
         progressStyles() {
@@ -49,6 +66,11 @@ export default {
                 width: `calc(100% / ${this.quest.questLength} - 1px)`,
             };
         },
+    },
+    data() {
+        return {
+            displayCard: "block",
+        };
     },
     created() {
         console.log(this.quest);
