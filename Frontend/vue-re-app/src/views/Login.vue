@@ -1,7 +1,7 @@
 <template>
     <div class="auth-view">
         <div class="logo-box">
-            <img src="" alt="" />
+            <img src="../assets/gif.gif" alt="" />
         </div>
         <h2 class="auth-title">Log In</h2>
         <form @submit.prevent="handdleSubmit">
@@ -72,6 +72,10 @@ export default {
     background: #ffffff;
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.1);
     border-radius: 200px 200px 69px 69px;
+}
+
+.auth-view .logo-box img {
+    height: 100%;
 }
 
 .auth-view .input-group {

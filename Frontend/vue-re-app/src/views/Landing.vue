@@ -217,4 +217,13 @@ header .header-box p {
 .mockup-box img:first-of-type {
     transform: translate(0, 10%);
 }
+
+::-webkit-scrollbar {
+    width: 12px;
+    margin: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to top, #62e3a7, #29ae70);
+    border-radius: 6px;
+}
 </style>
