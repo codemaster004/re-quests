@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 span {
     color: #248864;
 }
@@ -167,7 +171,7 @@ nav .right {
     margin-top: 100px;
     height: 80vh;
     width: 100%;
-    background: linear-gradient(to bottom, #fff, rgb(238, 238, 238));
+    background: linear-gradient(to bottom, #fff, #eeeeee);
 }
 section > header {
     font-family: Oswald;
@@ -239,6 +243,21 @@ section > header {
     text-align: center;
 }
 
+.team-section {
+    background: #eeeeee;
+}
+.team-section header {
+    width: 80%;
+    margin: 0 auto;
+
+    border-top: 2px solid #248864;
+    padding-top: 30px;
+}
+.people-box {
+    display: flex;
+    justify-content: space-around;
+    padding: 100px 0;
+}
 .person-box {
     height: 550px;
     width: 320px;
@@ -251,6 +270,10 @@ section > header {
     height: 250px;
     object-fit: cover;
     border-radius: 50%;
+    transform: translateY(15px);
+    position: relative;
+    z-index: 150;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
 }
 .person-box .person-text-box {
     width: 100%;
@@ -262,7 +285,7 @@ section > header {
     justify-content: space-around;
 
     background-color: #fff;
-    border-radius: 25px;
+    border-radius: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 
     text-align: center;
