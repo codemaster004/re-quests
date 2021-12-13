@@ -112,7 +112,7 @@ nav {
     display: flex;
     color: #9e9e9e;
     position: relative;
-    z-index: 20;
+    z-index: 100;
 }
 nav a {
     text-decoration: none;
@@ -147,6 +147,7 @@ header .right {
     display: flex;
     align-items: center;
     justify-content: center;
+    pointer-events: none;
 }
 
 header .header-box h1 {
