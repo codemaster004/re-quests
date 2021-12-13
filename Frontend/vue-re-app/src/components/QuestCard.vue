@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card" @mouseover="$emit('card-hover', $event, quest.id)">
         <div class="feature">
             <h2 class="header">{{ quest.title }}</h2>
             <p class="sub-header">{{ quest.desc }}</p>

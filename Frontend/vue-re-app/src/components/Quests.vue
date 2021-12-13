@@ -4,7 +4,7 @@
             <div>
                 <div v-if="!quests.length">You haven't started any quests yet.</div>
                 <div v-for="quest in quests" :key="quest.id">
-                    <QuestCard :quest="quest" />
+                    <QuestCard @card-hover="cardHovered" :quest="quest" />
                 </div>
             </div>
             <p class="header">Start New Quests</p>
@@ -15,12 +15,11 @@
             </div>
         </div>
         <div class="quest-info">
-            <h3 class="sub-header">Paper Bag</h3>
+            <h3 class="sub-header">{{ questInfo.title }}</h3>
             <h3 class="header">Do this every day. Why?</h3>
-            <img src="" alt="" />
+            <img :src="require(`../assets/${questInfo.img}`)" alt="" v-if="questInfo.img" />
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil autem necessitatibus suscipit debitis iste odit, totam nulla tempore
-                pariatur vel odio molestias optio adipisci perferendis saepe repudiandae eos magnam soluta.
+                {{ questInfo.description }}
             </p>
         </div>
     </section>
@@ -40,9 +39,25 @@ export default {
         QuestCard,
         QuestNew,
     },
+    methods: {
+        cardHovered(e, id) {
+            let quest = this.quests.filter((quest) => quest.id == id);
+            console.log(quest);
+            if (quest[0]) {
+                this.questInfo.title = quest[0].title;
+                this.questInfo.desc = quest[0].desc;
+                this.questInfo.img = quest[0].imgUrl;
+            }
+        },
+    },
     data() {
         return {
             questsNew: [],
+            questInfo: {
+                title: "",
+                description: "",
+                img: "",
+            },
         };
     },
     async created() {
@@ -52,7 +67,6 @@ export default {
             const { data } = await axios.get("/api/Quests/available", {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            console.log(data);
 
             for (let quest of data) {
                 this.questsNew.push({
@@ -168,6 +182,7 @@ section > .header {
     .quest-info img {
         width: 100%;
         height: 200px;
+        object-fit: contain;
     }
 
     .quest-info h3.header,

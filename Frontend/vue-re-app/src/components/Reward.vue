@@ -9,7 +9,13 @@
                 'border-radius': createRadius(),
             }"
         >
-            <img src="" alt="" class="reward-medal" />
+            <img
+                :src="require(`../assets/${reward.imgUrl}`)"
+                alt=""
+                class="reward-medal"
+                v-if="['Bottle.png', 'Can.png', 'PaperBag.png'].includes(reward.imgUrl)"
+            />
+            <img src="../assets/MedalTransparent.gif" alt="" class="reward-medal" v-else />
         </div>
     </div>
 </template>

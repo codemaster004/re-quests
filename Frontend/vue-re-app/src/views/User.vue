@@ -57,9 +57,16 @@ export default {
         async fetchRewards() {
             try {
                 const { data } = await axios.get("/api/Quests/completed", {
-                    headers: { Authorization: `Bearer ${token}` },
+                    headers: { Authorization: `Bearer ${this.token}` },
                 });
                 console.log(data);
+                for (let reward of data) {
+                    this.rewards.push({
+                        id: reward.questId,
+                        imgUrl: reward.questAwardUrl,
+                        color: reward.questColor,
+                    });
+                }
             } catch (e) {
                 console.log(e);
             }
@@ -94,6 +101,7 @@ export default {
         this.token = localStorage.getItem("accessToken");
         this.fetchUserData();
         this.fetchQuests();
+        this.fetchRewards();
     },
 };
 </script>
