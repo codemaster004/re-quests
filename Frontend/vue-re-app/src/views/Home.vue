@@ -16,7 +16,7 @@
         >
             <div class="medal-box">
                 <div>
-                    <img src="/MedalAnimation.gif" alt="" srcset="" />
+                    <img :src="require('../assets/Medal' + medalImg + '.gif')" alt="" srcset="" v-if="medalImg" />
                     <h2>Congrats!</h2>
                     <p>You completed the quest</p>
                     <p>
@@ -106,6 +106,7 @@ export default {
             },
             medalTitle: "",
             medalId: 0,
+            medalImg: "",
             blurBackground: false,
         };
     },
@@ -144,6 +145,7 @@ export default {
                 if (quest?.questLength - quest?.questProgress <= 0 && !quest?.wasWinReceived) {
                     willShowMedal = true;
                     this.medalTitle = quest.title;
+                    this.medalImg = quest.imgUrl;
                     this.medalId = quest.id;
                 }
             });
@@ -154,6 +156,11 @@ export default {
         } catch (e) {
             console.log(e);
         }
+
+        // this.medalTitle = "Test";
+        // this.medalImg = "Can";
+        // this.medalId = 0;
+        // this.showMedal();
 
         window.addEventListener("resize", this.resizeWindowHandler);
     },
@@ -185,7 +192,7 @@ export default {
     height: 120%;
     padding: 30px;
 
-    background-color: #fff;
+    background-color: rgb(252, 251, 255);
     border-radius: 30px 30px 0 0;
     display: flex;
     text-align: center;
