@@ -69,12 +69,12 @@ export default {
 .auth-view {
     min-height: calc(100vh - 50px);
     /* width: 100vw; */
-    width: 10%;
+    width: 100%;
     background-color: #fff;
     padding-top: 50px;
 }
 
-.logo-box {
+.auth-view .logo-box {
     width: 114px;
     height: 114px;
     margin: 0 auto;
@@ -84,11 +84,11 @@ export default {
     border-radius: 200px 200px 69px 69px;
 }
 
-.logo-box img {
+.auth-view .logo-box img {
     height: 100%;
 }
 
-.input-group {
+.auth-view .input-group {
     margin-top: 25px;
     padding: 0 30px;
 
@@ -97,7 +97,7 @@ export default {
     justify-content: space-between;
 }
 
-.input-group p {
+.auth-view .input-group p {
     display: block;
 
     font-family: Montserrat;
@@ -110,7 +110,7 @@ export default {
     color: #4c866b;
 }
 
-h2.auth-title {
+.auth-view h2.auth-title {
     margin-left: 30px;
     margin-top: 36px;
 
@@ -123,11 +123,65 @@ h2.auth-title {
     color: #000000;
 }
 
+.auth-view .input-box {
+    /* width: 328px; */
+    display: block;
+    width: 100%;
+    height: 49px;
+    margin-bottom: 30px;
+    padding-left: 28px;
+
+    background: #f5f5f5;
+    border-radius: 50px;
+    -webkit-appearance: none;
+    border: none;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 49px;
+    text-align: left;
+
+    color: #000000;
+}
+
+.auth-view .input-box::placeholder {
+    color: #999999;
+}
+
+.auth-view .auth-button {
+    width: calc(100% - 30px * 2);
+    height: 55px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+
+    transform: translateX(-50%);
+    transition: 0.3s;
+
+    background: #4c866b;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+    -webkit-appearance: none;
+    border: none;
+
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 55px;
+    text-align: center;
+
+    color: #ffffff;
+}
+
 @media screen and (min-width: 1000px) {
     .auth-view {
         width: 50%;
         margin: 0 auto;
-        max-width: 800px;
     }
     .auth-view .auth-button {
         position: relative;

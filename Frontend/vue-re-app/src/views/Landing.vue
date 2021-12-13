@@ -1,8 +1,10 @@
 <template>
     <div>
         <nav class="mobile-nav">
-            <div class="mobile-burger"></div>
-            <div class="mobile-links">
+            <div @click="burgerChange()" class="mobile-burger" :class="{ active: burger }"></div>
+            <div class="mobile-links" :class="{ active: burger }">
+                <router-link to="/login">Login</router-link>
+                <router-link to="/signup">Signup</router-link>
                 <a href="#">Home</a>
                 <a href="#">About</a>
                 <a href="#">Technologies</a>
@@ -146,6 +148,16 @@
 <script>
 export default {
     name: "Landing",
+    methods: {
+        burgerChange() {
+            this.burger = !this.burger;
+        },
+    },
+    data() {
+        return {
+            burger: false,
+        };
+    },
 };
 </script>
 
